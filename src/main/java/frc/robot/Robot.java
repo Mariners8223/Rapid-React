@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Chasis;
-import frc.robot.commands.Drive;
+import frc.robot.commands.DriveBase;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -16,7 +16,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private final Chasis chasis = Chasis.getInstance();
-  private final Drive drive = new Drive();
+  private final Drive drive = new DriveBase();
 
 
   /**
