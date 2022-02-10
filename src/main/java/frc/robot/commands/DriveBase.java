@@ -1,18 +1,15 @@
 package frc.robot.commands;
 
-
-import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Chasis;
 
-public class Drive extends CommandBase {
+public class DriveBase extends CommandBase {
   private Chasis chasis;
   private Joystick controller = new Joystick(0);
   private double ly; private double lx; private double rx;
 
-  public Drive() {
+  public DriveBase() {
     chasis = Chasis.getInstance();
     addRequirements(chasis);
   }
