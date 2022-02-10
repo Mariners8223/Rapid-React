@@ -1,18 +1,11 @@
 package frc.robot.subsystems;
 
-
-import java.lang.Math;
-import java.security.PublicKey;
-
-import com.ctre.phoenix.motorcontrol.ControlFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants;
 
 public class Chasis extends SubsystemBase {
@@ -32,9 +25,8 @@ public class Chasis extends SubsystemBase {
     LEFT_BACK.setNeutralMode(NeutralMode.Brake);
     RIGHT_FRONT.setNeutralMode(NeutralMode.Brake);
     RIGHT_BACK.setNeutralMode(NeutralMode.Brake);
-
-    // resetPosition();
   }
+  
   /**
    * Singleton function.
    * <br></br>
@@ -46,19 +38,6 @@ public class Chasis extends SubsystemBase {
       instance = new Chasis();
     return instance; 
   }
-  /**
-   * Checks whether the given number is outside of the bounderis, if yes, returns the limit. Else returns the speed.
-   * @param speed A double which needs to be within a certain limit.
-   * @param max Maximum num of the limit.
-   * @param min Minimum num of the limit.
-   * @return Either limit (max-min) or the given input.
-   */
-  public double Clamp(double speed, double limit)
-  {
-    if (speed > limit) return limit;
-    if (speed < -limit) return -limit;
-    return speed;
-  }
   
   /**
    * Sets the speed for the drivetrain, allows for steering, strafing etc etc.
@@ -67,15 +46,14 @@ public class Chasis extends SubsystemBase {
    * <p>In order to make the drive work in a field oriented manner we take the the values of lx and ly, put them on a vector and rotate it by the gyro's angle. After which we take the deviation.</p>
    * @param lx X axis from the left joystick. (Axis 4)
    * @param ly Y axis from the left joystick. (Axis 0)
-   * @param rx X axis from the right joystick. (Axis 1)
+   * @param r X axis from the right joystick. (Axis 1)
    * @param angle Current Gyro angle. Used for field oriented drive.
    */
-  public void setSpeed(double lx, double ly, double rx) {
-    rx = Clamp(rx, 1);
-    double xSpeed = Clamp(lx, 1);
-    double ySpeed = Clamp(ly, 1);
-    correctDrive(ySpeed + xSpeed + rx, ySpeed - xSpeed + rx, ySpeed - xSpeed - rx, ySpeed + xSpeed - rx);
-    
+  public void setSpeed(double lx, double ly, double r) {
+    r = MathUtil.clamp(r, -1.0, 1.0);;
+    double xSpeed = MathUtil.clamp(lx, -1.0, 1.0);
+    double ySpeed = MathUtil.clamp(ly, -1.0, 1.0);
+    correctDrive(ySpeed + xSpeed + r, ySpeed - xSpeed + r, ySpeed - xSpeed - r, ySpeed + xSpeed - r);
   }
 
   /**
@@ -97,24 +75,15 @@ public class Chasis extends SubsystemBase {
     return VelocityArr;
   }
 
-
-
-
   public void correctDrive(double LF, double LB, double RF, double RB)
   {
     LEFT_FRONT.set(ControlMode.PercentOutput, LF * Constants.MULTI);
     LEFT_BACK.set(ControlMode.PercentOutput, LB * Constants.MULTI);
     RIGHT_FRONT.set(ControlMode.PercentOutput, -RF * Constants.MULTI);
     RIGHT_BACK.set(ControlMode.PercentOutput, -RB * Constants.MULTI);
-    SmartDashboard.putNumber("LF", LF);
-    SmartDashboard.putNumber("LB", LB);
-    SmartDashboard.putNumber("RF", RF);
-    SmartDashboard.putNumber("RB", RB);
   }
 
   @Override
   public void periodic(){
-    
-    
   }
 }
