@@ -1,12 +1,12 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Chasis;
 
 public class DriveBase extends CommandBase {
   private Chasis chasis;
-  private Joystick controller = new Joystick(0);
   private double ly; private double lx; private double rx;
 
   public DriveBase() {
@@ -21,10 +21,10 @@ public class DriveBase extends CommandBase {
   
   @Override
   public void execute() {
-    lx = controller.getRawAxis(0) * 1.1; //Multiplied to counteract imperfect strafing.
-    ly = -controller.getRawAxis(1); //Inverted to reverse needed movements.
-    rx = controller.getRawAxis(4);
-    chasis.setSpeed(lx, ly, rx);
+    lx = RobotContainer.controller.getRawAxis(0); //Multiplied to counteract imperfect strafing.
+    ly = -RobotContainer.controller.getRawAxis(1); //Inverted to reverse needed movements.
+    rx = RobotContainer.controller.getRawAxis(4);
+    chasis.setSpeed(lx, ly, rx, Constants.BASE_DRIVE);
   }
 
   

@@ -4,6 +4,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import org.ejml.simple.SimpleMatrix;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -44,16 +46,17 @@ public class Chasis extends SubsystemBase {
    * <p>Works by using basic Tank movement (Adding Y to all wheels, adding RX to left and subtracting from right) however it was changed to fit this picture I used (https://imgur.com/a/fecunMR)
    * and finally adding / removing X from opposite wheels to strafe.</p>
    * <p>In order to make the drive work in a field oriented manner we take the the values of lx and ly, put them on a vector and rotate it by the gyro's angle. After which we take the deviation.</p>
-   * @param lx X axis from the left joystick. (Axis 4)
-   * @param ly Y axis from the left joystick. (Axis 0)
+   * @param x X axis from the left joystick. (Axis 4)
+   * @param y Y axis from the left joystick. (Axis 0)
    * @param r X axis from the right joystick. (Axis 1)
    * @param angle Current Gyro angle. Used for field oriented drive.
    */
-  public void setSpeed(double lx, double ly, double r) {
-    r = MathUtil.clamp(r, -1.0, 1.0);;
-    double xSpeed = MathUtil.clamp(lx, -1.0, 1.0);
-    double ySpeed = MathUtil.clamp(ly, -1.0, 1.0);
-    correctDrive(ySpeed + xSpeed + r, ySpeed - xSpeed + r, ySpeed - xSpeed - r, ySpeed + xSpeed - r);
+  public void setSpeed(double x, double y, double r, SimpleMatrix driveMatrix) {
+    r = MathUtil.clamp(r, -1.0, 1.0);
+    double[][] joystick_value_arr = {{MathUtil.clamp(x, -1.0, 1.0), MathUtil.clamp(y, -1.0, 1.0)}};
+    SimpleMatrix joystick_value = new SimpleMatrix(joystick_value_arr);
+    SimpleMatrix motors_value = driveMatrix.mult(joystick_value);
+    correctDrive(motors_value.get(1, 1) + r, motors_value.get(2, 1) + r, motors_value.get(2, 1)  - r, motors_value.get(1, 1)  - r);
   }
 
   /**
