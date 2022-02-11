@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.kauailabs.navx.frc.AHRS;
 
 import org.ejml.simple.SimpleMatrix;
 
@@ -15,6 +16,8 @@ public class Chasis extends SubsystemBase {
   private TalonFX LEFT_BACK;
   private TalonFX RIGHT_FRONT;
   private TalonFX RIGHT_BACK;
+
+  private AHRS navx;
   private static Chasis instance;
 
   private Chasis() {
@@ -22,6 +25,10 @@ public class Chasis extends SubsystemBase {
     LEFT_BACK = new TalonFX(Constants.LEFT_BACK);
     RIGHT_FRONT = new TalonFX(Constants.RIGHT_FRONT);
     RIGHT_BACK = new TalonFX(Constants.RIGHT_BACK);
+
+    navx = new AHRS();
+    navx.calibrate();
+    navx.reset();
 
     LEFT_FRONT.setNeutralMode(NeutralMode.Brake);
     LEFT_BACK.setNeutralMode(NeutralMode.Brake);
@@ -53,10 +60,10 @@ public class Chasis extends SubsystemBase {
    */
   public void setSpeed(double x, double y, double r, SimpleMatrix driveMatrix) {
     r = MathUtil.clamp(r, -1.0, 1.0);
-    double[][] joystick_value_arr = {{MathUtil.clamp(x, -1.0, 1.0), MathUtil.clamp(y, -1.0, 1.0)}};
+    double[][] joystick_value_arr = {{MathUtil.clamp(y, -1.0, 1.0), MathUtil.clamp(x, -1.0, 1.0)}};
     SimpleMatrix joystick_value = new SimpleMatrix(joystick_value_arr);
-    SimpleMatrix motors_value = driveMatrix.mult(joystick_value);
-    correctDrive(motors_value.get(1, 1) + r, motors_value.get(2, 1) + r, motors_value.get(2, 1)  - r, motors_value.get(1, 1)  - r);
+    SimpleMatrix motors_value = joystick_value.mult(driveMatrix);
+    correctDrive(motors_value.get(0, 0) + r, motors_value.get(0, 1) + r, motors_value.get(0, 1)  - r, motors_value.get(0, 0)  - r);
   }
 
   /**
@@ -86,7 +93,15 @@ public class Chasis extends SubsystemBase {
     RIGHT_BACK.set(ControlMode.PercentOutput, -RB * Constants.MULTI);
   }
 
-  @Override
-  public void periodic(){
+  public double getAngle(){
+    return navx.getAngle();
+  }
+
+  public SimpleMatrix rotationMatrix(double angle){
+    double[][] rot = {
+      {Math.cos(angle), Math.sin(angle)},
+      {-Math.sin(angle), Math.cos(angle)}
+    };
+    return new SimpleMatrix(rot);
   }
 }
