@@ -11,16 +11,16 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Chasis extends SubsystemBase {
+public class Chassis extends SubsystemBase {
   private TalonFX LEFT_FRONT;
   private TalonFX LEFT_BACK;
   private TalonFX RIGHT_FRONT;
   private TalonFX RIGHT_BACK;
 
   private AHRS navx;
-  private static Chasis instance;
+  private static Chassis instance;
 
-  private Chasis() {
+  private Chassis() {
     LEFT_FRONT = new TalonFX(Constants.LEFT_FRONT);
     LEFT_BACK = new TalonFX(Constants.LEFT_BACK);
     RIGHT_FRONT = new TalonFX(Constants.RIGHT_FRONT);
@@ -42,9 +42,9 @@ public class Chasis extends SubsystemBase {
    * Checks whether an instance of the chasis exists, if not creates one.
    * @return Returns the instance of the chasis.
    */
-  public static Chasis getInstance() {
+  public static Chassis getInstance() {
     if (instance == null)
-      instance = new Chasis();
+      instance = new Chassis();
     return instance; 
   }
   
@@ -56,11 +56,11 @@ public class Chasis extends SubsystemBase {
    * @param x X axis from the left joystick. (Axis 4)
    * @param y Y axis from the left joystick. (Axis 0)
    * @param r X axis from the right joystick. (Axis 1)
-   * @param angle Current Gyro angle. Used for field oriented drive.
+   * @param driveMatrix matrix that represents the drive.
    */
   public void setSpeed(double x, double y, double r, SimpleMatrix driveMatrix) {
     r = MathUtil.clamp(r, -1.0, 1.0);
-    double[][] joystick_value_arr = {{MathUtil.clamp(y, -1.0, 1.0), MathUtil.clamp(x, -1.0, 1.0)}};
+    double[][] joystick_value_arr = {{MathUtil.clamp(x, -1.0, 1.0), MathUtil.clamp(y, -1.0, 1.0)}};
     SimpleMatrix joystick_value = new SimpleMatrix(joystick_value_arr);
     SimpleMatrix motors_value = joystick_value.mult(driveMatrix);
     correctDrive(motors_value.get(0, 0) + r, motors_value.get(0, 1) + r, motors_value.get(0, 1)  - r, motors_value.get(0, 0)  - r);

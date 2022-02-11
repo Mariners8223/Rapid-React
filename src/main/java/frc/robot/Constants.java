@@ -9,13 +9,22 @@ public final class Constants {
     public static final int RIGHT_FRONT = 2;
     public static final int RIGHT_BACK = 3;
 
+    // Joysticks
+    public static final int DRIVE_JOYSTICK = 0;
+
+    // Axises
+    public static final int DRIVE_DIRECTION_X = 0;
+    public static final int DRIVE_DIRECTION_Y = 1;
+    public static final int DRIVE_ROTATION = 4;
+
+
     private static double sqrt2inverted = 0.70710678118;
     private static final double[][] base_drive_arr = {
-        {sqrt2inverted, sqrt2inverted},
-        {-sqrt2inverted, sqrt2inverted}
+        {-sqrt2inverted, sqrt2inverted},
+        {sqrt2inverted, sqrt2inverted}
     };
     public static final SimpleMatrix BASE_DRIVE = new SimpleMatrix(base_drive_arr);
 
     public static final double MULTI = 0.3;
-    public static final double MAX_CLAMP = 0.3;
+    public static final double MAX_CLAMP = 0.5;
 }
