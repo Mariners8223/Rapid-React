@@ -62,7 +62,8 @@ public class Chassis extends SubsystemBase {
     double[][] joystick_value_arr = {{x}, {y}};
     SimpleMatrix joystick_value = new SimpleMatrix(joystick_value_arr);
     SimpleMatrix motors_value = driveMatrix.mult(joystick_value);
-    correctDrive(motors_value.get(0, 0) + r, motors_value.get(1, 0) + r, motors_value.get(1, 0)  - r, motors_value.get(0, 0)  - r);
+    correctDrive(motors_value.get(1, 0) + r, motors_value.get(0, 0) - r,
+                 motors_value.get(0, 0) + r, motors_value.get(1, 0) - r);
   }
 
   /**
@@ -75,7 +76,7 @@ public class Chassis extends SubsystemBase {
     RIGHT_BACK.set(ControlMode.Disabled, 0);
   }
 
-  public void correctDrive(double LF, double LB, double RF, double RB)
+  public void correctDrive(double LF, double RF, double LB, double RB)
   {
     LEFT_FRONT.set(ControlMode.PercentOutput, MathUtil.clamp(LF * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
     LEFT_BACK.set(ControlMode.PercentOutput, MathUtil.clamp(LB * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
