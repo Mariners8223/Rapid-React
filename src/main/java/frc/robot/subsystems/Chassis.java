@@ -59,10 +59,10 @@ public class Chassis extends SubsystemBase {
    * @param driveMatrix matrix that represents the drive.
    */
   public void setSpeed(double x, double y, double r, SimpleMatrix driveMatrix) {
-    double[][] joystick_value_arr = {{y, x}};
+    double[][] joystick_value_arr = {{x}, {y}};
     SimpleMatrix joystick_value = new SimpleMatrix(joystick_value_arr);
-    SimpleMatrix motors_value = joystick_value.mult(driveMatrix);
-    correctDrive(motors_value.get(0, 0) + r, motors_value.get(0, 1) + r, motors_value.get(0, 1)  - r, motors_value.get(0, 0)  - r);
+    SimpleMatrix motors_value = driveMatrix.mult(joystick_value);
+    correctDrive(motors_value.get(0, 0) + r, motors_value.get(1, 0) + r, motors_value.get(1, 0)  - r, motors_value.get(0, 0)  - r);
   }
 
   /**
@@ -73,15 +73,6 @@ public class Chassis extends SubsystemBase {
     LEFT_BACK.set(ControlMode.Disabled, 0);
     RIGHT_FRONT.set(ControlMode.Disabled, 0);
     RIGHT_BACK.set(ControlMode.Disabled, 0);
-  }
-
-  public double[] getVeocity() {
-    double LFVec = LEFT_FRONT.getSelectedSensorVelocity();
-    double LBVec = LEFT_BACK.getSelectedSensorVelocity();
-    double RFVec = RIGHT_FRONT.getSelectedSensorVelocity();
-    double RBVec = RIGHT_BACK.getSelectedSensorVelocity();
-    double[] VelocityArr= new double[]{LFVec, LBVec, RFVec, RBVec};
-    return VelocityArr;
   }
 
   public void correctDrive(double LF, double LB, double RF, double RB)

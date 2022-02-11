@@ -20,8 +20,8 @@ public final class Constants {
 
     private static double sqrt2inverted = 0.70710678118;
     private static final double[][] base_drive_arr = {
-        {sqrt2inverted, sqrt2inverted},
-        {-sqrt2inverted, sqrt2inverted}
+        {-sqrt2inverted, sqrt2inverted},
+        {sqrt2inverted, sqrt2inverted}
     };
     public static final SimpleMatrix BASE_DRIVE = new SimpleMatrix(base_drive_arr);
 
