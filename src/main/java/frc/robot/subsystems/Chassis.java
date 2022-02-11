@@ -59,8 +59,7 @@ public class Chassis extends SubsystemBase {
    * @param driveMatrix matrix that represents the drive.
    */
   public void setSpeed(double x, double y, double r, SimpleMatrix driveMatrix) {
-    r = MathUtil.clamp(r, -1.0, 1.0);
-    double[][] joystick_value_arr = {{MathUtil.clamp(y, -1.0, 1.0), MathUtil.clamp(x, -1.0, 1.0)}};
+    double[][] joystick_value_arr = {{y, x}};
     SimpleMatrix joystick_value = new SimpleMatrix(joystick_value_arr);
     SimpleMatrix motors_value = joystick_value.mult(driveMatrix);
     correctDrive(motors_value.get(0, 0) + r, motors_value.get(0, 1) + r, motors_value.get(0, 1)  - r, motors_value.get(0, 0)  - r);
@@ -87,10 +86,10 @@ public class Chassis extends SubsystemBase {
 
   public void correctDrive(double LF, double LB, double RF, double RB)
   {
-    LEFT_FRONT.set(ControlMode.PercentOutput, LF * Constants.MULTI);
-    LEFT_BACK.set(ControlMode.PercentOutput, LB * Constants.MULTI);
-    RIGHT_FRONT.set(ControlMode.PercentOutput, -RF * Constants.MULTI);
-    RIGHT_BACK.set(ControlMode.PercentOutput, -RB * Constants.MULTI);
+    LEFT_FRONT.set(ControlMode.PercentOutput, MathUtil.clamp(LF * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
+    LEFT_BACK.set(ControlMode.PercentOutput, MathUtil.clamp(LB * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
+    RIGHT_FRONT.set(ControlMode.PercentOutput, MathUtil.clamp(-RF * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
+    RIGHT_BACK.set(ControlMode.PercentOutput, MathUtil.clamp(-RB * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
   }
 
   public double getAngle(){
