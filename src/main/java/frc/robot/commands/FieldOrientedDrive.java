@@ -10,7 +10,7 @@ import frc.robot.subsystems.Chassis;
 
 public class FieldOrientedDrive extends CommandBase {
   private Chassis chassis;
-  private double y; private double x; private double r;
+  private SimpleMatrix direction; private double r;
 
   public FieldOrientedDrive() {
     chassis = Chassis.getInstance();
@@ -26,14 +26,14 @@ public class FieldOrientedDrive extends CommandBase {
   
   @Override
   public void execute() {
-    x = RobotContainer.controller.getRawAxis(Constants.DRIVE_DIRECTION_X);
-    y = -RobotContainer.controller.getRawAxis(Constants.DRIVE_DIRECTION_Y); //Inverted because joystick is inverted.
-    r = RobotContainer.controller.getRawAxis(Constants.DRIVE_ROTATION);
+    direction = RobotContainer.getDriveDirection();
+    r += Constants.ROTATION_SPEED * RobotContainer.controller.getRawAxis(Constants.DRIVE_ROTATION);
 
     SmartDashboard.putNumber("angle", chassis.getAngle());
     SimpleMatrix robotOrientationMatrix = chassis.rotationMatrix(Math.toRadians(-chassis.getAngle()));
     SimpleMatrix fodMatrix = Constants.BASE_DRIVE.mult(robotOrientationMatrix);
-    chassis.setSpeed(x, y, r, fodMatrix);
+
+    chassis.setSpeed(direction, chassis.getRotationPID(r), fodMatrix);
   }
 
   

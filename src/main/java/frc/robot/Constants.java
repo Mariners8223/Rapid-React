@@ -28,25 +28,10 @@ public final class Constants {
     public static final double DEAD_BAND = 0.001;
     public static final double MULTI = 0.3;
     public static final double MAX_CLAMP = 0.5;
+    public static final double ROTATION_SPEED = 1;
 
     // PID values
-    public static final double LEFT_FRONT_KF = (0.5 * 1023.0) / 10210.0;
-    public static final double LEFT_FRONT_KP = 0.2;
-    public static final double LEFT_FRONT_KI = 0.001;
-    public static final double LEFT_FRONT_KD = 6;
-    
-    public static final double LEFT_BACK_KF = (0.5 * 1023.0) / 10060.0;
-    public static final double LEFT_BACK_KP = 0.2;
-    public static final double LEFT_BACK_KI = 0.001;
-    public static final double LEFT_BACK_KD = 6;
-    
-    public static final double RIGHT_FRONT_KF = (0.5 * 1023.0) / 10130.0;
-    public static final double RIGHT_FRONT_KP = 0.2;
-    public static final double RIGHT_FRONT_KI = 0.001;
-    public static final double RIGHT_FRONT_KD = 6;
-        
-    public static final double RIGHT_BACK_KF = (0.5 * 1023.0) / 10100.0;
-    public static final double RIGHT_BACK_KP = 0.2;
-    public static final double RIGHT_BACK_KI = 0.001;
-    public static final double RIGHT_BACK_KD = 6;
+    public static final double ANGLE_KI = 0;
+    public static final double ANGLE_KP = 0;
+    public static final double ANGLE_KD = 0;
 }

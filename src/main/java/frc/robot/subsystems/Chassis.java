@@ -9,6 +9,7 @@ import com.kauailabs.navx.frc.AHRS;
 import org.ejml.simple.SimpleMatrix;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -21,6 +22,8 @@ public class Chassis extends SubsystemBase {
   private AHRS navx;
   private static Chassis instance;
 
+  PIDController anglePID;
+
   private Chassis() {
     left_front = new TalonFX(Constants.LEFT_FRONT);
     left_back = new TalonFX(Constants.LEFT_BACK);
@@ -29,12 +32,14 @@ public class Chassis extends SubsystemBase {
 
     navx = new AHRS();
     navx.calibrate();
-    navx.reset();
 
-    configMotor(left_front, Constants.LEFT_FRONT_KF, Constants.LEFT_FRONT_KP, Constants.LEFT_FRONT_KI, Constants.LEFT_FRONT_KD);
-    configMotor(left_back, Constants.LEFT_BACK_KF, Constants.LEFT_BACK_KP, Constants.LEFT_BACK_KI, Constants.LEFT_BACK_KD);
-    configMotor(right_front, Constants.RIGHT_FRONT_KF, Constants.RIGHT_FRONT_KP, Constants.RIGHT_FRONT_KI, Constants.RIGHT_FRONT_KD);
-    configMotor(right_back, Constants.RIGHT_BACK_KF, Constants.RIGHT_BACK_KP, Constants.RIGHT_BACK_KI, Constants.RIGHT_BACK_KD);
+    anglePID = new PIDController(Constants.ANGLE_KP, Constants.ANGLE_KI, Constants.ANGLE_KD);
+    anglePID.enableContinuousInput(0, 360);
+
+    configMotor(left_front);
+    configMotor(left_back);
+    configMotor(right_front);
+    configMotor(right_back);
   }
   
   /**
@@ -59,10 +64,8 @@ public class Chassis extends SubsystemBase {
    * @param r X axis from the right joystick. (Axis 1)
    * @param driveMatrix matrix that represents the drive.
    */
-  public void setSpeed(double x, double y, double r, SimpleMatrix driveMatrix) {
-    double[][] joystick_value_arr = {{x}, {y}};
-    SimpleMatrix joystick_value = new SimpleMatrix(joystick_value_arr);
-    SimpleMatrix motors_value = driveMatrix.mult(joystick_value);
+  public void setSpeed(SimpleMatrix direction, double r, SimpleMatrix driveMatrix) {
+    SimpleMatrix motors_value = driveMatrix.mult(direction);
     correctDrive(motors_value.get(1, 0) + r, motors_value.get(0, 0) - r,
                  motors_value.get(0, 0) + r, motors_value.get(1, 0) - r);
   }
@@ -99,9 +102,10 @@ public class Chassis extends SubsystemBase {
 
   public void resetAngle(){
     navx.reset();
+    anglePID.reset();
   }
 
-  private void configMotor(TalonFX motor, double F, double P, double I, double D) {
+  private void configMotor(TalonFX motor) {
     motor.configFactoryDefault();
 		motor.configNeutralDeadband(Constants.DEAD_BAND);
     motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);							
@@ -109,10 +113,10 @@ public class Chassis extends SubsystemBase {
 		motor.configNominalOutputReverse(0, 0);
 		motor.configPeakOutputForward(Constants.MAX_CLAMP, 0);
 		motor.configPeakOutputReverse(-Constants.MAX_CLAMP, 0);
-		motor.config_kF(0, F, 0);
-		motor.config_kP(0, P, 0);
-		motor.config_kI(0, I, 0);
-		motor.config_kD(0, D, 0);
     motor.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public double getRotationPID(double target){
+    return anglePID.calculate(getAngle(), target);
   }
 }

@@ -1,5 +1,7 @@
 package frc.robot.commands;
 
+import org.ejml.simple.SimpleMatrix;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -7,7 +9,7 @@ import frc.robot.subsystems.Chassis;
 
 public class BaseDrive extends CommandBase {
   private Chassis chassis;
-  private double y; private double x; private double r;
+  private SimpleMatrix direction; private double r;
 
   public BaseDrive() {
     chassis = Chassis.getInstance();
@@ -21,11 +23,10 @@ public class BaseDrive extends CommandBase {
   
   @Override
   public void execute() {
-    x = RobotContainer.controller.getRawAxis(Constants.DRIVE_DIRECTION_X);
-    y = -RobotContainer.controller.getRawAxis(Constants.DRIVE_DIRECTION_Y); //Inverted because joystick is inverted.
-    r = RobotContainer.controller.getRawAxis(Constants.DRIVE_ROTATION);
+    direction = RobotContainer.getDriveDirection();
+    r += Constants.ROTATION_SPEED * RobotContainer.controller.getRawAxis(Constants.DRIVE_ROTATION);
 
-    chassis.setSpeed(x, y, r, Constants.BASE_DRIVE);
+    chassis.setSpeed(direction, chassis.getRotationPID(r), Constants.BASE_DRIVE);
   }
 
   
