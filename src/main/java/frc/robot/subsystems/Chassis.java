@@ -79,8 +79,8 @@ public class Chassis extends SubsystemBase {
   public void correctDrive(double LF, double RF, double LB, double RB)
   {
     left_front.set(ControlMode.PercentOutput, MathUtil.clamp(LF * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
-    left_back.set(ControlMode.PercentOutput, MathUtil.clamp(LB * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
     right_front.set(ControlMode.PercentOutput, MathUtil.clamp(-RF * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
+    left_back.set(ControlMode.PercentOutput, MathUtil.clamp(LB * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
     right_back.set(ControlMode.PercentOutput, MathUtil.clamp(-RB * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
   }
 
@@ -94,5 +94,9 @@ public class Chassis extends SubsystemBase {
       {-Math.sin(angle), Math.cos(angle)}
     };
     return new SimpleMatrix(rot);
+  }
+
+  public void resetAngle(){
+    navx.reset();
   }
 }
