@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -30,10 +31,10 @@ public class Chassis extends SubsystemBase {
     navx.calibrate();
     navx.reset();
 
-    left_front.setNeutralMode(NeutralMode.Brake);
-    left_back.setNeutralMode(NeutralMode.Brake);
-    right_front.setNeutralMode(NeutralMode.Brake);
-    right_back.setNeutralMode(NeutralMode.Brake);
+    configMotor(left_front, Constants.LEFT_FRONT_KF, Constants.LEFT_FRONT_KP, Constants.LEFT_FRONT_KI, Constants.LEFT_FRONT_KD);
+    configMotor(left_back, Constants.LEFT_BACK_KF, Constants.LEFT_BACK_KP, Constants.LEFT_BACK_KI, Constants.LEFT_BACK_KD);
+    configMotor(right_front, Constants.RIGHT_FRONT_KF, Constants.RIGHT_FRONT_KP, Constants.RIGHT_FRONT_KI, Constants.RIGHT_FRONT_KD);
+    configMotor(right_back, Constants.RIGHT_BACK_KF, Constants.RIGHT_BACK_KP, Constants.RIGHT_BACK_KI, Constants.RIGHT_BACK_KD);
   }
   
   /**
@@ -98,5 +99,20 @@ public class Chassis extends SubsystemBase {
 
   public void resetAngle(){
     navx.reset();
+  }
+
+  private void configMotor(TalonFX motor, double F, double P, double I, double D) {
+    motor.configFactoryDefault();
+		motor.configNeutralDeadband(Constants.DEAD_BAND);
+    motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);							
+		motor.configNominalOutputForward(0, 0);
+		motor.configNominalOutputReverse(0, 0);
+		motor.configPeakOutputForward(Constants.MAX_CLAMP, 0);
+		motor.configPeakOutputReverse(-Constants.MAX_CLAMP, 0);
+		motor.config_kF(0, F, 0);
+		motor.config_kP(0, P, 0);
+		motor.config_kI(0, I, 0);
+		motor.config_kD(0, D, 0);
+    motor.setNeutralMode(NeutralMode.Brake);
   }
 }
