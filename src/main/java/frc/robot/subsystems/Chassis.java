@@ -12,28 +12,28 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Chassis extends SubsystemBase {
-  private TalonFX LEFT_FRONT;
-  private TalonFX LEFT_BACK;
-  private TalonFX RIGHT_FRONT;
-  private TalonFX RIGHT_BACK;
+  private TalonFX left_front;
+  private TalonFX left_back;
+  private TalonFX right_front;
+  private TalonFX right_back;
 
   private AHRS navx;
   private static Chassis instance;
 
   private Chassis() {
-    LEFT_FRONT = new TalonFX(Constants.LEFT_FRONT);
-    LEFT_BACK = new TalonFX(Constants.LEFT_BACK);
-    RIGHT_FRONT = new TalonFX(Constants.RIGHT_FRONT);
-    RIGHT_BACK = new TalonFX(Constants.RIGHT_BACK);
+    left_front = new TalonFX(Constants.LEFT_FRONT);
+    left_back = new TalonFX(Constants.LEFT_BACK);
+    right_front = new TalonFX(Constants.RIGHT_FRONT);
+    right_back = new TalonFX(Constants.RIGHT_BACK);
 
     navx = new AHRS();
     navx.calibrate();
     navx.reset();
 
-    LEFT_FRONT.setNeutralMode(NeutralMode.Brake);
-    LEFT_BACK.setNeutralMode(NeutralMode.Brake);
-    RIGHT_FRONT.setNeutralMode(NeutralMode.Brake);
-    RIGHT_BACK.setNeutralMode(NeutralMode.Brake);
+    left_front.setNeutralMode(NeutralMode.Brake);
+    left_back.setNeutralMode(NeutralMode.Brake);
+    right_front.setNeutralMode(NeutralMode.Brake);
+    right_back.setNeutralMode(NeutralMode.Brake);
   }
   
   /**
@@ -70,18 +70,18 @@ public class Chassis extends SubsystemBase {
    * Stops the fuckign robot retard.
    */
   public void stopRobot() {
-    LEFT_FRONT.set(ControlMode.Disabled, 0);
-    LEFT_BACK.set(ControlMode.Disabled, 0);
-    RIGHT_FRONT.set(ControlMode.Disabled, 0);
-    RIGHT_BACK.set(ControlMode.Disabled, 0);
+    left_front.set(ControlMode.Disabled, 0);
+    left_back.set(ControlMode.Disabled, 0);
+    right_front.set(ControlMode.Disabled, 0);
+    right_back.set(ControlMode.Disabled, 0);
   }
 
   public void correctDrive(double LF, double RF, double LB, double RB)
   {
-    LEFT_FRONT.set(ControlMode.PercentOutput, MathUtil.clamp(LF * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
-    LEFT_BACK.set(ControlMode.PercentOutput, MathUtil.clamp(LB * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
-    RIGHT_FRONT.set(ControlMode.PercentOutput, MathUtil.clamp(-RF * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
-    RIGHT_BACK.set(ControlMode.PercentOutput, MathUtil.clamp(-RB * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
+    left_front.set(ControlMode.PercentOutput, MathUtil.clamp(LF * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
+    left_back.set(ControlMode.PercentOutput, MathUtil.clamp(LB * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
+    right_front.set(ControlMode.PercentOutput, MathUtil.clamp(-RF * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
+    right_back.set(ControlMode.PercentOutput, MathUtil.clamp(-RB * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
   }
 
   public double getAngle(){
