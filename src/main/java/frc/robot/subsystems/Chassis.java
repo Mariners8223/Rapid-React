@@ -82,7 +82,7 @@ public class Chassis extends SubsystemBase {
 
   private void configMotor(TalonFX motor, boolean isInverted) {
     motor.configFactoryDefault();
-		motor.configNeutralDeadband(Constants.DEAD_BAND);
+		motor.configNeutralDeadband(Constants.CHASSIS_DEAD_BAND);
     motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);							
 		motor.configNominalOutputForward(0, 0);
 		motor.configNominalOutputReverse(0, 0);
