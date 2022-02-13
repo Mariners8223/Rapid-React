@@ -52,7 +52,7 @@ public class Chassis extends SubsystemBase {
   public void setSpeed(SimpleMatrix direction, double r, SimpleMatrix driveMatrix) {
     SimpleMatrix motors_value = driveMatrix.mult(direction);
     setMotorsSpeed(motors_value.get(1, 0) + r, motors_value.get(0, 0) - r,
-                 motors_value.get(0, 0) + r, motors_value.get(1, 0) - r);
+                   motors_value.get(0, 0) + r, motors_value.get(1, 0) - r);
   }
 
   public void setMotorsSpeed(double lf, double rf, double lb, double rb)
