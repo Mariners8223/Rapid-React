@@ -25,7 +25,7 @@ public class FieldOrientedDrive extends CommandBase {
   @Override
   public void execute() {
     direction = RobotContainer.getDriveDirection();
-    r += Constants.ROTATION_SPEED * RobotContainer.controller.getRawAxis(Constants.DRIVE_ROTATION);
+    r = 0; //+= Constants.ROTATION_SPEED * RobotContainer.controller.getRawAxis(Constants.DRIVE_ROTATION);
 
     SmartDashboard.putNumber("angle", chassis.getAngle());
     SimpleMatrix robotOrientationMatrix = chassis.rotationMatrix(Math.toRadians(-chassis.getAngle()));

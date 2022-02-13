@@ -38,13 +38,13 @@ public final class Constants {
     public static final SimpleMatrix VELOCITY = new SimpleMatrix(velocity_arr);
 
     // PID values
+    public static final double ANGLE_KP = 0.02;
     public static final double ANGLE_KI = 0;
-    public static final double ANGLE_KP = 0;
     public static final double ANGLE_KD = 0;
 
     // Other constants
-    public static final double CHASSIS_DEAD_BAND = 0.1;
-    public static final double CHASSIS_MULTIPLIE = 0.3;
-    public static final double CHASSIS_CLAMP = 0.5;
+    public static final double CHASSIS_DEAD_BAND = 0;
+    public static final double CHASSIS_MULTIPLIE = 0.5;
+    public static final double CHASSIS_CLAMP = 0.7;
     public static final double ROTATION_SPEED = 1;
 }
