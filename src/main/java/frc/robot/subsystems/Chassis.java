@@ -42,28 +42,13 @@ public class Chassis extends SubsystemBase {
     configMotor(right_back, Constants.RIGHT_BACK_INVERTED);
   }
   
-  /**
-   * Singleton function.
-   * <br></br>
-   * Checks whether an instance of the chasis exists, if not creates one.
-   * @return Returns the instance of the chasis.
-   */
+  // Singleton instance
   public static Chassis getInstance() {
     if (instance == null)
       instance = new Chassis();
     return instance; 
   }
   
-  /**
-   * Sets the speed for the drivetrain, allows for steering, strafing etc etc.
-   * <p>Works by using basic Tank movement (Adding Y to all wheels, adding RX to left and subtracting from right) however it was changed to fit this picture I used (https://imgur.com/a/fecunMR)
-   * and finally adding / removing X from opposite wheels to strafe.</p>
-   * <p>In order to make the drive work in a field oriented manner we take the the values of lx and ly, put them on a vector and rotate it by the gyro's angle. After which we take the deviation.</p>
-   * @param x X axis from the left joystick. (Axis 4)
-   * @param y Y axis from the left joystick. (Axis 0)
-   * @param r X axis from the right joystick. (Axis 1)
-   * @param driveMatrix matrix that represents the drive.
-   */
   public void setSpeed(SimpleMatrix direction, double r, SimpleMatrix driveMatrix) {
     SimpleMatrix motors_value = driveMatrix.mult(direction);
     setMotorsSpeed(motors_value.get(1, 0) + r, motors_value.get(0, 0) - r,
