@@ -3,12 +3,12 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.kauailabs.navx.frc.AHRS;
 
 import org.ejml.simple.SimpleMatrix;
 
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -36,10 +36,10 @@ public class Chassis extends SubsystemBase {
     anglePID = new PIDController(Constants.ANGLE_KP, Constants.ANGLE_KI, Constants.ANGLE_KD);
     anglePID.enableContinuousInput(0, 360);
 
-    configMotor(left_front);
-    configMotor(left_back);
-    configMotor(right_front);
-    configMotor(right_back);
+    configMotor(left_front, Constants.LEFT_FRONT_INVERTED);
+    configMotor(left_back, Constants.LEFT_BACK_INVERTED);
+    configMotor(right_front, Constants.RIGHT_FRONT_INVERTED);
+    configMotor(right_back, Constants.RIGHT_BACK_INVERTED);
   }
   
   /**
@@ -66,7 +66,7 @@ public class Chassis extends SubsystemBase {
    */
   public void setSpeed(SimpleMatrix direction, double r, SimpleMatrix driveMatrix) {
     SimpleMatrix motors_value = driveMatrix.mult(direction);
-    correctDrive(motors_value.get(1, 0) + r, motors_value.get(0, 0) - r,
+    setMotorsSpeed(motors_value.get(1, 0) + r, motors_value.get(0, 0) - r,
                  motors_value.get(0, 0) + r, motors_value.get(1, 0) - r);
   }
 
@@ -80,12 +80,12 @@ public class Chassis extends SubsystemBase {
     right_back.set(ControlMode.Disabled, 0);
   }
 
-  public void correctDrive(double LF, double RF, double LB, double RB)
+  public void setMotorsSpeed(double lf, double rf, double lb, double rb)
   {
-    left_front.set(ControlMode.PercentOutput, MathUtil.clamp(LF * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
-    right_front.set(ControlMode.PercentOutput, MathUtil.clamp(-RF * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
-    left_back.set(ControlMode.PercentOutput, MathUtil.clamp(LB * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
-    right_back.set(ControlMode.PercentOutput, MathUtil.clamp(-RB * Constants.MULTI, -Constants.MAX_CLAMP, Constants.MAX_CLAMP));
+    left_front.set(ControlMode.PercentOutput, lf * Constants.CHASSIS_MULTIPLIE);
+    right_front.set(ControlMode.PercentOutput, rf * Constants.CHASSIS_MULTIPLIE);
+    left_back.set(ControlMode.PercentOutput, lb * Constants.CHASSIS_MULTIPLIE);
+    right_back.set(ControlMode.PercentOutput, rb * Constants.CHASSIS_MULTIPLIE);
   }
 
   public double getAngle(){
@@ -105,7 +105,7 @@ public class Chassis extends SubsystemBase {
     anglePID.reset();
   }
 
-  private void configMotor(TalonFX motor) {
+  private void configMotor(TalonFX motor, boolean isInverted) {
     motor.configFactoryDefault();
 		motor.configNeutralDeadband(Constants.DEAD_BAND);
     motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);							
@@ -114,6 +114,8 @@ public class Chassis extends SubsystemBase {
 		motor.configPeakOutputForward(Constants.MAX_CLAMP, 0);
 		motor.configPeakOutputReverse(-Constants.MAX_CLAMP, 0);
     motor.setNeutralMode(NeutralMode.Brake);
+    if(isInverted) motor.setInverted(TalonFXInvertType.Clockwise);
+    else motor.setInverted(TalonFXInvertType.CounterClockwise);
   }
 
   public double getRotationPID(double target){
