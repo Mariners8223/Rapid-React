@@ -44,7 +44,7 @@ public final class Constants {
 
     // Other constants
     public static final double DEAD_BAND = 0.001;
-    public static final double MULTI = 0.3;
-    public static final double MAX_CLAMP = 0.5;
+    public static final double CHASSIS_MULTIPLIE = 0.3;
+    public static final double CHASSIS_CLAMP = 0.5;
     public static final double ROTATION_SPEED = 1;
 }

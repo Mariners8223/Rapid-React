@@ -111,8 +111,8 @@ public class Chassis extends SubsystemBase {
     motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);							
 		motor.configNominalOutputForward(0, 0);
 		motor.configNominalOutputReverse(0, 0);
-		motor.configPeakOutputForward(Constants.MAX_CLAMP, 0);
-		motor.configPeakOutputReverse(-Constants.MAX_CLAMP, 0);
+		motor.configPeakOutputForward(Constants.CHASSIS_CLAMP, 0);
+		motor.configPeakOutputReverse(-Constants.CHASSIS_CLAMP, 0);
     motor.setNeutralMode(NeutralMode.Brake);
     if(isInverted) motor.setInverted(TalonFXInvertType.Clockwise);
     else motor.setInverted(TalonFXInvertType.CounterClockwise);
