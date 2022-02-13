@@ -70,16 +70,6 @@ public class Chassis extends SubsystemBase {
                  motors_value.get(0, 0) + r, motors_value.get(1, 0) - r);
   }
 
-  /**
-   * Stops the fuckign robot retard.
-   */
-  public void stopRobot() {
-    left_front.set(ControlMode.Disabled, 0);
-    left_back.set(ControlMode.Disabled, 0);
-    right_front.set(ControlMode.Disabled, 0);
-    right_back.set(ControlMode.Disabled, 0);
-  }
-
   public void setMotorsSpeed(double lf, double rf, double lb, double rb)
   {
     left_front.set(ControlMode.PercentOutput, lf * Constants.CHASSIS_MULTIPLIE);

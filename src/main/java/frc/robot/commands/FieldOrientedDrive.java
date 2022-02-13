@@ -16,14 +16,12 @@ public class FieldOrientedDrive extends CommandBase {
     chassis = Chassis.getInstance();
     addRequirements(chassis);
   }
-
   
   @Override
   public void initialize() {
     chassis.resetAngle();
   }
 
-  
   @Override
   public void execute() {
     direction = RobotContainer.getDriveDirection();
@@ -35,12 +33,12 @@ public class FieldOrientedDrive extends CommandBase {
 
     chassis.setSpeed(direction, chassis.getRotationPID(r), fodMatrix);
   }
-
   
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    chassis.setMotorsSpeed(0, 0, 0, 0);
+  }
 
-  
   @Override
   public boolean isFinished() {
     return false;
