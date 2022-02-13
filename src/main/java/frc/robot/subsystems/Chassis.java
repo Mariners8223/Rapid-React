@@ -51,10 +51,10 @@ public class Chassis extends SubsystemBase {
 
   public void setMotorsSpeed(double lf, double rf, double lb, double rb)
   {
-    left_front.set(ControlMode.PercentOutput, lf * Constants.CHASSIS_MULTIPLIE);
-    right_front.set(ControlMode.PercentOutput, rf * Constants.CHASSIS_MULTIPLIE);
-    left_back.set(ControlMode.PercentOutput, lb * Constants.CHASSIS_MULTIPLIE);
-    right_back.set(ControlMode.PercentOutput, rb * Constants.CHASSIS_MULTIPLIE);
+    left_front.set(ControlMode.PercentOutput, deadBandOutput(lf) * Constants.CHASSIS_MULTIPLIE);
+    right_front.set(ControlMode.PercentOutput, deadBandOutput(rf) * Constants.CHASSIS_MULTIPLIE);
+    left_back.set(ControlMode.PercentOutput, deadBandOutput(lb) * Constants.CHASSIS_MULTIPLIE);
+    right_back.set(ControlMode.PercentOutput, deadBandOutput(rb) * Constants.CHASSIS_MULTIPLIE);
   }
 
   public double getAngle(){
@@ -75,14 +75,16 @@ public class Chassis extends SubsystemBase {
 
   private void configMotor(TalonFX motor, boolean isInverted) {
     motor.configFactoryDefault();
-		motor.configNeutralDeadband(Constants.CHASSIS_DEAD_BAND);
-    motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);							
-		motor.configNominalOutputForward(0, 0);
-		motor.configNominalOutputReverse(0, 0);
+    motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);		
 		motor.configPeakOutputForward(Constants.CHASSIS_CLAMP, 0);
 		motor.configPeakOutputReverse(-Constants.CHASSIS_CLAMP, 0);
     motor.setNeutralMode(NeutralMode.Brake);
     if(isInverted) motor.setInverted(TalonFXInvertType.Clockwise);
     else motor.setInverted(TalonFXInvertType.CounterClockwise);
+  }
+
+  private double deadBandOutput(double s){
+    if(Math.abs(s) < Constants.CHASSIS_DEAD_BAND) return 0;
+    return s;
   }
 }

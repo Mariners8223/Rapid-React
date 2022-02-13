@@ -40,7 +40,7 @@ public final class Constants {
     // PID values
 
     // Other constants
-    public static final double CHASSIS_DEAD_BAND = 0.01;
-    public static final double CHASSIS_MULTIPLIE = 0.3;
-    public static final double CHASSIS_CLAMP = 0.5;
+    public static final double CHASSIS_DEAD_BAND = 0.25;
+    public static final double CHASSIS_MULTIPLIE = 0.6;
+    public static final double CHASSIS_CLAMP = 0.8;
 }
