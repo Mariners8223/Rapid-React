@@ -71,16 +71,24 @@ public class Chassis extends SubsystemBase {
 
   public void resetAngle(){
     navx.reset();
+    anglePID.setSetpoint(0);
+    anglePID.reset();
   }
 
   private void configMotor(TalonFX motor, boolean isInverted) {
     motor.configFactoryDefault();
-    motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);		
+    motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);							
+		motor.configNominalOutputForward(0, 0);
+		motor.configNominalOutputReverse(0, 0);
 		motor.configPeakOutputForward(Constants.CHASSIS_CLAMP, 0);
 		motor.configPeakOutputReverse(-Constants.CHASSIS_CLAMP, 0);
     motor.setNeutralMode(NeutralMode.Brake);
     if(isInverted) motor.setInverted(TalonFXInvertType.Clockwise);
     else motor.setInverted(TalonFXInvertType.CounterClockwise);
+  }
+
+  public double getRotationPID(double target){
+    return  anglePID.calculate(getAngle(), target);
   }
 
   private double deadBandOutput(double s){
