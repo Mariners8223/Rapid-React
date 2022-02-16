@@ -18,13 +18,16 @@ public class BaseDrive extends CommandBase {
 
   @Override
   public void initialize() {
+    r = 0;
+    double[][] zero = {{0}, {0}};
+    direction = new SimpleMatrix(zero);
     chassis.resetAngle();
   }
 
   @Override
   public void execute() {
     direction = RobotContainer.getDriveDirection();
-    r += Constants.ROTATION_SPEED * RobotContainer.controller.getRawAxis(Constants.DRIVE_ROTATION);
+    r += RobotContainer.getDriveRotationDiff();
 
     chassis.setSpeed(direction, chassis.getRotationPID(r), Constants.BASE_DRIVE);
   }
