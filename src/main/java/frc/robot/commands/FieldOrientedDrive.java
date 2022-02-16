@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import org.ejml.simple.SimpleMatrix;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -30,7 +29,6 @@ public class FieldOrientedDrive extends CommandBase {
     direction = RobotContainer.getDriveDirection();
     r += RobotContainer.getDriveRotationDiff();
 
-    SmartDashboard.putNumber("angle", chassis.getAngle());
     SimpleMatrix robotOrientationMatrix = chassis.rotationMatrix(Math.toRadians(-chassis.getAngle()));
     SimpleMatrix fodMatrix = Constants.BASE_DRIVE.mult(robotOrientationMatrix);
 

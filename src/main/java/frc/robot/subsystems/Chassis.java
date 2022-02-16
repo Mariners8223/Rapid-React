@@ -10,7 +10,6 @@ import com.kauailabs.navx.frc.AHRS;
 import org.ejml.simple.SimpleMatrix;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -95,10 +94,7 @@ public class Chassis extends SubsystemBase {
   }
 
   public double getRotationPID(double target){
-    double calculate = anglePID.calculate(getAngle(), target);
-    SmartDashboard.putNumber("pid", calculate);
-    if(Math.abs(calculate) < 0.2) return 0;
-    return calculate;
+    return  anglePID.calculate(getAngle(), target);
   }
 
   private double deadBandOutput(double s){
