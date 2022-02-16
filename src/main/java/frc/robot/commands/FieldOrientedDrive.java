@@ -32,7 +32,7 @@ public class FieldOrientedDrive extends CommandBase {
     SimpleMatrix robotOrientationMatrix = chassis.rotationMatrix(Math.toRadians(-chassis.getAngle()));
     SimpleMatrix fodMatrix = Constants.BASE_DRIVE.mult(robotOrientationMatrix);
 
-    chassis.setSpeed(direction, r, fodMatrix);
+    chassis.setSpeed(direction, chassis.getRotationPID(r), fodMatrix);
   }
   
   @Override

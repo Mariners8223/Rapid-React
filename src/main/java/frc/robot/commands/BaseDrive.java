@@ -29,7 +29,7 @@ public class BaseDrive extends CommandBase {
     direction = RobotContainer.getDriveDirection();
     r += RobotContainer.getDriveRotationDiff();
 
-    chassis.setSpeed(direction, r, Constants.BASE_DRIVE);
+    chassis.setSpeed(direction, chassis.getRotationPID(r), Constants.BASE_DRIVE);
   }
 
   @Override

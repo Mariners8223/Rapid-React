@@ -9,6 +9,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import org.ejml.simple.SimpleMatrix;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -21,6 +22,8 @@ public class Chassis extends SubsystemBase {
   private AHRS navx;
   private static Chassis instance;
 
+  PIDController anglePID;
+
   private Chassis() {
     left_front = new TalonFX(Constants.LEFT_FRONT);
     left_back = new TalonFX(Constants.LEFT_BACK);
@@ -29,6 +32,9 @@ public class Chassis extends SubsystemBase {
 
     navx = new AHRS();
     navx.calibrate();
+
+    anglePID = new PIDController(Constants.ANGLE_KP, Constants.ANGLE_KI, Constants.ANGLE_KD);
+    anglePID.enableContinuousInput(0, 360);
 
     configMotor(left_front, Constants.LEFT_FRONT_INVERTED);
     configMotor(left_back, Constants.LEFT_BACK_INVERTED);
@@ -88,7 +94,7 @@ public class Chassis extends SubsystemBase {
   }
 
   public double getRotationPID(double target){
-    return  anglePID.calculate(getAngle(), target);
+    return anglePID.calculate(getAngle(), target);
   }
 
   private double deadBandOutput(double s){
