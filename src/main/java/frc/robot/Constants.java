@@ -2,6 +2,8 @@ package frc.robot;
 
 import org.ejml.simple.SimpleMatrix;
 
+import edu.wpi.first.wpilibj.SerialPort;
+
 public final class Constants {
     // Motors
     public static final int LEFT_FRONT = 1;
@@ -41,6 +43,13 @@ public final class Constants {
     public static final double ANGLE_KP = 0.03;
     public static final double ANGLE_KI = 0;
     public static final double ANGLE_KD = 0.01;
+
+    // Raspberry pi usb
+    public static final int RASPBERRYPI_BAUDRATE = 9600;
+    public static final SerialPort.Port RASPBERRYPI_PORT = SerialPort.Port.kUSB;
+    public static final int RASPBERRYPI_DATABITS = 8;
+    public static final int RASPBERRYPI_READ_BAFFER_SIZE = 8;
+    public static final int RASPBERRYPI_OUTPUT_LEANGTH = 1;
 
     // Other constants
     public static final double CHASSIS_DEAD_BAND = 0.25;
