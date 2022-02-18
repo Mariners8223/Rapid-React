@@ -1,17 +1,23 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class RaspberryPi extends SubsystemBase {
   private static RaspberryPi instance;
 
-  private SerialPort usb;
+  private NetworkTable table;
+
+  private double angle;
+  private double distance;
 
   private RaspberryPi() {
-    usb = new SerialPort(Constants.RASPBERRYPI_BAUDRATE, Constants.RASPBERRYPI_PORT, Constants.RASPBERRYPI_DATABITS);
-    usb.setReadBufferSize(Constants.RASPBERRYPI_READ_BAFFER_SIZE);
+    table = NetworkTableInstance.getDefault().getTable(Constants.RASPBERRYPI_TABLE);
+    
+    angle = 0;
+    distance = 0;
   }
 
   public static RaspberryPi getInstance(){
@@ -19,11 +25,13 @@ public class RaspberryPi extends SubsystemBase {
     return instance;
   }
 
-  public double[] getData(){
-    String[] data_str = usb.readString().split(" ");
-    double[] data = new double[Constants.RASPBERRYPI_OUTPUT_LEANGTH];
-    if (data_str.length != Constants.RASPBERRYPI_OUTPUT_LEANGTH) return data;
-    for(int i = 0; i < Constants.RASPBERRYPI_OUTPUT_LEANGTH; i++) data[i] = Double.parseDouble(data_str[i]);
-    return data;
+  public double getAngle() {
+    table.getEntry(Constants.RASPBERRYPI_ANGLE_ENTERY).setDouble(angle);
+    return angle;
+  }
+
+  public double getDistance() {
+    table.getEntry(Constants.RASPBERRYPI_DISTANCE_ENTERY).setDouble(distance);
+    return distance;
   }
 }
