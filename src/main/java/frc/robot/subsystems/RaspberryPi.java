@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -10,14 +11,14 @@ public class RaspberryPi extends SubsystemBase {
 
   private NetworkTable table;
 
-  private double angle;
-  private double distance;
+  private NetworkTableEntry angleEntry;
+  private NetworkTableEntry distanceEntry;
 
   private RaspberryPi() {
     table = NetworkTableInstance.getDefault().getTable(Constants.RASPBERRYPI_TABLE);
-    
-    angle = 0;
-    distance = 0;
+
+    angleEntry = table.getEntry(Constants.RASPBERRYPI_ANGLE_ENTERY);
+    distanceEntry = table.getEntry(Constants.RASPBERRYPI_DISTANCE_ENTERY);
   }
 
   public static RaspberryPi getInstance(){
@@ -26,12 +27,10 @@ public class RaspberryPi extends SubsystemBase {
   }
 
   public double getAngle() {
-    table.getEntry(Constants.RASPBERRYPI_ANGLE_ENTERY).setDouble(angle);
-    return angle;
+    return angleEntry.getDouble(0);
   }
 
   public double getDistance() {
-    table.getEntry(Constants.RASPBERRYPI_DISTANCE_ENTERY).setDouble(distance);
-    return distance;
+    return distanceEntry.getDouble(0);
   }
 }
