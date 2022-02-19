@@ -43,9 +43,9 @@ public final class Constants {
     public static final double ANGLE_KD = 0.01;
 
     // Other constants
-    public static final double CHASSIS_DEAD_BAND = 0.25;
-    public static final double CHASSIS_MULTIPLIE = 0.5;
-    public static final double CHASSIS_CLAMP = 0.7;
-    public static final double ROTATION_SPEED = 1;
+    public static final double CHASSIS_DEAD_BAND = 0.3;
+    public static final double CHASSIS_MULTIPLIE = 0.6;
+    public static final double CHASSIS_CLAMP = 0.8;
+    public static final double ROTATION_SPEED = 2;
     public static final double ROTATION_DEAD_BAND = 0.3;
 }
