@@ -9,7 +9,10 @@ import frc.robot.subsystems.Chassis;
 
 public class FieldOrientedDrive extends CommandBase {
   private Chassis chassis;
-  private SimpleMatrix direction; private double r;
+
+  private SimpleMatrix direction;
+  private double r;
+  private double diff;
 
   public FieldOrientedDrive() {
     chassis = Chassis.getInstance();
@@ -27,7 +30,12 @@ public class FieldOrientedDrive extends CommandBase {
   @Override
   public void execute() {
     direction = RobotContainer.getDriveDirection();
-    r += RobotContainer.getDriveRotationDiff();
+    diff = RobotContainer.getDriveRotationDiff();
+    if(diff != 0) {
+      r += diff;
+      chassis.setSmoothRotation(true);
+    }
+    else chassis.setSmoothRotation(false);
 
     SimpleMatrix robotOrientationMatrix = chassis.rotationMatrix(Math.toRadians(-chassis.getAngle()));
     SimpleMatrix fodMatrix = Constants.BASE_DRIVE.mult(robotOrientationMatrix);

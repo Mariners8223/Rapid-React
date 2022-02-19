@@ -101,4 +101,9 @@ public class Chassis extends SubsystemBase {
     if(Math.abs(s) < Constants.CHASSIS_DEAD_BAND) return 0;
     return s;
   }
+
+  public void setSmoothRotation(boolean smooth) {
+    if (smooth) anglePID.setD(0);
+    else anglePID.setD(Constants.ANGLE_KD);
+  }
 }
