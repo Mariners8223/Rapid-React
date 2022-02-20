@@ -29,7 +29,7 @@ public class HeadingDrive extends CommandBase {
   @Override
   public void execute() {
     direction = RobotContainer.getDriveDirection();
-    double angle = RobotContainer.getDriveRotationDiff();
+    double angle = RobotContainer.getDriveAngle();
     if(angle != 361) {
       heading = angle;
     }
