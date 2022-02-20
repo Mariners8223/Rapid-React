@@ -10,6 +10,7 @@ import com.kauailabs.navx.frc.AHRS;
 import org.ejml.simple.SimpleMatrix;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -22,7 +23,10 @@ public class Chassis extends SubsystemBase {
   private AHRS navx;
   private static Chassis instance;
 
-  PIDController anglePID;
+  private PIDController anglePID;
+
+  private SimpleMatrix position;
+  private double last_time_position;
 
   private Chassis() {
     left_front = new TalonFX(Constants.LEFT_FRONT);
@@ -30,16 +34,19 @@ public class Chassis extends SubsystemBase {
     right_front = new TalonFX(Constants.RIGHT_FRONT);
     right_back = new TalonFX(Constants.RIGHT_BACK);
 
+    configMotor(left_front, Constants.LEFT_FRONT_INVERTED);
+    configMotor(left_back, Constants.LEFT_BACK_INVERTED);
+    configMotor(right_front, Constants.RIGHT_FRONT_INVERTED);
+    configMotor(right_back, Constants.RIGHT_BACK_INVERTED);
+
     navx = new AHRS();
     navx.calibrate();
 
     anglePID = new PIDController(Constants.ANGLE_KP, Constants.ANGLE_KI, Constants.ANGLE_KD);
     anglePID.enableContinuousInput(0, 360);
 
-    configMotor(left_front, Constants.LEFT_FRONT_INVERTED);
-    configMotor(left_back, Constants.LEFT_BACK_INVERTED);
-    configMotor(right_front, Constants.RIGHT_FRONT_INVERTED);
-    configMotor(right_back, Constants.RIGHT_BACK_INVERTED);
+    position = Constants.ZERO_VECTOR;
+    last_time_position = 0;
   }
   
   // Singleton instance
@@ -105,5 +112,34 @@ public class Chassis extends SubsystemBase {
   public void setSmoothRotation(boolean smooth) {
     if (smooth) anglePID.setD(0);
     else anglePID.setD(Constants.ANGLE_KD);
+  }
+
+  public void resetPosition() {
+    position = Constants.ZERO_VECTOR;
+    last_time_position = 0;
+  }
+
+  public SimpleMatrix getVelocity() {
+    double lf =  Constants.LEFT_FRONT_DPP * left_front.getSelectedSensorVelocity();
+    double rf = Constants.RIGHT_FRONT_DPP * right_front.getSelectedSensorVelocity();
+    double lb = Constants.LEFT_BACK_DPP * left_back.getSelectedSensorVelocity();
+    double rb = Constants.RIGHT_BACK_DPP * right_back.getSelectedSensorVelocity();
+    
+    double e1 = (rf + lb) / 2.0;
+    double e2 = (lf + rb) / 2.0;
+
+    double[][] raw_velocity_arr = {{e1}, {e2}};
+
+    return Constants.VELOCITY.mult(new SimpleMatrix(raw_velocity_arr));
+  }
+
+  public SimpleMatrix getPosition() {
+    SimpleMatrix field_oriented_velocity = rotationMatrix(getAngle()).mult(getVelocity());
+
+    double time = Timer.getFPGATimestamp();
+    position = position.plus(field_oriented_velocity.scale(time - last_time_position));
+    last_time_position = time;
+    
+    return position;
   }
 }
