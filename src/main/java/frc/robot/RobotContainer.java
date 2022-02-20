@@ -26,6 +26,14 @@ public class RobotContainer {
     return joystick_value;
   }
 
+  public static double getDriveAngle() {
+    double x = controller.getRawAxis(Constants.DRIVE_DIRECTION_X);
+    double y = -controller.getRawAxis(Constants.DRIVE_DIRECTION_Y); //Inverted because joystick is inverted.
+    if(Math.abs(x) < Constants.ROTATION_DEAD_BAND || Math.abs(y) < Constants.ROTATION_DEAD_BAND) return 361;
+    double angle = Math.atan2(y, x);
+    return Math.toDegrees(angle);
+  }
+
   public static double getDriveRotationDiff() {
     double s = RobotContainer.controller.getRawAxis(Constants.DRIVE_ROTATION);
     if(Math.abs(s) < Constants.ROTATION_DEAD_BAND) return 0;
