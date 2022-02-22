@@ -15,11 +15,11 @@ public final class Constants {
     public static final boolean RIGHT_FRONT_INVERTED = true;
     public static final boolean RIGHT_BACK_INVERTED = true;
 
-    // Motors encoders
-    public static final double LEFT_FRONT_DPP = 0.00010440706;
-    public static final double LEFT_BACK_DPP = 0.00010440706;
-    public static final double RIGHT_FRONT_DPP = 0.00010440706;
-    public static final double RIGHT_BACK_DPP = 0.00010440706;
+    // Motors encoders                              0.00001072997
+    public static final double LEFT_FRONT_DPP = 0.000010440706;
+    public static final double LEFT_BACK_DPP = 0.000010440706;
+    public static final double RIGHT_FRONT_DPP = 0.000010440706;
+    public static final double RIGHT_BACK_DPP = 0.000010440706;
 
     // Joysticks
     public static final int DRIVE_JOYSTICK = 0;
@@ -60,6 +60,7 @@ public final class Constants {
     public static final double CHASSIS_DEAD_BAND = 0.3;
     public static final double CHASSIS_MULTIPLIE = 0.6;
     public static final double CHASSIS_CLAMP = 0.8;
+    public static final double CHASSIS_VELOCITY_TIME_TO_SECONDS = 10.0;
     public static final double ROTATION_SPEED = 2;
     public static final double ROTATION_DEAD_BAND = 0.3;
 }

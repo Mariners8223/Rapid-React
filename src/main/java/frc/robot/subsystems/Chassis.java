@@ -121,10 +121,10 @@ public class Chassis extends SubsystemBase {
   }
 
   public SimpleMatrix getVelocity() {
-    double lf =  Constants.LEFT_FRONT_DPP * left_front.getSelectedSensorVelocity();
-    double rf = Constants.RIGHT_FRONT_DPP * right_front.getSelectedSensorVelocity();
-    double lb = Constants.LEFT_BACK_DPP * left_back.getSelectedSensorVelocity();
-    double rb = Constants.RIGHT_BACK_DPP * right_back.getSelectedSensorVelocity();
+    double lf =  Constants.LEFT_FRONT_DPP * Constants.CHASSIS_VELOCITY_TIME_TO_SECONDS * left_front.getSelectedSensorVelocity();
+    double rf = Constants.RIGHT_FRONT_DPP * Constants.CHASSIS_VELOCITY_TIME_TO_SECONDS * right_front.getSelectedSensorVelocity();
+    double lb = Constants.LEFT_BACK_DPP * Constants.CHASSIS_VELOCITY_TIME_TO_SECONDS * left_back.getSelectedSensorVelocity();
+    double rb = Constants.RIGHT_BACK_DPP * Constants.CHASSIS_VELOCITY_TIME_TO_SECONDS * right_back.getSelectedSensorVelocity();
 
     SmartDashboard.putNumber("lf", lf);
     SmartDashboard.putNumber("rf", rf);
