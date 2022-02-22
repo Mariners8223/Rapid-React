@@ -15,15 +15,11 @@ public final class Constants {
     public static final boolean RIGHT_FRONT_INVERTED = true;
     public static final boolean RIGHT_BACK_INVERTED = true;
 
-    // Motors distance per pulse
-    private static final double ROTATION_PER_PULSE = 1.0 / 2048.0;
-    private static final double WHEEL_ROTATION_PER_ROTATION = 1.0 / 7.5;
-    private static final double DISTANCE_PER_WHEEL_ROTATION = 2.0 * Math.PI * 0.0762;
-
-    public static final double LEFT_FRONT_DPP = DISTANCE_PER_WHEEL_ROTATION * WHEEL_ROTATION_PER_ROTATION * ROTATION_PER_PULSE;
-    public static final double LEFT_BACK_DPP = DISTANCE_PER_WHEEL_ROTATION * WHEEL_ROTATION_PER_ROTATION * ROTATION_PER_PULSE;
-    public static final double RIGHT_FRONT_DPP = DISTANCE_PER_WHEEL_ROTATION * WHEEL_ROTATION_PER_ROTATION * ROTATION_PER_PULSE;
-    public static final double RIGHT_BACK_DPP = DISTANCE_PER_WHEEL_ROTATION * WHEEL_ROTATION_PER_ROTATION * ROTATION_PER_PULSE;
+    // Motors encoders
+    public static final double LEFT_FRONT_DPP = 0.00010440706;
+    public static final double LEFT_BACK_DPP = 0.00010440706;
+    public static final double RIGHT_FRONT_DPP = 0.00010440706;
+    public static final double RIGHT_BACK_DPP = 0.00010440706;
 
     // Joysticks
     public static final int DRIVE_JOYSTICK = 0;
