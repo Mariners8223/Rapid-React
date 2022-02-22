@@ -8,15 +8,26 @@ public final class Constants {
     public static final int LEFT_BACK = 4;
     public static final int RIGHT_FRONT = 2;
     public static final int RIGHT_BACK = 3;
+    public static final int EYE_LEFT = 6;
+    public static final int EYE_RIGHT = 8;
+    public static final int INTAKE_LEFT = 5; 
+    public static final int INTAKE_RIGHT = 9;
+    public static final int TRANSPORT_BOTTOM = 11;
+    public static final int TRANSPORT_TOP = 7;
 
     // Motors Invertion
     public static final boolean LEFT_FRONT_INVERTED = false;
     public static final boolean LEFT_BACK_INVERTED = false;
     public static final boolean RIGHT_FRONT_INVERTED = true;
     public static final boolean RIGHT_BACK_INVERTED = true;
+    public static final boolean EYE_LEFT_INVERTED = false;    
+    public static final boolean EYE_RIGHT_INVERTED = true;
+    public static final boolean INTAKE_LEFT_INVERTED = false;
+    public static final boolean INTAKE_RIGHT_INVERTED = true;
 
     // Joysticks
     public static final int DRIVE_JOYSTICK = 0;
+    public static final int ARM_JOYSTICK = 1;
 
     // Axises
     public static final int DRIVE_DIRECTION_X = 0;
@@ -46,6 +57,18 @@ public final class Constants {
     public static final String RASPBERRYPI_TABLE = "vision";
     public static final String RASPBERRYPI_ANGLE_ENTERY = "angle";
     public static final String RASPBERRYPI_DISTANCE_ENTERY = "distance";
+
+    // Speed Values
+    public static final double PULLIES_SPEED = 0.8;
+    public static final double INTAKE_SPEED = 0.8;
+    public static final double TRANSPORT_SPEED = 0.9;
+
+    // Buttons
+    public static final int TOGGLE_PULLIES_BUTTON = 4;
+    public static final int INTAKE_OUT_AXIS = 2;
+    public static final int INTAKE_IN_BUTTON = 5;
+
+
 
     // Other constants
     public static final double CHASSIS_DEAD_BAND = 0.3;
