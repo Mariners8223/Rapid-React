@@ -4,34 +4,32 @@ import org.ejml.simple.SimpleMatrix;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.toggleIntake; 
+import frc.robot.commands.IntakeLeft;
+import frc.robot.commands.IntakeRight;
+import frc.robot.commands.LowerIntake;
+import frc.robot.commands.RaiseIntake;
 
 public class RobotContainer {
   private static Joystick chasis_controller = new Joystick(Constants.DRIVE_JOYSTICK);
   // private static Joystick limb_controller = new Joystick(Constants.ARM_JOYSTICK);
-  private static JoystickButton pullies_button = new JoystickButton(chasis_controller, Constants.TOGGLE_PULLIES_BUTTON);
-
+  private static JoystickButton pullies_raise_button = new JoystickButton(chasis_controller, Constants.RAISE_PULLIES_BUTTON);
+  private static JoystickButton pullies_lower_button = new JoystickButton(chasis_controller, Constants.LOWER_PULLIES_BUTTON);
+  private static JoystickButton intake_left_button = new JoystickButton(chasis_controller, Constants.INTAKE_LEFT_BUTTON);
+  private static JoystickButton intake_right_button = new JoystickButton(chasis_controller, Constants.INTAKE_RIGHT_BUTTON);
 
   public RobotContainer() {
     configureButtonBindings();
   }
 
   private void configureButtonBindings() {
-    pullies_button.whenPressed(new toggleIntake());
+    pullies_raise_button.whenPressed(new RaiseIntake());
+    pullies_lower_button.whenPressed(new LowerIntake());
+    intake_left_button.whenPressed(new IntakeLeft());
+    intake_right_button.whenPressed(new IntakeRight());
   }
 
   public Command getAutonomousCommand(){
     return null;
-  }
-
-  public static boolean intakeOutCheck() {
-    if (chasis_controller.getRawAxis(Constants.INTAKE_OUT_AXIS) > 0.1) return true;
-    return false;
-  }
-
-  public static boolean intakeInCheck() {
-    if (chasis_controller.getRawButton(Constants.INTAKE_IN_BUTTON)) return true;
-    return false;
   }
   
   public static SimpleMatrix getDriveDirection() {

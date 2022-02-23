@@ -64,9 +64,10 @@ public final class Constants {
     public static final double TRANSPORT_SPEED = 0.9;
 
     // Buttons
-    public static final int TOGGLE_PULLIES_BUTTON = 4;
-    public static final int INTAKE_OUT_AXIS = 2;
-    public static final int INTAKE_IN_BUTTON = 5;
+    public static final int RAISE_PULLIES_BUTTON = 4;
+    public static final int LOWER_PULLIES_BUTTON = 2;
+    public static final int INTAKE_LEFT_BUTTON = 5;
+    public static final int INTAKE_RIGHT_BUTTON = 6;
 
 
 
