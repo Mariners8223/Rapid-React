@@ -31,6 +31,10 @@ public class RobotContainer {
   public Command getAutonomousCommand(){
     return null;
   }
+
+  public static boolean getChasisButton(int button) {
+    return chasis_controller.getRawButton(button);
+  }
   
   public static SimpleMatrix getDriveDirection() {
     double x = chasis_controller.getRawAxis(Constants.DRIVE_DIRECTION_X);
