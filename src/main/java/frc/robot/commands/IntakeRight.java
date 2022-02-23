@@ -27,7 +27,7 @@ public class IntakeRight extends CommandBase {
 
   
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {intake.setRight(0); transport.transportInwards(0);}
 
   
   @Override

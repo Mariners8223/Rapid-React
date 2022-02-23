@@ -21,7 +21,7 @@ public class LowerIntake extends CommandBase {
 
   
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {intake.lowerPullies(0);}
 
   
   @Override

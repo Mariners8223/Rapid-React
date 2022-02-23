@@ -5,28 +5,23 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
-  private static TalonSRX left_eye;
-  private static TalonSRX right_eye;
-  private static TalonSRX left_intake;
-  private static TalonSRX right_intake;
+  private static VictorSPX left_eye;
+  private static VictorSPX right_eye;
+  private static VictorSPX left_intake;
+  private static VictorSPX right_intake;
   private static Intake instance;
 
   private Intake() {
-    left_intake = new TalonSRX(Constants.INTAKE_LEFT);
-    right_intake = new TalonSRX(Constants.INTAKE_RIGHT);
-    left_eye =  new TalonSRX(Constants.EYE_LEFT);
-    right_eye = new TalonSRX(Constants.EYE_RIGHT);
-
-    right_eye.setInverted(Constants.EYE_RIGHT_INVERTED);
-    right_intake.setInverted(Constants.INTAKE_RIGHT_INVERTED);
-    left_eye.setInverted(Constants.EYE_LEFT_INVERTED);
-    left_intake.setInverted(Constants.INTAKE_LEFT_INVERTED);
+    left_intake = new VictorSPX(Constants.INTAKE_LEFT);
+    right_intake = new VictorSPX(Constants.INTAKE_RIGHT);
+    left_eye =  new VictorSPX(Constants.EYE_LEFT);
+    right_eye = new VictorSPX(Constants.EYE_RIGHT);
   }
 
 
@@ -36,22 +31,12 @@ public class Intake extends SubsystemBase {
 
   public void lowerPullies(double voltage) {
     left_eye.set(ControlMode.PercentOutput, voltage);
-    right_eye.set(ControlMode.Follower, left_eye.getDeviceID());
+    right_eye.set(ControlMode.PercentOutput, voltage);
   }
 
   public void raisePullies(double voltage) {
     left_eye.set(ControlMode.PercentOutput, voltage);
-    right_eye.set(ControlMode.Follower, left_eye.getDeviceID());
-  }
-
-  public void intakeBalls(double voltage) {
-    setRight(voltage);
-    setLeft(voltage);
-  }
-
-  public void outtakeBalls(double voltage) {
-    setRight(-voltage);
-    setLeft(-voltage);
+    right_eye.set(ControlMode.PercentOutput, voltage);
   }
 
 

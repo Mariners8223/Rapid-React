@@ -22,10 +22,10 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    pullies_raise_button.whenPressed(new RaiseIntake());
-    pullies_lower_button.whenPressed(new LowerIntake());
-    intake_left_button.whenPressed(new IntakeLeft());
-    intake_right_button.whenPressed(new IntakeRight());
+    pullies_raise_button.whileHeld(new RaiseIntake());
+    pullies_lower_button.whileHeld(new LowerIntake());
+    intake_left_button.whileHeld(new IntakeLeft());
+    intake_right_button.whileHeld(new IntakeRight());
   }
 
   public Command getAutonomousCommand(){

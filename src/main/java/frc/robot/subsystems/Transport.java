@@ -5,22 +5,22 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Transport extends SubsystemBase {
-  private static TalonSRX transport_bottom;
-  private static TalonSRX transport_top;
+  private static VictorSPX transport_bottom;
+  private static VictorSPX transport_top;
 
 
   private static Transport instance;
 
 
   private Transport() {
-    transport_bottom = new TalonSRX(Constants.TRANSPORT_BOTTOM);
-    transport_top = new TalonSRX(Constants.TRANSPORT_TOP);
+    transport_bottom = new VictorSPX(Constants.TRANSPORT_BOTTOM);
+    transport_top = new VictorSPX(Constants.TRANSPORT_TOP);
   }
 
 

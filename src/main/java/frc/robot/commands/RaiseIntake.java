@@ -23,7 +23,7 @@ public class RaiseIntake extends CommandBase {
 
   
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {intake.raisePullies(0);}
 
   
   @Override
