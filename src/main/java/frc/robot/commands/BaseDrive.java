@@ -12,7 +12,8 @@ public class BaseDrive extends CommandBase {
   
   private SimpleMatrix direction;
   private double r;
-  private double diff;
+  private double angle;
+  private double rotation;
 
   public BaseDrive() {
     chassis = Chassis.getInstance();
@@ -24,20 +25,21 @@ public class BaseDrive extends CommandBase {
     r = 0;
     double[][] zero = {{0}, {0}};
     direction = new SimpleMatrix(zero);
+    angle = 0;
     chassis.resetAngle();
   }
 
   @Override
   public void execute() {
     direction = RobotContainer.getDriveDirection();
-    diff = RobotContainer.getDriveRotationDiff();
-    if(diff != 0) {
-      r += diff;
-      chassis.setSmoothRotation(true);
+    rotation = RobotContainer.getDriveRotation();
+    if(rotation != 0) {
+      r = rotation;
+      angle = chassis.getAngle();
     }
-    else chassis.setSmoothRotation(false);
+    else r = chassis.getRotationPID(angle);
 
-    chassis.setSpeed(direction, chassis.getRotationPID(r), Constants.BASE_DRIVE);
+    chassis.setSpeed(direction, r, Constants.BASE_DRIVE);
   }
 
   @Override

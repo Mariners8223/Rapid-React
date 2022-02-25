@@ -34,7 +34,7 @@ public class RobotContainer {
     return Math.toDegrees(angle);
   }
 
-  public static double getDriveRotationDiff() {
+  public static double getDriveRotation() {
     double s = RobotContainer.controller.getRawAxis(Constants.DRIVE_ROTATION);
     if(Math.abs(s) < Constants.ROTATION_DEAD_BAND) return 0;
     return Constants.ROTATION_SPEED * s;
