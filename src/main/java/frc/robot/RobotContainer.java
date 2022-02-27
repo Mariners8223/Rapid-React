@@ -4,10 +4,8 @@ import org.ejml.simple.SimpleMatrix;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.IntakeLeft;
-import frc.robot.commands.IntakeRight;
-import frc.robot.commands.LowerIntake;
-import frc.robot.commands.RaiseIntake;
+import frc.robot.commands.IntakeButtons;
+import frc.robot.commands.ShootCycle;
 
 public class RobotContainer {
   private static Joystick chasis_controller = new Joystick(Constants.DRIVE_JOYSTICK);
@@ -16,16 +14,18 @@ public class RobotContainer {
   private static JoystickButton pullies_lower_button = new JoystickButton(chasis_controller, Constants.LOWER_PULLIES_BUTTON);
   private static JoystickButton intake_left_button = new JoystickButton(chasis_controller, Constants.INTAKE_LEFT_BUTTON);
   private static JoystickButton intake_right_button = new JoystickButton(chasis_controller, Constants.INTAKE_RIGHT_BUTTON);
+  private static JoystickButton shoot_button = new JoystickButton(chasis_controller, Constants.SHOOT_FIRE_BUTTON);
 
   public RobotContainer() {
     configureButtonBindings();
   }
 
   private void configureButtonBindings() {
-    pullies_raise_button.whileHeld(new RaiseIntake());
-    pullies_lower_button.whileHeld(new LowerIntake());
-    intake_left_button.whileHeld(new IntakeLeft());
-    intake_right_button.whileHeld(new IntakeRight());
+    pullies_raise_button.whileHeld(new IntakeButtons(Constants.RAISE_PULLIES_BUTTON));
+    pullies_lower_button.whileHeld(new IntakeButtons(Constants.LOWER_PULLIES_BUTTON));
+    intake_left_button.whileHeld(new IntakeButtons(Constants.INTAKE_LEFT_BUTTON, true));
+    intake_right_button.whileHeld(new IntakeButtons(Constants.INTAKE_RIGHT_BUTTON, false));
+    shoot_button.whileHeld(new ShootCycle());
   }
 
   public Command getAutonomousCommand(){

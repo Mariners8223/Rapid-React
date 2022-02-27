@@ -22,6 +22,8 @@ public class Intake extends SubsystemBase {
     right_intake = new VictorSPX(Constants.INTAKE_RIGHT);
     left_eye =  new VictorSPX(Constants.EYE_LEFT);
     right_eye = new VictorSPX(Constants.EYE_RIGHT);
+
+    left_eye.setInverted(true);
   }
 
 
@@ -37,6 +39,13 @@ public class Intake extends SubsystemBase {
   public void raisePullies(double voltage) {
     left_eye.set(ControlMode.PercentOutput, voltage);
     right_eye.set(ControlMode.PercentOutput, voltage);
+  }
+
+  public void stopAll() {
+    left_eye.set(ControlMode.PercentOutput, 0);
+    right_eye.set(ControlMode.PercentOutput, 0);
+    left_intake.set(ControlMode.PercentOutput, 0);
+    right_intake.set(ControlMode.PercentOutput, 0);
   }
 
 

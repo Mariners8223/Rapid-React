@@ -1,6 +1,5 @@
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 
 import org.ejml.simple.SimpleMatrix;
 
@@ -64,12 +63,11 @@ public final class Constants {
     public static final double SHOOTER_SPEED = 0.5;
 
     // Buttons
-    public static final int RAISE_PULLIES_BUTTON = 4;
-    public static final int LOWER_PULLIES_BUTTON = 1;
+    public static final int RAISE_PULLIES_BUTTON = 3;
+    public static final int LOWER_PULLIES_BUTTON = 2;
     public static final int INTAKE_LEFT_BUTTON = 5;
     public static final int INTAKE_RIGHT_BUTTON = 6;
-    public static final int SHOOT_WARMUP_BUTTON = 3;
-    public static final int SHOOT_FIRE_BUTTON = 2;
+    public static final int SHOOT_FIRE_BUTTON = 4;
 
 
 

@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
   private static TalonFX shooter;
@@ -15,7 +16,8 @@ public class Shooter extends SubsystemBase {
   private static Shooter instance;
 
   private Shooter() {
-
+    shooter = new TalonFX(Constants.SHOOTER);
+    shooter.setInverted(true);
   }
 
   public void setSpeed(double voltage) {
