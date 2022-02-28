@@ -75,7 +75,12 @@ public class Chassis extends SubsystemBase {
     return navx.getAngle();
   }
 
-  public SimpleMatrix rotationMatrix(double angle){
+  public SimpleMatrix getFieldOrientedMatrix(){
+    SimpleMatrix robotOrientationMatrix = rotationMatrix(Math.toRadians(-getAngle()));
+    return Constants.BASE_DRIVE.mult(robotOrientationMatrix);
+  }
+
+  private SimpleMatrix rotationMatrix(double angle){
     double[][] rot = {
       {Math.cos(angle), Math.sin(angle)},
       {-Math.sin(angle), Math.cos(angle)}
