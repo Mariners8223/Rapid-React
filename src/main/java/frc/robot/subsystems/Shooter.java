@@ -17,7 +17,7 @@ public class Shooter extends SubsystemBase {
 
   private Shooter() {
     shooter = new TalonFX(Constants.SHOOTER);
-    shooter.setInverted(true);
+    shooter.setInverted(Constants.SHOOTER_INVERTED);
   }
 
   public void setSpeed(double voltage) {
@@ -28,10 +28,5 @@ public class Shooter extends SubsystemBase {
     if (instance == null)
       instance = new Shooter();
     return instance;
-  }
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
   }
 }

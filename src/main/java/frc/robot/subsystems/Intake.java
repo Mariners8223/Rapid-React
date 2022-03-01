@@ -23,7 +23,10 @@ public class Intake extends SubsystemBase {
     left_eye =  new VictorSPX(Constants.EYE_LEFT);
     right_eye = new VictorSPX(Constants.EYE_RIGHT);
 
-    left_eye.setInverted(true);
+    left_eye.setInverted(Constants.LEFT_PULLIE_INVERTED);
+    right_eye.setInverted(Constants.RIGHT_PULLIE_INVERTED);
+    right_intake.setInverted(Constants.RIGHT_INTAKE_INVERTED);
+    left_intake.setInverted(Constants.LEFT_INTAKE_INVERTED);
   }
 
 
@@ -54,10 +57,5 @@ public class Intake extends SubsystemBase {
     if (instance == null)
       instance = new Intake();
     return instance;
-  }
-
-  @Override
-  public void periodic() {
-
   }
 }

@@ -21,7 +21,9 @@ public class Transport extends SubsystemBase {
   private Transport() {
     transport_bottom = new VictorSPX(Constants.TRANSPORT_BOTTOM);
     transport_top = new VictorSPX(Constants.TRANSPORT_TOP);
-    transport_bottom.setInverted(true);
+    
+    transport_bottom.setInverted(Constants.BOTTOM_TRANSPORT_INVERTED);
+    transport_top.setInverted(Constants.TOP_TRANSPORT_INVERTED);
   }
 
 
@@ -44,10 +46,5 @@ public class Transport extends SubsystemBase {
     if (instance == null) 
       instance = new Transport();
     return instance;
-  }
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
   }
 }

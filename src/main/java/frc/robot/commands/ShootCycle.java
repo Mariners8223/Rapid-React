@@ -23,9 +23,9 @@ public class ShootCycle extends CommandBase {
   
   @Override
   public void execute() {
-    shooter.setSpeed(Math.abs(RobotContainer.getArmsAxis(1)) * 0.5);
-    if (RobotContainer.getArmsButton(3)) {transport.transportInwards(Constants.TRANSPORT_SPEED);}
-    else if (RobotContainer.getArmsButton(2)) {transport.transportOutwards(Constants.TRANSPORT_SPEED);}
+    shooter.setSpeed(Math.abs(RobotContainer.getArmsAxis(Constants.SHOOT_TRIGGER)) * Constants.SHOOTER_SPEED);
+    if (RobotContainer.getArmsButton(Constants.TRANSPORT_INWARDS_BUTTON)) {transport.transportInwards(Constants.TRANSPORT_SPEED);}
+    else if (RobotContainer.getArmsButton(Constants.TRANSPORT_OUTWARDS_BUTTON)) {transport.transportOutwards(Constants.TRANSPORT_SPEED);}
     else {transport.stopAll();}
   }
 

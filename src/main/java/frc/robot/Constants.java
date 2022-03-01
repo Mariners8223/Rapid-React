@@ -22,6 +22,13 @@ public final class Constants {
     public static final boolean LEFT_BACK_INVERTED = false;
     public static final boolean RIGHT_FRONT_INVERTED = true;
     public static final boolean RIGHT_BACK_INVERTED = true;
+    public static final boolean SHOOTER_INVERTED = false;
+    public static final boolean LEFT_INTAKE_INVERTED = false;    
+    public static final boolean LEFT_PULLIE_INVERTED = true;
+    public static final boolean RIGHT_INTAKE_INVERTED = false;
+    public static final boolean RIGHT_PULLIE_INVERTED = false;
+    public static final boolean TOP_TRANSPORT_INVERTED = false;
+    public static final boolean BOTTOM_TRANSPORT_INVERTED = true;    
 
     // Joysticks
     public static final int DRIVE_JOYSTICK = 0;
@@ -31,6 +38,7 @@ public final class Constants {
     public static final int DRIVE_DIRECTION_X = 0;
     public static final int DRIVE_DIRECTION_Y = 1;
     public static final int DRIVE_ROTATION = 4;
+    public static final int SHOOT_TRIGGER = 2;
 
     // Matrices
     private static final double[][] base_drive_arr = {
@@ -68,6 +76,8 @@ public final class Constants {
     public static final int INTAKE_LEFT_BUTTON = 5;
     public static final int INTAKE_RIGHT_BUTTON = 6;
     public static final int SHOOT_COMMAND_BUTTON = 5;
+    public static final int TRANSPORT_INWARDS_BUTTON = 3;
+    public static final int TRANSPORT_OUTWARDS_BUTTON = 2;
 
 
 
