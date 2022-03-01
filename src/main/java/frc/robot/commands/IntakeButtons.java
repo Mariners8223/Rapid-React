@@ -39,7 +39,7 @@ public class IntakeButtons extends CommandBase {
       transport.transportInwards(Constants.TRANSPORT_SPEED);
     } else {
       intake.setRight(Constants.INTAKE_SPEED);
-      transport.transportOutwards(Constants.TRANSPORT_SPEED);      
+      transport.transportInwards(Constants.TRANSPORT_SPEED);      
 
     }
   }

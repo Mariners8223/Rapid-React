@@ -21,17 +21,17 @@ public class Transport extends SubsystemBase {
   private Transport() {
     transport_bottom = new VictorSPX(Constants.TRANSPORT_BOTTOM);
     transport_top = new VictorSPX(Constants.TRANSPORT_TOP);
-    transport_top.setInverted(true);
+    transport_bottom.setInverted(true);
   }
 
 
   public void transportInwards(double voltage) {
-    transport_top.set(ControlMode.PercentOutput, voltage);
+    transport_top.set(ControlMode.PercentOutput, -voltage);
     transport_bottom.set(ControlMode.Follower, transport_top.getDeviceID());
   }
 
   public void transportOutwards(double voltage) {
-    transport_top.set(ControlMode.PercentOutput, -voltage);
+    transport_top.set(ControlMode.PercentOutput, voltage);
     transport_bottom.set(ControlMode.Follower, transport_top.getDeviceID());
   }
   

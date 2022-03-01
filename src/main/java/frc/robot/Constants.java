@@ -67,7 +67,7 @@ public final class Constants {
     public static final int LOWER_PULLIES_BUTTON = 2;
     public static final int INTAKE_LEFT_BUTTON = 5;
     public static final int INTAKE_RIGHT_BUTTON = 6;
-    public static final int SHOOT_FIRE_BUTTON = 4;
+    public static final int SHOOT_COMMAND_BUTTON = 5;
 
 
 

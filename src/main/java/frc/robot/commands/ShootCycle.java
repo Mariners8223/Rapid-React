@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transport;
 
@@ -15,25 +16,27 @@ public class ShootCycle extends CommandBase {
     addRequirements(shooter);
   }
 
-  // Called when the command is initially scheduled.
+  
   @Override
-  public void initialize() {
-    shooter.setSpeed(Constants.SHOOTER_SPEED);
-  }
+  public void initialize() {}
 
-  // Called every time the scheduler runs while the command is scheduled.
+  
   @Override
   public void execute() {
+    shooter.setSpeed(Math.abs(RobotContainer.getArmsAxis(1)) * 0.5);
+    if (RobotContainer.getArmsButton(3)) {transport.transportInwards(Constants.TRANSPORT_SPEED);}
+    else if (RobotContainer.getArmsButton(2)) {transport.transportOutwards(Constants.TRANSPORT_SPEED);}
+    else {transport.stopAll();}
   }
 
-  // Called once the command ends or is interrupted.
+  
   @Override
   public void end(boolean interrupted) {
     transport.transportInwards(0);
     shooter.setSpeed(0);
   }
 
-  // Returns true when the command should end.
+  
   @Override
   public boolean isFinished() {
     return false;
