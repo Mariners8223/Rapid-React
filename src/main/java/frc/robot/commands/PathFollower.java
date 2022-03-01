@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PathFollower extends CommandBase {
-  double speed;
   double time;
   double dt;
   int discret_factor;
@@ -22,21 +21,20 @@ public class PathFollower extends CommandBase {
   boolean finished = false;
   private final Chassis chassis = Chassis.getInstance();
 
-  public PathFollower(SimpleMatrix[] path, double speed) {
+  public PathFollower(SimpleMatrix[] path) {
     addRequirements(chassis);
     this.path = path;
-    this.speed = speed;
     discret_factor = path.length;
   }
 
   @Override
   public void initialize() {
     chassis.resetPosition();
+    chassis.resetAngle();
     time = Timer.getFPGATimestamp();
     last_index_position = 0;
     target_index = 0;
-    double[][] zero = {{0}, {0}};
-    position = new SimpleMatrix(zero);
+    position = chassis.getPosition();
     target = path[0];
   }
 
@@ -58,7 +56,7 @@ public class PathFollower extends CommandBase {
       SimpleMatrix prediction = position.plus(velocity);
       if(prediction.minus(target).normF() > position.minus(target).normF()){
         SmartDashboard.putBoolean("faggot", true);
-        finished = true;
+        finished = false;
         return;
       }
     }
@@ -66,9 +64,11 @@ public class PathFollower extends CommandBase {
 
     SimpleMatrix error = target.minus(position);
     double error_norm = error.normF();
-    if(error_norm > 0.1){
+    if(error_norm > 0.05){
       SimpleMatrix fodMatrix = chassis.getFieldOrientedMatrix();
-      chassis.setSpeed(error.scale(0.2 + (1.0 / error_norm)), chassis.getRotationPID(0), fodMatrix);
+      SmartDashboard.putNumber("error x", error.scale((0.5 / error_norm)).get(0,0));
+      SmartDashboard.putNumber("error y", error.scale((0.5 / error_norm)).get(1,0));
+      chassis.setSpeed(error.scale((1.0 / error_norm)), chassis.getRotationPID(0), fodMatrix);
     }
     else{
       last_index_position = target_index + 1;
@@ -98,7 +98,7 @@ public class PathFollower extends CommandBase {
     int closest_index = discret_factor - 1;
     double dist_optimal_prediction = prediction.minus(path[closest_index]).normF();
 
-    for(int i = last_index_position + 1; i < discret_factor - 1 || i < last_index_position + 11; i++){
+    for(int i = last_index_position + 1; i < discret_factor - 1; i++){
       //double dist_current = Vector2d.subtract(position, path[i]).magnitude_sqered();
       double dist_current_prediction = prediction.minus(path[i]).normF();
       //if(dist_current_prediction < dist_current){
@@ -106,6 +106,8 @@ public class PathFollower extends CommandBase {
         dist_optimal_prediction = dist_current_prediction;
         closest_index = i;
       }
+
+      if (i - last_index_position > 10) break;
       //}
     }
     target_index = closest_index;
