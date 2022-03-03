@@ -98,4 +98,5 @@ public final class Constants {
     public static final double CHASSIS_VELOCITY_TIME_TO_SECONDS = 10.0;
     public static final double ROTATION_SPEED = 0.5;
     public static final double ROTATION_DEAD_BAND = 0.1;
+    public static final double NO_TIME = -1.0;
 }

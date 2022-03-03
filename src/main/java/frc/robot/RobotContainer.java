@@ -22,11 +22,11 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    pullies_raise_button.whileHeld(new IntakeButtons(Constants.RAISE_PULLIES_BUTTON));
-    pullies_lower_button.whileHeld(new IntakeButtons(Constants.LOWER_PULLIES_BUTTON));
-    intake_left_button.whileHeld(new IntakeButtons(Constants.INTAKE_LEFT_BUTTON, true));
-    intake_right_button.whileHeld(new IntakeButtons(Constants.INTAKE_RIGHT_BUTTON, false));
-    shoot_start.toggleWhenPressed(new ShootCycle());
+    pullies_raise_button.whileHeld(new IntakeButtons(Constants.RAISE_PULLIES_BUTTON, Constants.NO_TIME));
+    pullies_lower_button.whileHeld(new IntakeButtons(Constants.LOWER_PULLIES_BUTTON, Constants.NO_TIME));
+    intake_left_button.whileHeld(new IntakeButtons(Constants.INTAKE_LEFT_BUTTON, true, Constants.NO_TIME));
+    intake_right_button.whileHeld(new IntakeButtons(Constants.INTAKE_RIGHT_BUTTON, false, Constants.NO_TIME));
+    shoot_start.toggleWhenPressed(new ShootCycle(Constants.NO_TIME));
   }
 
   public Command getAutonomousCommand(){

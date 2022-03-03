@@ -9,17 +9,18 @@ import org.ejml.simple.SimpleMatrix;
 import edu.wpi.first.wpilibj.Timer;
 
 public class PathFollower extends CommandBase {
-  double time;
-  double dt;
-  int points;
-  int last_index_position;
-  int target_index;
-  SimpleMatrix[] path;
-  SimpleMatrix position;
-  SimpleMatrix target;
-  SimpleMatrix velocity;
-  boolean finished = false;
-  private final Chassis chassis = Chassis.getInstance();
+  private Chassis chassis = Chassis.getInstance();
+
+  private double time;
+  private double dt;
+  private int points;
+  private int last_index_position;
+  private int target_index;
+  private SimpleMatrix[] path;
+  private SimpleMatrix position;
+  private SimpleMatrix target;
+  private SimpleMatrix velocity;
+  private boolean finished = false;
 
   public PathFollower(SimpleMatrix[] path) {
     addRequirements(chassis);

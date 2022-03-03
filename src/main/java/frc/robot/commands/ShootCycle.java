@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -7,26 +8,34 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transport;
 
 public class ShootCycle extends CommandBase {
-  private static Transport transport;
-  private static Shooter shooter;
-  public ShootCycle() {
+  private Transport transport;
+  private Shooter shooter;
+
+  private double time;
+  private double start_time;
+
+  public ShootCycle(double time) {
     transport = Transport.getInstance();
     shooter = Shooter.getInstance();
 
-    addRequirements(shooter);
+    addRequirements(shooter, transport);
+
+    this.time = time;
   }
 
   
   @Override
-  public void initialize() {}
+  public void initialize() {
+    start_time = Timer.getFPGATimestamp();
+  }
 
   
   @Override
   public void execute() {
     shooter.setSpeed(Math.abs(RobotContainer.getArmsAxis(Constants.SHOOT_TRIGGER)) * Constants.SHOOTER_SPEED);
-    if (RobotContainer.getArmsButton(Constants.TRANSPORT_INWARDS_BUTTON)) {transport.transportInwards(Constants.TRANSPORT_SPEED);}
-    else if (RobotContainer.getArmsButton(Constants.TRANSPORT_OUTWARDS_BUTTON)) {transport.transportOutwards(Constants.TRANSPORT_SPEED);}
-    else {transport.stopAll();}
+    if (RobotContainer.getArmsButton(Constants.TRANSPORT_INWARDS_BUTTON)) transport.transportInwards(Constants.TRANSPORT_SPEED);
+    else if (RobotContainer.getArmsButton(Constants.TRANSPORT_OUTWARDS_BUTTON)) transport.transportOutwards(Constants.TRANSPORT_SPEED);
+    else transport.stopAll();
   }
 
   
@@ -39,6 +48,8 @@ public class ShootCycle extends CommandBase {
   
   @Override
   public boolean isFinished() {
-    return false;
+    if(time == Constants.NO_TIME) return false;
+    if(Timer.getFPGATimestamp() - start_time > time) return true;
+    return false; 
   }
 }
