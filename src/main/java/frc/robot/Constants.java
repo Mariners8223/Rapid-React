@@ -22,10 +22,11 @@ public final class Constants {
     public static final boolean LEFT_BACK_INVERTED = false;
     public static final boolean RIGHT_FRONT_INVERTED = true;
     public static final boolean RIGHT_BACK_INVERTED = true;
+
     public static final boolean SHOOTER_INVERTED = false;
     public static final boolean LEFT_INTAKE_INVERTED = false;    
     public static final boolean LEFT_PULLIE_INVERTED = true;
-    public static final boolean RIGHT_INTAKE_INVERTED = false;
+    public static final boolean RIGHT_INTAKE_INVERTED = true;
     public static final boolean RIGHT_PULLIE_INVERTED = false;
     public static final boolean TOP_TRANSPORT_INVERTED = false;
     public static final boolean BOTTOM_TRANSPORT_INVERTED = true;    
@@ -100,7 +101,7 @@ public final class Constants {
     public static final double CHASSIS_MULTIPLIE = 0.7;
     public static final double CHASSIS_CLAMP = 0.8;
     public static final double CHASSIS_VELOCITY_TIME_TO_SECONDS = 10.0;
-    public static final double ROTATION_SPEED = 0.5;
+    public static final double ROTATION_SPEED = 0.4;
     public static final double ROTATION_DEAD_BAND = 0.1;
     public static final double NO_TIME = -1.0;
 }

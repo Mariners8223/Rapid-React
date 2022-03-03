@@ -4,10 +4,9 @@ import org.ejml.simple.SimpleMatrix;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.IntakeButtons;
-import frc.robot.commands.ShootCycle;
-
-import frc.robot.commands.PathFollower;
+import frc.robot.commands.Autonomus.OneBallAuto;
+import frc.robot.commands.mechanisems.IntakeButtons;
+import frc.robot.commands.mechanisems.ShootCycle;
 
 public class RobotContainer {
   private static Joystick chasis_controller = new Joystick(Constants.DRIVE_JOYSTICK);
@@ -30,14 +29,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand(){
-    int discret_factor = 30;
-    SimpleMatrix[] path = new SimpleMatrix[discret_factor];
-    for(int i = 0; i < discret_factor; i++){
-      double x = 2.0 * (double)i/(double)discret_factor;
-      double[][] pos = {{1.16 * x}, {Math.sqrt(Math.abs(2.0 * x - x * x))}};
-      path[i] = new SimpleMatrix(pos);
-    }
-    return new PathFollower(path);
+    return new OneBallAuto();
   }
 
   public static boolean getChasisButton(int button) {return chasis_controller.getRawButton(button);}
