@@ -45,7 +45,7 @@ public final class Constants {
     public static final int DRIVE_DIRECTION_X = 0;
     public static final int DRIVE_DIRECTION_Y = 1;
     public static final int DRIVE_ROTATION = 4;
-    public static final int SHOOT_TRIGGER = 2;
+    public static final int SHOOT_TRIGGER = 1;
 
     // Matrices
     private static final double[][] base_drive_arr = {
@@ -78,7 +78,7 @@ public final class Constants {
     public static final double PULLIES_SPEED = 0.6;
     public static final double INTAKE_SPEED = 0.6;
     public static final double TRANSPORT_SPEED = 0.6;
-    public static final double SHOOTER_SPEED = 0.5;
+    public static final double SHOOTER_SPEED = 0.8;
 
     // Buttons
     public static final int RAISE_PULLIES_ENUM = 3;

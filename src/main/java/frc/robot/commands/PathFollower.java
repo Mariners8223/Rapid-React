@@ -20,6 +20,7 @@ public class PathFollower extends CommandBase {
   private SimpleMatrix position;
   private SimpleMatrix target;
   private SimpleMatrix velocity;
+  private double angle;
   private boolean finished = false;
 
   public PathFollower(SimpleMatrix[] path) {
@@ -31,6 +32,7 @@ public class PathFollower extends CommandBase {
   @Override
   public void initialize() {
     chassis.resetPosition();
+    angle = chassis.getAngle();
     //chassis.resetAngle();
     time = Timer.getFPGATimestamp();
     last_index_position = 0;
@@ -60,7 +62,7 @@ public class PathFollower extends CommandBase {
     double error_norm = error.normF();
     if(error_norm > 0.05){
       SimpleMatrix fodMatrix = chassis.getFieldOrientedMatrix();
-      chassis.setSpeed(error.scale((1.0 / error_norm)), chassis.getRotationPID(0), fodMatrix);
+      chassis.setSpeed(error.scale((1.0 / error_norm)), chassis.getRotationPID(angle), fodMatrix);
     }
     else{
       last_index_position = target_index + 1;

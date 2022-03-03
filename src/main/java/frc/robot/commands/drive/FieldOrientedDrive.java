@@ -33,7 +33,6 @@ public class FieldOrientedDrive extends CommandBase {
 
   @Override
   public void execute() {
-    chassis.getOrientation();
     direction = RobotContainer.getDriveDirection();
     rotation = RobotContainer.getDriveRotation();
     if(rotation != 0) {
