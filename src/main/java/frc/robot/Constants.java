@@ -88,7 +88,8 @@ public final class Constants {
     public static final int TRANSPORT_INWARDS_BUTTON = 3;
     public static final int TRANSPORT_OUTWARDS_BUTTON = 2;
 
-
+    // Path Follower
+    public static final int FIND_TARGET_ITERATIONS = 10;
 
     // Other constants
     public static final double CHASSIS_DEAD_BAND = 0.2;
