@@ -7,16 +7,16 @@ import frc.robot.subsystems.Transport;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 
-public class IntakeButtons extends CommandBase {
-  private static Transport transport;
-  private static Intake intake;
+public class IntakeBalls extends CommandBase {
+  private Transport transport;
+  private Intake intake;
 
   private boolean left;
   private int button;
   private double time;
   private double start_time;
   
-  public IntakeButtons(int button, boolean left, double time) {
+  public IntakeBalls(int button, boolean left, double time) {
     transport = Transport.getInstance();
     intake = Intake.getInstance();
     addRequirements(transport, intake);
@@ -26,7 +26,7 @@ public class IntakeButtons extends CommandBase {
     this.time = time;
   }
 
-  public IntakeButtons(int button, double time) {
+  public IntakeBalls(int button, double time) {
     transport = Transport.getInstance();
     intake = Intake.getInstance();
     addRequirements(transport, intake);
@@ -40,8 +40,8 @@ public class IntakeButtons extends CommandBase {
   public void initialize() {
     start_time = Timer.getFPGATimestamp();
 
-    if (button == Constants.RAISE_PULLIES_BUTTON) intake.raisePullies(Constants.PULLIES_SPEED);
-    else if (button == Constants.LOWER_PULLIES_BUTTON) intake.lowerPullies(Constants.PULLIES_SPEED);
+    if (button == Constants.RAISE_PULLIES_ENUM) intake.raisePullies(Constants.PULLIES_SPEED);
+    else if (button == Constants.LOWER_PULLIES_ENUM) intake.lowerPullies(Constants.PULLIES_SPEED);
     else if (left) {
       intake.setLeft(Constants.INTAKE_SPEED);
       transport.transportInwards(Constants.TRANSPORT_SPEED);

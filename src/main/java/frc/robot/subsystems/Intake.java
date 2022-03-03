@@ -18,7 +18,7 @@ public class Intake extends SubsystemBase {
   private static Intake instance;
 
   private Intake() {
-    left_intake = new VictorSPX(Constants.INTAKE_LEFT);
+    left_intake = new VictorSPX(Constants.INTAKE_LEFT_ENUM);
     right_intake = new VictorSPX(Constants.INTAKE_RIGHT);
     left_eye =  new VictorSPX(Constants.EYE_LEFT);
     right_eye = new VictorSPX(Constants.EYE_RIGHT);
