@@ -25,8 +25,8 @@ public class FieldOrientedDrive extends CommandBase {
     r = 0;
     double[][] zero = {{0}, {0}};
     direction = new SimpleMatrix(zero);
-    angle = 0;
-    chassis.resetAngle();
+    angle = chassis.getAngle();
+    //chassis.resetAngle();
 
     chassis.resetPosition();
   }

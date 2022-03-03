@@ -14,15 +14,18 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class Chassis extends SubsystemBase {
+  private static Chassis instance;
+  
   private TalonFX left_front;
   private TalonFX left_back;
   private TalonFX right_front;
   private TalonFX right_back;
 
   private AHRS navx;
-  private static Chassis instance;
+  private double orientation;
 
   private PIDController anglePID;
 
@@ -42,6 +45,8 @@ public class Chassis extends SubsystemBase {
 
     navx = new AHRS();
     navx.calibrate();
+    if(RobotContainer.isBlue()) orientation = getOrientation();
+    else orientation = 180 - getOrientation();
 
     anglePID = new PIDController(Constants.ANGLE_KP, Constants.ANGLE_KI, Constants.ANGLE_KD);
     anglePID.enableContinuousInput(0, 360);
@@ -72,7 +77,11 @@ public class Chassis extends SubsystemBase {
   }
 
   public double getAngle(){
-    return navx.getAngle();
+    return navx.getAngle() + orientation;
+  }
+
+  public double getOrientation(){
+    return navx.getCompassHeading();
   }
 
   public SimpleMatrix getFieldOrientedMatrix(){

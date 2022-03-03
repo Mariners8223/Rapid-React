@@ -31,7 +31,7 @@ public class PathFollower extends CommandBase {
   @Override
   public void initialize() {
     chassis.resetPosition();
-    chassis.resetAngle();
+    //chassis.resetAngle();
     time = Timer.getFPGATimestamp();
     last_index_position = 0;
     target_index = 0;

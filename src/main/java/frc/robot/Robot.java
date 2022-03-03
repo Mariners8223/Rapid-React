@@ -7,8 +7,8 @@ import frc.robot.subsystems.Chassis;
 import frc.robot.commands.FieldOrientedDrive;
 
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
-  private RobotContainer m_robotContainer;
+  private Command autonomousCommand;
+  private RobotContainer robotContainer;
 
   private final Chassis chassis = Chassis.getInstance();
   private final FieldOrientedDrive drive = new FieldOrientedDrive();
@@ -16,7 +16,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    m_robotContainer = new RobotContainer();
+    chassis.resetAngle();
+    robotContainer = new RobotContainer();
     CommandScheduler.getInstance().setDefaultCommand(chassis, drive);
   }
 
@@ -33,10 +34,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    autonomousCommand = robotContainer.getAutonomousCommand();
 
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
+    if (autonomousCommand != null) {
+      autonomousCommand.schedule();
     }
   }
 
@@ -45,8 +46,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    if (autonomousCommand != null) {
+      autonomousCommand.cancel();
     }
   }
 

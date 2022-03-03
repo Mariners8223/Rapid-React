@@ -22,7 +22,7 @@ public class HeadingDrive extends CommandBase {
     heading = 0;
     double[][] zero = {{0}, {0}};
     direction = new SimpleMatrix(zero);
-    chassis.resetAngle();
+    //chassis.resetAngle();
   }
 
   @Override

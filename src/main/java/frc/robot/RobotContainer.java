@@ -1,6 +1,8 @@
 package frc.robot;
+
 import org.ejml.simple.SimpleMatrix;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -78,7 +80,11 @@ public class RobotContainer {
       double[][] pos = {{path_arr[i][0]}, {path_arr[i][1]}};
       path[i] = new SimpleMatrix(pos);
     }
-    
+
     return path;
+  }
+
+  public static boolean isBlue(){
+    return DriverStation.getAlliance() == DriverStation.Alliance.Blue;
   }
 }
