@@ -70,4 +70,15 @@ public class RobotContainer {
     if(Math.abs(s) < Constants.ROTATION_DEAD_BAND) return 0;
     return Constants.ROTATION_SPEED * s;
   }
+
+  public static SimpleMatrix[] arrayToPath(double[][] path_arr) {
+    SimpleMatrix[] path = new SimpleMatrix[path_arr.length];
+
+    for(int i = 0; i < path_arr.length; i++){
+      double[][] pos = {{path_arr[i][0]}, {path_arr[i][1]}};
+      path[i] = new SimpleMatrix(pos);
+    }
+    
+    return path;
+  }
 }

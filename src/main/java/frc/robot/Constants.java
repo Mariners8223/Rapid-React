@@ -91,6 +91,10 @@ public final class Constants {
     // Path Follower
     public static final int FIND_TARGET_ITERATIONS = 10;
 
+    // Autonomus
+    private static final double[][] one_ball_path_arr = {{0,0}, {0, -1}};
+    public static final SimpleMatrix[] ONE_BALL_PATH = RobotContainer.arrayToPath(one_ball_path_arr);
+
     // Other constants
     public static final double CHASSIS_DEAD_BAND = 0.2;
     public static final double CHASSIS_MULTIPLIE = 0.7;

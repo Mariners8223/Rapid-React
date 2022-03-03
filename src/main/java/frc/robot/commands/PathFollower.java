@@ -64,7 +64,7 @@ public class PathFollower extends CommandBase {
     }
     else{
       last_index_position = target_index + 1;
-      if(last_index_position < points) target = path[last_index_position];
+      if(last_index_position < points + 1) target = path[last_index_position];
       else finished = true;
     }
   }
