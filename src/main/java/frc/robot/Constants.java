@@ -99,6 +99,9 @@ public final class Constants {
     private static final double[][] ball_behind_path_arr = {{0,0}, {0.5, -1}, {1, -1}};
     public static final SimpleMatrix[] BALL_BEHIND_PATH = RobotContainer.arrayToPath(ball_behind_path_arr);
 
+    private static final double[][] ball_behind_hub_path_arr = {{0,0}, {-0.5, 0}, {-0.5, 1}};
+    public static final SimpleMatrix[] BALL_BEHIND_HUB_PATH = RobotContainer.arrayToPath(ball_behind_hub_path_arr);
+
     // Other constants
     public static final double CHASSIS_DEAD_BAND = 0.2;
     public static final double CHASSIS_MULTIPLIE = 0.7;
