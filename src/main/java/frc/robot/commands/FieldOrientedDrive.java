@@ -12,7 +12,8 @@ public class FieldOrientedDrive extends CommandBase {
 
   private SimpleMatrix direction;
   private double r;
-  private double diff;
+  private double angle;
+  private double rotation;
 
   public FieldOrientedDrive() {
     chassis = Chassis.getInstance();
@@ -24,6 +25,7 @@ public class FieldOrientedDrive extends CommandBase {
     r = 0;
     double[][] zero = {{0}, {0}};
     direction = new SimpleMatrix(zero);
+    angle = 0;
     chassis.resetAngle();
 
     chassis.resetPosition();
@@ -32,12 +34,12 @@ public class FieldOrientedDrive extends CommandBase {
   @Override
   public void execute() {
     direction = RobotContainer.getDriveDirection();
-    diff = RobotContainer.getDriveRotationDiff();
-    if(diff != 0) {
-      r += diff;
-      chassis.setSmoothRotation(true);
+    rotation = RobotContainer.getDriveRotation();
+    if(rotation != 0) {
+      r = rotation;
+      angle = chassis.getAngle();
     }
-    else chassis.setSmoothRotation(false);
+    else r = chassis.getRotationPID(angle);
 
     SimpleMatrix position = chassis.getPosition();
     SmartDashboard.putNumber("x", position.get(0, 0));
@@ -45,7 +47,7 @@ public class FieldOrientedDrive extends CommandBase {
 
     SimpleMatrix fodMatrix = chassis.getFieldOrientedMatrix();
 
-    chassis.setSpeed(direction, chassis.getRotationPID(r), fodMatrix);
+    chassis.setSpeed(direction, r, fodMatrix);
   }
   
   @Override
