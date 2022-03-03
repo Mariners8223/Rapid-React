@@ -4,6 +4,7 @@ import org.ejml.simple.SimpleMatrix;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.autonomus.CollectBehind;
@@ -78,6 +79,8 @@ public class RobotContainer {
   }
 
   public static boolean isBlue(){
+    while(DriverStation.getInstance() == null)
+    SmartDashboard.putBoolean("cum", DriverStation.getAlliance() == DriverStation.Alliance.Blue);
     return DriverStation.getAlliance() == DriverStation.Alliance.Blue;
   }
 }

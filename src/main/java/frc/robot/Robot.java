@@ -16,8 +16,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    chassis.resetAngle();
     robotContainer = new RobotContainer();
+    chassis.resetAngle();
+    chassis.getOrientation();
     CommandScheduler.getInstance().setDefaultCommand(chassis, drive);
   }
 

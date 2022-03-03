@@ -45,8 +45,6 @@ public class Chassis extends SubsystemBase {
 
     navx = new AHRS();
     navx.calibrate();
-    if(RobotContainer.isBlue()) orientation = getOrientation();
-    else orientation = 180 - getOrientation();
 
     anglePID = new PIDController(Constants.ANGLE_KP, Constants.ANGLE_KI, Constants.ANGLE_KD);
     anglePID.enableContinuousInput(0, 360);
@@ -81,7 +79,10 @@ public class Chassis extends SubsystemBase {
   }
 
   public double getOrientation(){
-    return navx.getCompassHeading();
+    SmartDashboard.putNumber("orientation", navx.getCompassHeading());
+    if(RobotContainer.isBlue()) orientation = navx.getCompassHeading();
+    else orientation = 180 - navx.getCompassHeading();
+    return orientation;
   }
 
   public SimpleMatrix getFieldOrientedMatrix(){
@@ -99,7 +100,7 @@ public class Chassis extends SubsystemBase {
 
   public void resetAngle(){
     navx.reset();
-    anglePID.setSetpoint(0);
+    anglePID.setSetpoint(orientation);
     anglePID.reset();
   }
 

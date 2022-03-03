@@ -33,6 +33,7 @@ public class FieldOrientedDrive extends CommandBase {
 
   @Override
   public void execute() {
+    chassis.getOrientation();
     direction = RobotContainer.getDriveDirection();
     rotation = RobotContainer.getDriveRotation();
     if(rotation != 0) {
@@ -43,7 +44,7 @@ public class FieldOrientedDrive extends CommandBase {
 
     SimpleMatrix position = chassis.getPosition();
     SmartDashboard.putNumber("x", position.get(0, 0));
-    SmartDashboard.putNumber("y", position.get(1, 0));    
+    SmartDashboard.putNumber("y", position.get(1, 0));
 
     SimpleMatrix fodMatrix = chassis.getFieldOrientedMatrix();
 
