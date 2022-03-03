@@ -24,7 +24,7 @@ public class PathFollower extends CommandBase {
   public PathFollower(SimpleMatrix[] path) {
     addRequirements(chassis);
     this.path = path;
-    points = path.length;
+    points = path.length - 1;
   }
 
   @Override

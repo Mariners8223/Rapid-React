@@ -33,8 +33,8 @@ public class RobotContainer {
     int discret_factor = 30;
     SimpleMatrix[] path = new SimpleMatrix[discret_factor];
     for(int i = 0; i < discret_factor; i++){
-      double x = (double)i/(double)discret_factor;
-      double[][] pos = {{1.16 * x}, {Math.sqrt(Math.abs(1.0 * x - x * x))}};
+      double x = 2.0 * (double)i/(double)discret_factor;
+      double[][] pos = {{1.16 * x}, {Math.sqrt(Math.abs(2.0 * x - x * x))}};
       path[i] = new SimpleMatrix(pos);
     }
     return new PathFollower(path);
