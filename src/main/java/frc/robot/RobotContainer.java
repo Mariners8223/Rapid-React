@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.IntakeButtons;
 import frc.robot.commands.ShootCycle;
 
+import frc.robot.commands.PathFollower;
+
 public class RobotContainer {
   private static Joystick chasis_controller = new Joystick(Constants.DRIVE_JOYSTICK);
   private static Joystick limb_controller = new Joystick(Constants.ARM_JOYSTICK);
@@ -28,7 +30,14 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand(){
-    return null;
+    int discret_factor = 30;
+    SimpleMatrix[] path = new SimpleMatrix[discret_factor];
+    for(int i = 0; i < discret_factor; i++){
+      double x = (double)i/(double)discret_factor;
+      double[][] pos = {{1.16 * x}, {Math.sqrt(Math.abs(1.0 * x - x * x))}};
+      path[i] = new SimpleMatrix(pos);
+    }
+    return new PathFollower(path);
   }
 
   public static boolean getChasisButton(int button) {return chasis_controller.getRawButton(button);}
