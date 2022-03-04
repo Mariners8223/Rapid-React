@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    chassis.resetAngle();
     autonomousCommand = robotContainer.getAutonomousCommand();
 
     if (autonomousCommand != null) {
