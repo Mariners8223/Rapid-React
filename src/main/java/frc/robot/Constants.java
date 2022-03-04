@@ -23,7 +23,7 @@ public final class Constants {
     public static final boolean RIGHT_FRONT_INVERTED = true;
     public static final boolean RIGHT_BACK_INVERTED = true;
 
-    public static final boolean SHOOTER_INVERTED = false;
+    public static final boolean SHOOTER_INVERTED = true;
     public static final boolean LEFT_INTAKE_INVERTED = false;    
     public static final boolean LEFT_PULLIE_INVERTED = true;
     public static final boolean RIGHT_INTAKE_INVERTED = true;
@@ -76,7 +76,7 @@ public final class Constants {
 
     // Speed Values
     public static final double PULLIES_SPEED = 0.6;
-    public static final double INTAKE_SPEED = 0.6;
+    public static final double INTAKE_SPEED = 0.8;
     public static final double TRANSPORT_SPEED = 0.6;
     public static final double SHOOTER_SPEED = 0.3;
 
@@ -93,13 +93,13 @@ public final class Constants {
     public static final int FIND_TARGET_ITERATIONS = 10;
 
     // Autonomus
-    private static final double[][] one_ball_path_arr = {{0,0}, {0, -1}};
+    private static final double[][] one_ball_path_arr = {{0,0}, {0, -1.7}};
     public static final SimpleMatrix[] ONE_BALL_PATH = RobotContainer.arrayToPath(one_ball_path_arr);
 
-    private static final double[][] ball_behind_path_arr = {{0,0}, {0.25, -0.5}, {0.5, -1}, {1.5, -1}};
+    private static final double[][] ball_behind_path_arr = {{0,0}, {0.25, -0.5}, {0.5, -0.5}, {2.7, -0.5}};
     public static final SimpleMatrix[] BALL_BEHIND_PATH = RobotContainer.arrayToPath(ball_behind_path_arr);
 
-    private static final double[][] ball_behind_hub_path_arr = {{0,0}, {-0.5, 0}, {-0.5, 1}};
+    private static final double[][] ball_behind_hub_path_arr = {{0,0}, {-3.5, 0}, {-3.5, 0.6}};
     public static final SimpleMatrix[] BALL_BEHIND_HUB_PATH = RobotContainer.arrayToPath(ball_behind_hub_path_arr);
 
     // Other constants

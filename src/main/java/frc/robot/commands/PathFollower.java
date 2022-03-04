@@ -7,6 +7,7 @@ import frc.robot.subsystems.Chassis;
 import org.ejml.simple.SimpleMatrix;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PathFollower extends CommandBase {
   private Chassis chassis = Chassis.getInstance();
@@ -46,6 +47,8 @@ public class PathFollower extends CommandBase {
     dt = Timer.getFPGATimestamp() - time;
     time = Timer.getFPGATimestamp();
     position = chassis.getPosition();
+    SmartDashboard.putNumber("x", position.get(0,0));
+    SmartDashboard.putNumber("y", position.get(1,0));
     velocity = chassis.getVelocity();
     find_target();
 
@@ -59,8 +62,10 @@ public class PathFollower extends CommandBase {
     }
 
     SimpleMatrix error = target.minus(position);
+    SmartDashboard.putNumber("error x", error.get(0,0));
+    SmartDashboard.putNumber("error y", error.get(1,0));
     double error_norm = error.normF();
-    if(error_norm > 0.05){
+    if(error_norm > 0.15){
       SimpleMatrix fodMatrix = chassis.getFieldOrientedMatrix();
       chassis.setSpeed(error.scale((1.0 / error_norm)), chassis.getRotationPID(angle), fodMatrix);
     }
