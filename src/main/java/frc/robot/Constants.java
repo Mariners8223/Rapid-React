@@ -11,7 +11,7 @@ public final class Constants {
     public static final int RIGHT_BACK = 3;
     public static final int EYE_LEFT = 6;
     public static final int EYE_RIGHT = 8;
-    public static final int INTAKE_LEFT_ENUM = 5; 
+    public static final int INTAKE_LEFT = 5; 
     public static final int INTAKE_RIGHT = 9;
     public static final int TRANSPORT_BOTTOM = 11;
     public static final int TRANSPORT_TOP = 7;
@@ -45,7 +45,7 @@ public final class Constants {
     public static final int DRIVE_DIRECTION_X = 0;
     public static final int DRIVE_DIRECTION_Y = 1;
     public static final int DRIVE_ROTATION = 4;
-    public static final int SHOOT_TRIGGER = 1;
+    public static final int SHOOT_TRIGGER = 2;
 
     // Matrices
     private static final double[][] base_drive_arr = {
@@ -78,12 +78,12 @@ public final class Constants {
     public static final double PULLIES_SPEED = 0.6;
     public static final double INTAKE_SPEED = 0.6;
     public static final double TRANSPORT_SPEED = 0.6;
-    public static final double SHOOTER_SPEED = 0.8;
+    public static final double SHOOTER_SPEED = 0.3;
 
     // Buttons
     public static final int RAISE_PULLIES_ENUM = 3;
     public static final int LOWER_PULLIES_ENUM = 2;
-    public static final int INTAKE_LEFT = 5;
+    public static final int INTAKE_LEFT_ENUM = 5; 
     public static final int INTAKE_RIGHT_ENUM = 6;
     public static final int SHOOT_COMMAND_BUTTON = 5;
     public static final int TRANSPORT_INWARDS_BUTTON = 3;
@@ -96,7 +96,7 @@ public final class Constants {
     private static final double[][] one_ball_path_arr = {{0,0}, {0, -1}};
     public static final SimpleMatrix[] ONE_BALL_PATH = RobotContainer.arrayToPath(one_ball_path_arr);
 
-    private static final double[][] ball_behind_path_arr = {{0,0}, {0.5, -1}, {1, -1}};
+    private static final double[][] ball_behind_path_arr = {{0,0}, {0.25, -0.5}, {0.5, -1}, {1.5, -1}};
     public static final SimpleMatrix[] BALL_BEHIND_PATH = RobotContainer.arrayToPath(ball_behind_path_arr);
 
     private static final double[][] ball_behind_hub_path_arr = {{0,0}, {-0.5, 0}, {-0.5, 1}};
