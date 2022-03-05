@@ -49,23 +49,15 @@ public class PathFollower extends CommandBase {
     velocity = chassis.getVelocity();
     find_target();
 
-    if(target_index == points){
-      velocity = velocity.scale(1.0 / (double)Constants.FIND_TARGET_ITERATIONS);
-      SimpleMatrix prediction = position.plus(velocity);
-      if(prediction.minus(target).normF() > position.minus(target).normF()){
-        finished = false;
-        return;
-      }
-    }
-
-    SimpleMatrix error = target.minus(position);
+    SimpleMatrix error = target.copy().minus(position);
     double error_norm = error.normF();
-    if(error_norm > 0.05){
+    if(error_norm > 0.15){
       SimpleMatrix fodMatrix = chassis.getFieldOrientedMatrix();
       chassis.setSpeed(error.scale((1.0 / error_norm)), chassis.getRotationPID(angle), fodMatrix);
     }
     else{
-      last_index_position = target_index + 1;
+      target_index++;
+      last_index_position = target_index;
       if(last_index_position < points + 1) target = path[last_index_position];
       else finished = true;
     }
@@ -83,13 +75,12 @@ public class PathFollower extends CommandBase {
   }
 
   public void find_target(){
-    velocity = velocity.scale(Constants.FIND_TARGET_ITERATIONS * dt);
-    SimpleMatrix prediction = position.plus(velocity);
+    SimpleMatrix prediction = position.copy().plus(velocity.copy().scale(Constants.FIND_TARGET_ITERATIONS * dt));
     int closest_index = points;
-    double dist_optimal_prediction = prediction.minus(path[closest_index]).normF();
+    double dist_optimal_prediction = prediction.copy().minus(path[closest_index]).normF();
 
     for(int i = last_index_position + 1; i < points; i++){
-      double dist_current_prediction = prediction.minus(path[i]).normF();
+      double dist_current_prediction = prediction.copy().minus(path[i]).normF();
       if(dist_current_prediction < dist_optimal_prediction){
         dist_optimal_prediction = dist_current_prediction;
         closest_index = i;

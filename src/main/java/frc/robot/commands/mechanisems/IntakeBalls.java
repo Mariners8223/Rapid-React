@@ -43,10 +43,10 @@ public class IntakeBalls extends CommandBase {
     if (button == Constants.RAISE_PULLIES_ENUM) intake.raisePullies(Constants.PULLIES_SPEED);
     else if (button == Constants.LOWER_PULLIES_ENUM) intake.lowerPullies(Constants.PULLIES_SPEED);
     else if (left) {
-      intake.setLeft(Constants.INTAKE_SPEED);
+      intake.setLeft(Constants.INTAKE_LEFT_SPEED);
       transport.transportInwards(Constants.TRANSPORT_SPEED);
     } else {
-      intake.setRight(Constants.INTAKE_SPEED);
+      intake.setRight(Constants.INTAKE_RIGHT_SPEED);
       transport.transportInwards(Constants.TRANSPORT_SPEED);
     }
   }

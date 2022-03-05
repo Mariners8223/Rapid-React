@@ -128,7 +128,7 @@ public class Chassis extends SubsystemBase {
 
   public void resetPosition() {
     position = Constants.ZERO_VECTOR;
-    last_time_position = 0;
+    last_time_position = Timer.getFPGATimestamp();
   }
 
   public SimpleMatrix getVelocity() {
