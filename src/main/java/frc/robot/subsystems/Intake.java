@@ -12,7 +12,6 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -46,10 +45,10 @@ public class Intake extends SubsystemBase {
     left_eye.setSelectedSensorPosition(0);
     right_eye.setSelectedSensorPosition(0);
 
-    left_eye_pid = new PIDController(0.6, 0.1, 0);
-    left_eye_pid.setTolerance(0.2);
-    right_eye_pid = new PIDController(0, 0, 0);
-    right_eye_pid.setTolerance(0.2);
+    left_eye_pid = new PIDController(Constants.INTAKE_KP, Constants.INTAKE_KI, Constants.INTAKE_KD);
+    left_eye_pid.setTolerance(Constants.INTAKE_TOLERANCE);
+    right_eye_pid = new PIDController(Constants.INTAKE_KP, Constants.INTAKE_KI, Constants.INTAKE_KD);
+    right_eye_pid.setTolerance(Constants.INTAKE_TOLERANCE);
   }
 
   public void setRight(double voltage) {
@@ -61,24 +60,26 @@ public class Intake extends SubsystemBase {
   }
 
   public void lowerPullies() {
-    left_eye_pid.setSetpoint(-1.2);
-    right_eye_pid.setSetpoint(-1.2);
+    left_eye_pid.setSetpoint(Constants.EYE_DOWN);
+    right_eye_pid.setSetpoint(Constants.EYE_DOWN);
   }
 
   public void raisePullies() {
-    left_eye_pid.setSetpoint(2);
-    right_eye_pid.setSetpoint(2);
+    left_eye_pid.setSetpoint(Constants.EYE_UP);
+    right_eye_pid.setSetpoint(Constants.EYE_UP);
   }
 
   public boolean isLeftAtSetpoint(){
-    if(left_eye_pid.getSetpoint() == 2 && Math.abs(left_eye.getMotorOutputPercent()) > 0.3) {
-      SmartDashboard.putNumber("v", left_eye.getSelectedSensorVelocity());
+    if(left_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(left_eye.getMotorOutputPercent()) > 0.3) {
       if(Math.abs(left_eye.getSelectedSensorVelocity()) < 0.01) return true;
     }
     return left_eye_pid.atSetpoint();
   }
 
   public boolean isRightAtSetpoint(){
+    if(right_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(right_eye.getMotorOutputPercent()) > 0.3) {
+      if(Math.abs(right_eye.getSelectedSensorVelocity()) < 0.01) return true;
+    }
     return right_eye_pid.atSetpoint();
   }
 
@@ -87,22 +88,23 @@ public class Intake extends SubsystemBase {
   }
 
   public void setEyeRight(double s) {
-    right_eye.set(ControlMode.PercentOutput, s);
+    right_eye.set(ControlMode.PercentOutput, MathUtil.clamp(s, -Constants.EYE_SPEED, Constants.EYE_SPEED));
   }
 
   public void resetLeftEye(){
     left_eye.setSelectedSensorPosition(0);
   }
 
+  public void reseRightEye(){
+    right_eye.setSelectedSensorPosition(0);
+  }
+
   public void leftPID() {
-    SmartDashboard.putNumber("l", left_eye.getSelectedSensorPosition());
     setEyeLeft(left_eye_pid.calculate(Constants.LEFT_EYE_DPP * left_eye.getSelectedSensorPosition()));
-    //setEyeLeft(0.5);
   }
 
   public void rightPID() {
-    //SmartDashboard.putNumber("r", Constants.LEFT_EYE_DPP * right_eye.getSelectedSensorPosition(0));
-    //setEyeRight(right_eye_pid.calculate(Constants.RIGHT_EYE_DPP * right_eye.getSelectedSensorPosition(0)));
+    setEyeRight(right_eye_pid.calculate(Constants.RIGHT_EYE_DPP * right_eye.getSelectedSensorPosition()));
   }
 
   public void stopAll() {

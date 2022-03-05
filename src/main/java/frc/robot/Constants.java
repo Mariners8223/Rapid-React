@@ -38,7 +38,7 @@ public final class Constants {
     public static final double RIGHT_BACK_DPP = 0.000010440706;
 
     public static final double LEFT_EYE_DPP = 1.0 / 10000.0;
-    public static final double RIGHT_EYE_DPP = 1;
+    public static final double RIGHT_EYE_DPP = 1.0 / 10000.0;
 
     // Joysticks
     public static final int DRIVE_JOYSTICK = 0;
@@ -72,6 +72,12 @@ public final class Constants {
     public static final double ANGLE_KI = 0;
     public static final double ANGLE_KD = 0.01;
     public static final double ANGLE_TOLERANCE = 1.0;
+
+    public static final double INTAKE_KP = 0.6;
+    public static final double INTAKE_KI = 0.1;
+    public static final double INTAKE_KD = 0;
+    public static final double INTAKE_TOLERANCE = 0.2;
+
 
     // Raspberry pi
     public static final String RASPBERRYPI_TABLE = "vision";
@@ -132,5 +138,7 @@ public final class Constants {
     public static final double ROTATION_DEAD_BAND = 0.1;
     public static final double NO_TIME = -1.0;
     public static final double EYE_SPEED = 0.6;
+    public static final double EYE_UP = 2.0;
+    public static final double EYE_DOWN = -1.2;
 
 }
