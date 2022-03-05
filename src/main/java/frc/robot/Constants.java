@@ -37,6 +37,9 @@ public final class Constants {
     public static final double RIGHT_FRONT_DPP = 0.000010440706;
     public static final double RIGHT_BACK_DPP = 0.000010440706;
 
+    public static final double LEFT_EYE_DPP = 1;
+    public static final double RIGHT_EYE_DPP = 1;
+
     // Joysticks
     public static final int DRIVE_JOYSTICK = 0;
     public static final int ARM_JOYSTICK = 1;

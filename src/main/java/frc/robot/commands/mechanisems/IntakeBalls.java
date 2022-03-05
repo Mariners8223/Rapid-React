@@ -40,8 +40,8 @@ public class IntakeBalls extends CommandBase {
   public void initialize() {
     start_time = Timer.getFPGATimestamp();
 
-    if (button == Constants.RAISE_PULLIES_ENUM) intake.raisePullies(Constants.PULLIES_SPEED);
-    else if (button == Constants.LOWER_PULLIES_ENUM) intake.lowerPullies(Constants.PULLIES_SPEED);
+    if (button == Constants.RAISE_PULLIES_ENUM) intake.raisePullies();
+    else if (button == Constants.LOWER_PULLIES_ENUM) intake.lowerPullies();
     else if (button == Constants.INTAKE_BOUTH_ENUM){
       intake.setLeft(Constants.INTAKE_LEFT_SPEED);
       intake.setRight(Constants.INTAKE_RIGHT_SPEED);
@@ -58,7 +58,14 @@ public class IntakeBalls extends CommandBase {
 
   
   @Override
-  public void execute() {}
+  public void execute() {
+    if(button == Constants.RAISE_PULLIES_ENUM || button == Constants.LOWER_PULLIES_ENUM) {
+      if(intake.isLeftAtSetpoint()) intake.setEyeLeft(0);
+      else intake.leftPID();
+      if(intake.isRightAtSetpoint()) intake.setEyeRight(0);
+      else intake.rightPID();
+    }
+  }
 
   
   @Override
@@ -70,6 +77,7 @@ public class IntakeBalls extends CommandBase {
   
   @Override
   public boolean isFinished() {
+    if(button == Constants.RAISE_PULLIES_ENUM || button == Constants.LOWER_PULLIES_ENUM) return (intake.isLeftAtSetpoint() && intake.isRightAtSetpoint());
     if(time == Constants.NO_TIME) return false;
     if(Timer.getFPGATimestamp() - start_time > time) return true;
     return false; 
