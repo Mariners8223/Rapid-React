@@ -68,6 +68,7 @@ public final class Constants {
     public static final double ANGLE_KP = 0.03;
     public static final double ANGLE_KI = 0;
     public static final double ANGLE_KD = 0.01;
+    public static final double ANGLE_TOLERANCE = 1.0;
 
     // Raspberry pi
     public static final String RASPBERRYPI_TABLE = "vision";

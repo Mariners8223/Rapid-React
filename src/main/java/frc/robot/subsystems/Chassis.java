@@ -46,6 +46,7 @@ public class Chassis extends SubsystemBase {
 
     anglePID = new PIDController(Constants.ANGLE_KP, Constants.ANGLE_KI, Constants.ANGLE_KD);
     anglePID.enableContinuousInput(0, 360);
+    anglePID.setTolerance(Constants.ANGLE_TOLERANCE);
 
     position = Constants.ZERO_VECTOR;
     last_time_position = 0;
@@ -109,6 +110,10 @@ public class Chassis extends SubsystemBase {
 
   public double getRotationPID(double target){
     return anglePID.calculate(getAngle(), target);
+  }
+
+  public boolean isRotationPIDatSetpoint(){
+    return anglePID.atSetpoint();
   }
 
   private double deadBandOutput(double s){
