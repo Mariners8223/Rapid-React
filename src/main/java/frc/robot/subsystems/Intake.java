@@ -5,10 +5,14 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -34,13 +38,18 @@ public class Intake extends SubsystemBase {
     right_intake.setInverted(Constants.RIGHT_INTAKE_INVERTED);
     left_intake.setInverted(Constants.LEFT_INTAKE_INVERTED);
 
+    left_eye.setNeutralMode(NeutralMode.Brake);
+
+    left_eye.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    right_eye.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+
     left_eye.setSelectedSensorPosition(0);
     right_eye.setSelectedSensorPosition(0);
 
-    left_eye_pid = new PIDController(0, 0, 0);
-    left_eye_pid.setTolerance(0.1);
+    left_eye_pid = new PIDController(0.6, 0.1, 0);
+    left_eye_pid.setTolerance(0.2);
     right_eye_pid = new PIDController(0, 0, 0);
-    right_eye_pid.setTolerance(0.1);
+    right_eye_pid.setTolerance(0.2);
   }
 
   public void setRight(double voltage) {
@@ -52,16 +61,20 @@ public class Intake extends SubsystemBase {
   }
 
   public void lowerPullies() {
-    left_eye_pid.setSetpoint(1);
-    right_eye_pid.setSetpoint(1);
+    left_eye_pid.setSetpoint(-1.2);
+    right_eye_pid.setSetpoint(-1.2);
   }
 
   public void raisePullies() {
-    left_eye_pid.setSetpoint(0);
-    right_eye_pid.setSetpoint(0);
+    left_eye_pid.setSetpoint(2);
+    right_eye_pid.setSetpoint(2);
   }
 
   public boolean isLeftAtSetpoint(){
+    if(left_eye_pid.getSetpoint() == 2 && Math.abs(left_eye.getMotorOutputPercent()) > 0.3) {
+      SmartDashboard.putNumber("v", left_eye.getSelectedSensorVelocity());
+      if(Math.abs(left_eye.getSelectedSensorVelocity()) < 0.01) return true;
+    }
     return left_eye_pid.atSetpoint();
   }
 
@@ -70,19 +83,26 @@ public class Intake extends SubsystemBase {
   }
 
   public void setEyeLeft(double s) {
-    left_eye.set(ControlMode.PercentOutput, s);
+    left_eye.set(ControlMode.PercentOutput, MathUtil.clamp(s, -Constants.EYE_SPEED, Constants.EYE_SPEED));
   }
 
   public void setEyeRight(double s) {
     right_eye.set(ControlMode.PercentOutput, s);
   }
 
+  public void resetLeftEye(){
+    left_eye.setSelectedSensorPosition(0);
+  }
+
   public void leftPID() {
-    setEyeLeft(left_eye_pid.calculate(Constants.LEFT_EYE_DPP * left_eye.getSelectedSensorPosition(0)));
+    SmartDashboard.putNumber("l", left_eye.getSelectedSensorPosition());
+    setEyeLeft(left_eye_pid.calculate(Constants.LEFT_EYE_DPP * left_eye.getSelectedSensorPosition()));
+    //setEyeLeft(0.5);
   }
 
   public void rightPID() {
-    setEyeLeft(right_eye_pid.calculate(Constants.RIGHT_EYE_DPP * right_eye.getSelectedSensorPosition(0)));
+    //SmartDashboard.putNumber("r", Constants.LEFT_EYE_DPP * right_eye.getSelectedSensorPosition(0));
+    //setEyeRight(right_eye_pid.calculate(Constants.RIGHT_EYE_DPP * right_eye.getSelectedSensorPosition(0)));
   }
 
   public void stopAll() {

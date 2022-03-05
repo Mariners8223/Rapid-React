@@ -1,6 +1,7 @@
 package frc.robot.commands.mechanisems;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.subsystems.Transport;
@@ -15,6 +16,8 @@ public class IntakeBalls extends CommandBase {
   private int button;
   private double time;
   private double start_time;
+
+  private boolean stop_left;
   
   public IntakeBalls(int button, boolean left, double time) {
     transport = Transport.getInstance();
@@ -24,6 +27,8 @@ public class IntakeBalls extends CommandBase {
     this.button = button;
     this.left = left;
     this.time = time;
+
+    this.stop_left = false;
   }
 
   public IntakeBalls(int button, double time) {
@@ -34,6 +39,8 @@ public class IntakeBalls extends CommandBase {
     this.button = button;
     this.left = false;
     this.time = time;
+
+    this.stop_left = false;
   }
   
   @Override
@@ -54,16 +61,23 @@ public class IntakeBalls extends CommandBase {
       intake.setRight(Constants.INTAKE_RIGHT_SPEED);
       transport.transportInwards(Constants.TRANSPORT_SPEED);
     }
+    stop_left = false;
   }
 
   
   @Override
   public void execute() {
     if(button == Constants.RAISE_PULLIES_ENUM || button == Constants.LOWER_PULLIES_ENUM) {
-      if(intake.isLeftAtSetpoint()) intake.setEyeLeft(0);
+      if(intake.isLeftAtSetpoint() && !stop_left) {
+        intake.setEyeLeft(0);
+        intake.resetLeftEye();
+        stop_left = true;
+      }
+      else if(stop_left) intake.setEyeLeft(0);
       else intake.leftPID();
       if(intake.isRightAtSetpoint()) intake.setEyeRight(0);
       else intake.rightPID();
+      SmartDashboard.putBoolean("lol", stop_left);
     }
   }
 

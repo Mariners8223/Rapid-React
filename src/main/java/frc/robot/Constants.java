@@ -9,8 +9,8 @@ public final class Constants {
     public static final int LEFT_BACK = 4;
     public static final int RIGHT_FRONT = 2;
     public static final int RIGHT_BACK = 3;
-    public static final int EYE_LEFT = 6;
-    public static final int EYE_RIGHT = 8;
+    public static final int EYE_LEFT = 8;
+    public static final int EYE_RIGHT = 6;
     public static final int INTAKE_LEFT = 5; 
     public static final int INTAKE_RIGHT = 9;
     public static final int TRANSPORT_BOTTOM = 11;
@@ -37,7 +37,7 @@ public final class Constants {
     public static final double RIGHT_FRONT_DPP = 0.000010440706;
     public static final double RIGHT_BACK_DPP = 0.000010440706;
 
-    public static final double LEFT_EYE_DPP = 1;
+    public static final double LEFT_EYE_DPP = 1.0 / 10000.0;
     public static final double RIGHT_EYE_DPP = 1;
 
     // Joysticks
@@ -131,4 +131,6 @@ public final class Constants {
     public static final double ROTATION_SPEED = 0.4;
     public static final double ROTATION_DEAD_BAND = 0.1;
     public static final double NO_TIME = -1.0;
+    public static final double EYE_SPEED = 0.6;
+
 }
