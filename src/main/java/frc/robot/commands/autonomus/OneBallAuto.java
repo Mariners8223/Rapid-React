@@ -7,6 +7,6 @@ import frc.robot.commands.mechanisems.ShootCycle;
 
 public class OneBallAuto extends SequentialCommandGroup {
   public OneBallAuto() {
-    addCommands(new ShootCycle(2.0), new PathFollower(Constants.ONE_BALL_PATH));
+    addCommands(new Rotate(45),new ShootCycle(2.0), new PathFollower(Constants.ONE_BALL_PATH));
   }
 }

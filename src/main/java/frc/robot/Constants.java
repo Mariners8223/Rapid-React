@@ -87,6 +87,7 @@ public final class Constants {
     public static final int LOWER_PULLIES_ENUM = 2;
     public static final int INTAKE_LEFT_ENUM = 5; 
     public static final int INTAKE_RIGHT_ENUM = 6;
+    public static final int INTAKE_BOUTH_ENUM = 7;
     public static final int SHOOT_COMMAND_BUTTON = 5;
     public static final int TRANSPORT_INWARDS_BUTTON = 3;
     public static final int TRANSPORT_OUTWARDS_BUTTON = 2;
@@ -109,6 +110,15 @@ public final class Constants {
 
     private static final double[][] ball_behind_left_hub_path_arr = {{0,0}, {3.5, 0}, {3.5, 0.6}};
     public static final SimpleMatrix[] BALL_BEHIND_LEFT_HUB_PATH = RobotContainer.arrayToPath(ball_behind_left_hub_path_arr);
+
+    private static final double[][] two_balls_first_path = {{0,0}, {0.4, 0}};
+    public static final SimpleMatrix[] TWO_BALL_RIGHT_FIRST_PATH = RobotContainer.arrayToPath(two_balls_first_path);
+
+    private static final double[][] two_balls_secound_path = {{0,0}, {-3, -1}};
+    public static final SimpleMatrix[] TWO_BALL_RIGHT_SECOUND_PATH = RobotContainer.arrayToPath(two_balls_secound_path);
+
+    private static final double[][] two_balls_hub_path = {{0,0}, {1, 2}};
+    public static final SimpleMatrix[] TWO_BALL_HUB_PATH = RobotContainer.arrayToPath(two_balls_hub_path);
 
     // Other constants
     public static final double CHASSIS_DEAD_BAND = 0.2;
