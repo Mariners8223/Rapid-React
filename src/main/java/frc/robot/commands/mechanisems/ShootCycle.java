@@ -4,15 +4,18 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transport;
 
 public class ShootCycle extends CommandBase {
   private Transport transport;
   private Shooter shooter;
+  private Intake intake;
 
   private double time;
   private double start_time;
+  private boolean left;
 
   public ShootCycle(double time) {
     transport = Transport.getInstance();
@@ -23,7 +26,17 @@ public class ShootCycle extends CommandBase {
     this.time = time;
   }
 
-  
+  public ShootCycle(double time, boolean left) {
+    transport = Transport.getInstance();
+    shooter = Shooter.getInstance();
+    intake = Intake.getInstance();
+
+    addRequirements(shooter, transport, intake);
+
+    this.time = time;
+    this.left = left;
+  }
+
   @Override
   public void initialize() {
     start_time = Timer.getFPGATimestamp();
@@ -35,6 +48,8 @@ public class ShootCycle extends CommandBase {
     if(time != Constants.NO_TIME) {
       shooter.setSpeed(0.4);
       transport.transportInwards(Constants.TRANSPORT_SPEED);
+      if(left) intake.setLeft(Constants.INTAKE_LEFT_SPEED);
+      else intake.setRight(Constants.INTAKE_RIGHT_SPEED);
     }
     else {
       shooter.setSpeed(Math.abs(RobotContainer.getArmsAxis(Constants.SHOOT_TRIGGER)) * Constants.SHOOTER_SPEED);

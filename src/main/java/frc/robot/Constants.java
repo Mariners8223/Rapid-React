@@ -76,7 +76,8 @@ public final class Constants {
 
     // Speed Values
     public static final double PULLIES_SPEED = 0.6;
-    public static final double INTAKE_SPEED = 0.8;
+    public static final double INTAKE_LEFT_SPEED = 0.5;
+    public static final double INTAKE_RIGHT_SPEED = 0.8;
     public static final double TRANSPORT_SPEED = 0.6;
     public static final double SHOOTER_SPEED = 0.3;
 
@@ -102,10 +103,10 @@ public final class Constants {
     private static final double[][] ball_behind_right_hub_path_arr = {{0,0}, {-3.5, 0}, {-3.5, 0.6}};
     public static final SimpleMatrix[] BALL_BEHIND_RIGHT_HUB_PATH = RobotContainer.arrayToPath(ball_behind_right_hub_path_arr);
 
-    private static final double[][] ball_behind_left_path_arr = {{0,0}, {0, -0.8}, {-2, -0.8}};
+    private static final double[][] ball_behind_left_path_arr = {{0,0}, {0, -0.7}, {-2.5, -0.7}};
     public static final SimpleMatrix[] BALL_BEHIND_LEFT_PATH = RobotContainer.arrayToPath(ball_behind_left_path_arr);
 
-    private static final double[][] ball_behind_left_hub_path_arr = {{0,0}, {-3.5, 0}, {-3.5, 0.6}};
+    private static final double[][] ball_behind_left_hub_path_arr = {{0,0}, {4.5, 0}, {4.5, 0.4}};
     public static final SimpleMatrix[] BALL_BEHIND_LEFT_HUB_PATH = RobotContainer.arrayToPath(ball_behind_left_hub_path_arr);
 
     // Other constants
