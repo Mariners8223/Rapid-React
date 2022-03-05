@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.autonomus.TwoBallAuto;
+import frc.robot.commands.autonomus.CollectBehindLeft;
+import frc.robot.commands.autonomus.TwoBallRightAuto;
 import frc.robot.commands.mechanisems.IntakeBalls;
 import frc.robot.commands.mechanisems.ShootCycle;
 
@@ -32,7 +33,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand(){
-    return new TwoBallAuto();
+    return new CollectBehindLeft();
   }
 
   public static boolean getChasisButton(int button) {return chasis_controller.getRawButton(button);}

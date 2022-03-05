@@ -5,8 +5,8 @@ import frc.robot.Constants;
 import frc.robot.commands.PathFollower;
 import frc.robot.commands.mechanisems.IntakeBalls;
 
-public class CollectBehind extends ParallelCommandGroup {
-  public CollectBehind() {
-    addCommands(new PathFollower(Constants.BALL_BEHIND_PATH), new IntakeBalls(Constants.INTAKE_RIGHT_ENUM, false, 5));
+public class CollectBehindLeft extends ParallelCommandGroup {
+  public CollectBehindLeft() {
+    addCommands(new PathFollower(Constants.BALL_BEHIND_LEFT_PATH), new IntakeBalls(Constants.INTAKE_LEFT_ENUM, true, 5));
   }
 }
