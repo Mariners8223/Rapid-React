@@ -95,7 +95,7 @@ public class Intake extends SubsystemBase {
     left_eye.setSelectedSensorPosition(0);
   }
 
-  public void reseRightEye(){
+  public void resetRightEye(){
     right_eye.setSelectedSensorPosition(0);
   }
 
