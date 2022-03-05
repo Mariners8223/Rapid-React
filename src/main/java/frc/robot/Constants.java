@@ -98,16 +98,16 @@ public final class Constants {
     private static final double[][] one_ball_path_arr = {{0,0}, {0, -1.7}};
     public static final SimpleMatrix[] ONE_BALL_PATH = RobotContainer.arrayToPath(one_ball_path_arr);
 
-    private static final double[][] ball_behind_right_path_arr = {{0,0}, {0.25, -0.5}, {0.5, -0.5}, {2.7, -0.5}};
+    private static final double[][] ball_behind_right_path_arr = {{0,0}, {0, -0.7}, {2.5, -0.7}};
     public static final SimpleMatrix[] BALL_BEHIND_RIGHT_PATH = RobotContainer.arrayToPath(ball_behind_right_path_arr);
 
-    private static final double[][] ball_behind_right_hub_path_arr = {{0,0}, {-3.5, 0}, {-3.5, 0.6}};
+    private static final double[][] ball_behind_right_hub_path_arr = {{0,0}, {-4.5, 0}, {-4.5, 0.4}};
     public static final SimpleMatrix[] BALL_BEHIND_RIGHT_HUB_PATH = RobotContainer.arrayToPath(ball_behind_right_hub_path_arr);
 
-    private static final double[][] ball_behind_left_path_arr = {{0,0}, {0, -0.7}, {-2.5, -0.7}};
+    private static final double[][] ball_behind_left_path_arr = {{0,0}, {-0.25, -0.5}, {-0.5, -0.5}, {-2.7, -0.5}};
     public static final SimpleMatrix[] BALL_BEHIND_LEFT_PATH = RobotContainer.arrayToPath(ball_behind_left_path_arr);
 
-    private static final double[][] ball_behind_left_hub_path_arr = {{0,0}, {4.5, 0}, {4.5, 0.4}};
+    private static final double[][] ball_behind_left_hub_path_arr = {{0,0}, {3.5, 0}, {3.5, 0.6}};
     public static final SimpleMatrix[] BALL_BEHIND_LEFT_HUB_PATH = RobotContainer.arrayToPath(ball_behind_left_hub_path_arr);
 
     // Other constants
