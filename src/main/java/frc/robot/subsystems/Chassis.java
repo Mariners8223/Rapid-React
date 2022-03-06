@@ -73,6 +73,14 @@ public class Chassis extends SubsystemBase {
     right_back.set(ControlMode.PercentOutput, deadBandOutput(rb) * Constants.CHASSIS_MULTIPLIE);
   }
 
+  public void disable() {
+    anglePID.setPID(0, 0, 0);
+  }
+
+  public void enable() {
+    anglePID.setPID(Constants.ANGLE_KP, Constants.ANGLE_KI, Constants.ANGLE_KD);
+  }
+
   public double getAngle(){
     return navx.getAngle();
   }

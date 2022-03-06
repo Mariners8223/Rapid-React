@@ -16,6 +16,8 @@ public final class Constants {
     public static final int TRANSPORT_BOTTOM = 11;
     public static final int TRANSPORT_TOP = 7;
     public static final int SHOOTER = 12;
+    public static final int CLIMBER = 13;
+
 
     // Motors Invertion
     public static final boolean LEFT_FRONT_INVERTED = false;
@@ -29,7 +31,9 @@ public final class Constants {
     public static final boolean RIGHT_INTAKE_INVERTED = true;
     public static final boolean RIGHT_PULLIE_INVERTED = true;
     public static final boolean TOP_TRANSPORT_INVERTED = false;
-    public static final boolean BOTTOM_TRANSPORT_INVERTED = true;
+    public static final boolean BOTTOM_TRANSPORT_INVERTED = true;    
+    public static final boolean CLIMBER_INVERTED = false;    
+
 
     // Motors encoders                              0.00001072997
     public static final double LEFT_FRONT_DPP = 0.000010440706;
@@ -37,8 +41,11 @@ public final class Constants {
     public static final double RIGHT_FRONT_DPP = 0.000010440706;
     public static final double RIGHT_BACK_DPP = 0.000010440706;
 
+    public static final double CLIMBER_DPP = 0.00000522035;
+
     public static final double LEFT_EYE_DPP = 1.0 / 10000.0;
     public static final double RIGHT_EYE_DPP = 1.0 / 10000.0;
+
 
     // Joysticks
     public static final int DRIVE_JOYSTICK = 0;
@@ -73,6 +80,7 @@ public final class Constants {
     public static final double ANGLE_KD = 0.01;
     public static final double ANGLE_TOLERANCE = 1.0;
 
+    public static final double CLIMBER_KF = 0;
     public static final double INTAKE_KP = 0.6;
     public static final double INTAKE_KI = 0.1;
     public static final double INTAKE_KD = 0;
@@ -100,6 +108,8 @@ public final class Constants {
     public static final int SHOOT_COMMAND_BUTTON = 5;
     public static final int TRANSPORT_INWARDS_BUTTON = 3;
     public static final int TRANSPORT_OUTWARDS_BUTTON = 2;
+    public static final int CLIMB_UP_BUTTON = 6;
+    public static final int CLIMB_DOWN_BUTTON = 270;
 
     // Path Follower
     public static final int FIND_TARGET_ITERATIONS = 10;
@@ -137,8 +147,8 @@ public final class Constants {
     public static final double ROTATION_SPEED = 0.4;
     public static final double ROTATION_DEAD_BAND = 0.1;
     public static final double NO_TIME = -1.0;
+    public static final double CLIMBER_SPEED = 0.7;
     public static final double EYE_SPEED = 0.5;
     public static final double EYE_UP = 5.0;
     public static final double EYE_DOWN = -1.2;
-
 }
