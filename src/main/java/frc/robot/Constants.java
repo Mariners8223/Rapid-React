@@ -136,7 +136,7 @@ public final class Constants {
     private static final double[][] two_balls_first_path = {{0,0}, {0.5, 0.8}};
     public static final SimpleMatrix[] TWO_BALL_RIGHT_FIRST_PATH = RobotContainer.arrayToPath(two_balls_first_path);
 
-    private static final double[][] two_balls_secound_path = {{0,0}, {-2, -2.4}};
+    private static final double[][] two_balls_secound_path = {{0,0}, {-2, -2.5}};
     public static final SimpleMatrix[] TWO_BALL_RIGHT_SECOUND_PATH = RobotContainer.arrayToPath(two_balls_secound_path);
 
     private static final double[][] two_balls_hub_path = {{0,0}, {-0.6, 4}};
@@ -144,8 +144,8 @@ public final class Constants {
 
     // Other constants
     public static final double CHASSIS_DEAD_BAND = 0.2;
-    public static final double CHASSIS_MULTIPLIE = 0.7;
-    public static final double CHASSIS_CLAMP = 0.8;
+    public static final double CHASSIS_MULTIPLIE = 0.8;
+    public static final double CHASSIS_CLAMP = 1.0;
     public static final double CHASSIS_VELOCITY_TIME_TO_SECONDS = 10.0;
     public static final double ROTATION_SPEED = 0.4;
     public static final double ROTATION_DEAD_BAND = 0.1;

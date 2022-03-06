@@ -6,6 +6,6 @@ import frc.robot.commands.mechanisems.IntakeBalls;
 
 public class CollectTwoBallsRight extends ParallelCommandGroup {
   public CollectTwoBallsRight() {
-    addCommands(new DriveTwoBallsRight(), new IntakeBalls(Constants.INTAKE_BOUTH_ENUM, 8));
+    addCommands(new DriveTwoBallsRight(), new IntakeBalls(Constants.INTAKE_BOUTH_ENUM, 5));
   }
 }
