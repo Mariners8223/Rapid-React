@@ -25,11 +25,11 @@ public final class Constants {
 
     public static final boolean SHOOTER_INVERTED = true;
     public static final boolean LEFT_INTAKE_INVERTED = false;    
-    public static final boolean LEFT_PULLIE_INVERTED = true;
+    public static final boolean LEFT_PULLIE_INVERTED = false;
     public static final boolean RIGHT_INTAKE_INVERTED = true;
-    public static final boolean RIGHT_PULLIE_INVERTED = false;
+    public static final boolean RIGHT_PULLIE_INVERTED = true;
     public static final boolean TOP_TRANSPORT_INVERTED = false;
-    public static final boolean BOTTOM_TRANSPORT_INVERTED = true;    
+    public static final boolean BOTTOM_TRANSPORT_INVERTED = true;
 
     // Motors encoders                              0.00001072997
     public static final double LEFT_FRONT_DPP = 0.000010440706;
@@ -138,7 +138,7 @@ public final class Constants {
     public static final double ROTATION_DEAD_BAND = 0.1;
     public static final double NO_TIME = -1.0;
     public static final double EYE_SPEED = 0.5;
-    public static final double EYE_UP = 4.0;
+    public static final double EYE_UP = 5.0;
     public static final double EYE_DOWN = -1.2;
 
 }

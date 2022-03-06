@@ -61,8 +61,8 @@ public class Intake extends SubsystemBase {
   }
 
   public void lowerPullies() {
-    left_eye_pid.setSetpoint(Constants.EYE_DOWN);
-    right_eye_pid.setSetpoint(-0.6);
+    left_eye_pid.setSetpoint(-1.7);
+    right_eye_pid.setSetpoint(-1.2);
   }
 
   public void raisePullies() {

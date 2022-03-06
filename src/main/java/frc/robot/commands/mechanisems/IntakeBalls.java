@@ -81,10 +81,16 @@ public class IntakeBalls extends CommandBase {
   public void execute() {
     if(button == Constants.RAISE_PULLIES_ENUM || button == Constants.LOWER_PULLIES_ENUM) {
       if(intake.isLeftAtSetpoint() && !stop_left) {
-        intake.setEyeLeft(0);
-        intake.resetLeftEye();
-        if(left_start_time == Constants.NO_TIME) left_start_time = Timer.getFPGATimestamp();
-        else if(Timer.getFPGATimestamp() - left_start_time > 0.1) stop_left = true;
+        if(left_start_time == Constants.NO_TIME) {
+          left_start_time = Timer.getFPGATimestamp();
+          intake.leftPID();
+        }
+        else if(Timer.getFPGATimestamp() - left_start_time > 0.1) 
+        {
+          stop_left = true;
+          intake.setEyeLeft(0);
+          intake.resetLeftEye();
+        }
       }
       else if(stop_left) intake.setEyeLeft(0);
       else {
@@ -93,10 +99,16 @@ public class IntakeBalls extends CommandBase {
       }
 
       if(intake.isRightAtSetpoint() && !stop_right) {
-        intake.setEyeRight(0);
-        intake.resetRightEye();
-        if(right_start_time == Constants.NO_TIME) right_start_time = Timer.getFPGATimestamp();
-        else if(Timer.getFPGATimestamp() - right_start_time > 0.1) stop_right = true;
+        if(right_start_time == Constants.NO_TIME) {
+          right_start_time = Timer.getFPGATimestamp();
+          intake.rightPID();
+        }
+        else if(Timer.getFPGATimestamp() - right_start_time > 0.1) 
+        {
+          stop_right = true;
+          intake.setEyeRight(0);
+          intake.resetRightEye();
+        }
       }
       else if(stop_right) intake.setEyeRight(0);
       else {
@@ -120,7 +132,7 @@ public class IntakeBalls extends CommandBase {
   
   @Override
   public boolean isFinished() {
-    if(button == Constants.RAISE_PULLIES_ENUM || button == Constants.LOWER_PULLIES_ENUM) return (intake.isLeftAtSetpoint() && intake.isRightAtSetpoint());
+    if(button == Constants.RAISE_PULLIES_ENUM || button == Constants.LOWER_PULLIES_ENUM) return (stop_left && stop_right);
     if(time == Constants.NO_TIME) return false;
     if(Timer.getFPGATimestamp() - start_time > time) return true;
     return false; 
