@@ -1,6 +1,7 @@
 package frc.robot.commands.mechanisems;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.subsystems.Transport;
@@ -87,6 +88,8 @@ public class IntakeBalls extends CommandBase {
       else if(stop_right) intake.setEyeRight(0);
       else intake.rightPID();
     }
+    SmartDashboard.putBoolean("l", stop_left);
+    SmartDashboard.putBoolean("r", stop_right);
   }
 
   

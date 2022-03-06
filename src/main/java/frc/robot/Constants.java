@@ -137,8 +137,8 @@ public final class Constants {
     public static final double ROTATION_SPEED = 0.4;
     public static final double ROTATION_DEAD_BAND = 0.1;
     public static final double NO_TIME = -1.0;
-    public static final double EYE_SPEED = 0.6;
-    public static final double EYE_UP = 2.0;
+    public static final double EYE_SPEED = 0.5;
+    public static final double EYE_UP = 4.0;
     public static final double EYE_DOWN = -1.2;
 
 }

@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -61,7 +62,7 @@ public class Intake extends SubsystemBase {
 
   public void lowerPullies() {
     left_eye_pid.setSetpoint(Constants.EYE_DOWN);
-    right_eye_pid.setSetpoint(Constants.EYE_DOWN);
+    right_eye_pid.setSetpoint(-0.6);
   }
 
   public void raisePullies() {
@@ -70,14 +71,15 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean isLeftAtSetpoint(){
-    if(left_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(left_eye.getMotorOutputPercent()) > 0.3) {
+    if(left_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(left_eye.getMotorOutputPercent()) > 0.4) {
       if(Math.abs(left_eye.getSelectedSensorVelocity()) < 0.01) return true;
     }
     return left_eye_pid.atSetpoint();
   }
 
   public boolean isRightAtSetpoint(){
-    if(right_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(right_eye.getMotorOutputPercent()) > 0.3) {
+    SmartDashboard.putNumber("ri", right_eye.getMotorOutputPercent());
+    if(right_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(right_eye.getMotorOutputPercent()) > 0.4) {
       if(Math.abs(right_eye.getSelectedSensorVelocity()) < 0.01) return true;
     }
     return right_eye_pid.atSetpoint();
