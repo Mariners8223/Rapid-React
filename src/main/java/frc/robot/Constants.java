@@ -78,7 +78,7 @@ public final class Constants {
     public static final double ANGLE_KP = 0.03;
     public static final double ANGLE_KI = 0;
     public static final double ANGLE_KD = 0.01;
-    public static final double ANGLE_TOLERANCE = 1.0;
+    public static final double ANGLE_TOLERANCE = 5.0;
 
     public static final double CLIMBER_KF = 0;
     public static final double INTAKE_KP = 0.6;
@@ -94,8 +94,8 @@ public final class Constants {
 
     // Speed Values
     public static final double PULLIES_SPEED = 0.6;
-    public static final double INTAKE_LEFT_SPEED = 0.5;
-    public static final double INTAKE_RIGHT_SPEED = 0.8;
+    public static final double INTAKE_LEFT_SPEED = 0.6;
+    public static final double INTAKE_RIGHT_SPEED = 0.6;
     public static final double TRANSPORT_SPEED = 0.6;
     public static final double SHOOTER_SPEED = 0.3;
 
@@ -115,8 +115,11 @@ public final class Constants {
     public static final int FIND_TARGET_ITERATIONS = 10;
 
     // Autonomus
-    private static final double[][] one_ball_path_arr = {{0,0}, {0, -1.7}};
+    private static final double[][] one_ball_path_arr = {{0,0}, {1.0, -1.5}};
     public static final SimpleMatrix[] ONE_BALL_PATH = RobotContainer.arrayToPath(one_ball_path_arr);
+
+    private static final double[][] one_ball_path_arr1 = {{0,0}, {1.6, -2}};
+    public static final SimpleMatrix[] ONE_BALL_PATH1 = RobotContainer.arrayToPath(one_ball_path_arr1);
 
     private static final double[][] ball_behind_right_path_arr = {{0,0}, {0, -0.7}, {2.5, -0.7}};
     public static final SimpleMatrix[] BALL_BEHIND_RIGHT_PATH = RobotContainer.arrayToPath(ball_behind_right_path_arr);
@@ -130,13 +133,13 @@ public final class Constants {
     private static final double[][] ball_behind_left_hub_path_arr = {{0,0}, {3.5, 0}, {3.5, 0.6}};
     public static final SimpleMatrix[] BALL_BEHIND_LEFT_HUB_PATH = RobotContainer.arrayToPath(ball_behind_left_hub_path_arr);
 
-    private static final double[][] two_balls_first_path = {{0,0}, {0.4, 0}};
+    private static final double[][] two_balls_first_path = {{0,0}, {0.5, 0.8}};
     public static final SimpleMatrix[] TWO_BALL_RIGHT_FIRST_PATH = RobotContainer.arrayToPath(two_balls_first_path);
 
-    private static final double[][] two_balls_secound_path = {{0,0}, {-3, -1}};
+    private static final double[][] two_balls_secound_path = {{0,0}, {-2, -2.4}};
     public static final SimpleMatrix[] TWO_BALL_RIGHT_SECOUND_PATH = RobotContainer.arrayToPath(two_balls_secound_path);
 
-    private static final double[][] two_balls_hub_path = {{0,0}, {1, 2}};
+    private static final double[][] two_balls_hub_path = {{0,0}, {-0.6, 4}};
     public static final SimpleMatrix[] TWO_BALL_HUB_PATH = RobotContainer.arrayToPath(two_balls_hub_path);
 
     // Other constants

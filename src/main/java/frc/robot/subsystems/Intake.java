@@ -39,6 +39,7 @@ public class Intake extends SubsystemBase {
     left_intake.setInverted(Constants.LEFT_INTAKE_INVERTED);
 
     left_eye.setNeutralMode(NeutralMode.Brake);
+    right_eye.setNeutralMode(NeutralMode.Brake);
 
     left_eye.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
     right_eye.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);

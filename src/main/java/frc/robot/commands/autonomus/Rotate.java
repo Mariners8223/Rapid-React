@@ -18,7 +18,7 @@ public class Rotate extends CommandBase {
 
   @Override
   public void initialize() {
-    //chassis.setSmoothRotation(true);
+    chassis.setSmoothRotation(true);
   }
 
   @Override
@@ -29,7 +29,7 @@ public class Rotate extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     chassis.setMotorsSpeed(0, 0, 0, 0);
-    //chassis.setSmoothRotation(false);
+    chassis.setSmoothRotation(false);
   }
 
   @Override
