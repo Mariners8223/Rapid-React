@@ -21,7 +21,7 @@ public class RobotContainer {
   private static JoystickButton intake_left_button = new JoystickButton(chasis_controller, Constants.INTAKE_LEFT_ENUM);
   private static JoystickButton intake_right_button = new JoystickButton(chasis_controller, Constants.INTAKE_RIGHT_ENUM);
   private static JoystickButton shoot_start = new JoystickButton(limb_controller, Constants.SHOOT_COMMAND_BUTTON);
-  private static POVButton climb_up = new POVButton(limb_controller, Constants.CLIMB_UP_BUTTON);
+  private static JoystickButton climb_up = new JoystickButton(limb_controller, Constants.CLIMB_UP_BUTTON);
   private static POVButton climb_down = new POVButton(limb_controller, Constants.CLIMB_DOWN_BUTTON);
 
 
