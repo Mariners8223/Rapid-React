@@ -17,6 +17,8 @@ public class IntakeBalls extends CommandBase {
   private double time;
   private double start_time;
 
+  private double left_start_time;
+  private double right_start_time;
   private boolean stop_left;
   private boolean stop_right;
 
@@ -29,6 +31,8 @@ public class IntakeBalls extends CommandBase {
     this.left = left;
     this.time = time;
 
+    left_start_time = Constants.NO_TIME;
+    right_start_time = Constants.NO_TIME;
     this.stop_left = false;
     this.stop_right = false;
   }
@@ -42,6 +46,8 @@ public class IntakeBalls extends CommandBase {
     this.left = false;
     this.time = time;
 
+    left_start_time = Constants.NO_TIME;
+    right_start_time = Constants.NO_TIME;
     this.stop_left = false;
     this.stop_right = false;
   }
@@ -64,6 +70,8 @@ public class IntakeBalls extends CommandBase {
       intake.setRight(Constants.INTAKE_RIGHT_SPEED);
       transport.transportInwards(Constants.TRANSPORT_SPEED);
     }
+    left_start_time = Constants.NO_TIME;
+    right_start_time = Constants.NO_TIME;
     stop_left = false;
     stop_right = false;
   }
@@ -75,18 +83,26 @@ public class IntakeBalls extends CommandBase {
       if(intake.isLeftAtSetpoint() && !stop_left) {
         intake.setEyeLeft(0);
         intake.resetLeftEye();
-        stop_left = true;
+        if(left_start_time == Constants.NO_TIME) left_start_time = Timer.getFPGATimestamp();
+        else if(Timer.getFPGATimestamp() - left_start_time > 0.1) stop_left = true;
       }
       else if(stop_left) intake.setEyeLeft(0);
-      else intake.leftPID();
+      else {
+        intake.leftPID();
+        left_start_time = Constants.NO_TIME;
+      }
 
       if(intake.isRightAtSetpoint() && !stop_right) {
         intake.setEyeRight(0);
         intake.resetRightEye();
-        stop_right = true;
+        if(right_start_time == Constants.NO_TIME) right_start_time = Timer.getFPGATimestamp();
+        else if(Timer.getFPGATimestamp() - right_start_time > 0.1) stop_right = true;
       }
       else if(stop_right) intake.setEyeRight(0);
-      else intake.rightPID();
+      else {
+        intake.rightPID();
+        right_start_time = Constants.NO_TIME;
+      }
     }
     SmartDashboard.putBoolean("l", stop_left);
     SmartDashboard.putBoolean("r", stop_right);
@@ -97,6 +113,8 @@ public class IntakeBalls extends CommandBase {
   public void end(boolean interrupted) {
     intake.stopAll();
     transport.stopAll();
+    intake.resetLeftEye();
+    intake.resetRightEye();
   }
 
   

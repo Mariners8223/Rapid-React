@@ -71,16 +71,16 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean isLeftAtSetpoint(){
-    if(left_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(left_eye.getMotorOutputPercent()) > 0.4) {
-      if(Math.abs(left_eye.getSelectedSensorVelocity()) < 0.01) return true;
+    if(left_eye_pid.getSetpoint() == Constants.EYE_UP) {
+      if(Math.abs(left_eye.getSelectedSensorVelocity()) < 10) return true;
     }
     return left_eye_pid.atSetpoint();
   }
 
   public boolean isRightAtSetpoint(){
     SmartDashboard.putNumber("ri", right_eye.getMotorOutputPercent());
-    if(right_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(right_eye.getMotorOutputPercent()) > 0.4) {
-      if(Math.abs(right_eye.getSelectedSensorVelocity()) < 0.01) return true;
+    if(right_eye_pid.getSetpoint() == Constants.EYE_UP) {
+      if(Math.abs(right_eye.getSelectedSensorVelocity()) < 10) return true;
     }
     return right_eye_pid.atSetpoint();
   }
