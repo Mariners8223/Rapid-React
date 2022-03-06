@@ -13,6 +13,7 @@ public class ShootCycle extends CommandBase {
 
   private double time;
   private double start_time;
+  private double speed;
 
   public ShootCycle(double time) {
     transport = Transport.getInstance();
@@ -21,8 +22,18 @@ public class ShootCycle extends CommandBase {
     addRequirements(shooter, transport);
 
     this.time = time;
+    this.speed = 0.4;
   }
 
+  public ShootCycle(double time, double speed) {
+    transport = Transport.getInstance();
+    shooter = Shooter.getInstance();
+
+    addRequirements(shooter, transport);
+
+    this.time = time;
+    this.speed = speed;
+  }
 
   @Override
   public void initialize() {
@@ -33,7 +44,7 @@ public class ShootCycle extends CommandBase {
   @Override
   public void execute() {
     if(time != Constants.NO_TIME) {
-      shooter.setSpeed(0.4);
+      shooter.setSpeed(speed);
       transport.transportInwards(Constants.TRANSPORT_SPEED);
     }
     else {
