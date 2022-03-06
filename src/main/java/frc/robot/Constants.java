@@ -9,8 +9,8 @@ public final class Constants {
     public static final int LEFT_BACK = 4;
     public static final int RIGHT_FRONT = 2;
     public static final int RIGHT_BACK = 3;
-    public static final int EYE_LEFT = 6;
-    public static final int EYE_RIGHT = 8;
+    public static final int EYE_LEFT = 8;
+    public static final int EYE_RIGHT = 6;
     public static final int INTAKE_LEFT = 5; 
     public static final int INTAKE_RIGHT = 9;
     public static final int TRANSPORT_BOTTOM = 11;
@@ -27,12 +27,13 @@ public final class Constants {
 
     public static final boolean SHOOTER_INVERTED = true;
     public static final boolean LEFT_INTAKE_INVERTED = false;    
-    public static final boolean LEFT_PULLIE_INVERTED = true;
+    public static final boolean LEFT_PULLIE_INVERTED = false;
     public static final boolean RIGHT_INTAKE_INVERTED = true;
-    public static final boolean RIGHT_PULLIE_INVERTED = false;
+    public static final boolean RIGHT_PULLIE_INVERTED = true;
     public static final boolean TOP_TRANSPORT_INVERTED = false;
     public static final boolean BOTTOM_TRANSPORT_INVERTED = true;    
     public static final boolean CLIMBER_INVERTED = false;    
+
 
     // Motors encoders                              0.00001072997
     public static final double LEFT_FRONT_DPP = 0.000010440706;
@@ -41,6 +42,10 @@ public final class Constants {
     public static final double RIGHT_BACK_DPP = 0.000010440706;
 
     public static final double CLIMBER_DPP = 0.00000522035;
+
+    public static final double LEFT_EYE_DPP = 1.0 / 10000.0;
+    public static final double RIGHT_EYE_DPP = 1.0 / 10000.0;
+
 
     // Joysticks
     public static final int DRIVE_JOYSTICK = 0;
@@ -76,6 +81,11 @@ public final class Constants {
     public static final double ANGLE_TOLERANCE = 1.0;
 
     public static final double CLIMBER_KF = 0;
+    public static final double INTAKE_KP = 0.6;
+    public static final double INTAKE_KI = 0.1;
+    public static final double INTAKE_KD = 0;
+    public static final double INTAKE_TOLERANCE = 0.2;
+
 
     // Raspberry pi
     public static final String RASPBERRYPI_TABLE = "vision";
@@ -138,4 +148,7 @@ public final class Constants {
     public static final double ROTATION_DEAD_BAND = 0.1;
     public static final double NO_TIME = -1.0;
     public static final double CLIMBER_SPEED = 0.7;
+    public static final double EYE_SPEED = 0.5;
+    public static final double EYE_UP = 5.0;
+    public static final double EYE_DOWN = -1.2;
 }

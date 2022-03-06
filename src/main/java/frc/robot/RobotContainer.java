@@ -30,8 +30,8 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    pullies_raise_button.whileHeld(new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME));
-    pullies_lower_button.whileHeld(new IntakeBalls(Constants.LOWER_PULLIES_ENUM, Constants.NO_TIME));
+    pullies_raise_button.whenPressed(new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME));
+    pullies_lower_button.whenPressed(new IntakeBalls(Constants.LOWER_PULLIES_ENUM, Constants.NO_TIME));
     intake_left_button.whileHeld(new IntakeBalls(Constants.INTAKE_LEFT_ENUM, true, Constants.NO_TIME));
     intake_right_button.whileHeld(new IntakeBalls(Constants.INTAKE_RIGHT_ENUM, false, Constants.NO_TIME));
     shoot_start.toggleWhenPressed(new ShootCycle(Constants.NO_TIME));
