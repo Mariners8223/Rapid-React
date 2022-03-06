@@ -94,8 +94,8 @@ public final class Constants {
 
     // Speed Values
     public static final double PULLIES_SPEED = 0.6;
-    public static final double INTAKE_LEFT_SPEED = 0.6;
-    public static final double INTAKE_RIGHT_SPEED = 0.6;
+    public static final double INTAKE_LEFT_SPEED = 0.7;
+    public static final double INTAKE_RIGHT_SPEED = 0.7;
     public static final double TRANSPORT_SPEED = 0.6;
     public static final double SHOOTER_SPEED = 0.3;
 
