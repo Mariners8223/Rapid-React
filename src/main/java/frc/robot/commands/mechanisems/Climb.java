@@ -21,13 +21,13 @@ public class Climb extends CommandBase {
 
   @Override
   public void initialize() {
-    if(up) climber.setSpeed(Constants.CLIMBER_SPEED);
-    else climber.setSpeed(-Constants.CLIMBER_SPEED);
     chassis.disable();
   }
 
   @Override
   public void execute() {
+    if(up) climber.setSpeed(Constants.CLIMBER_SPEED);
+    else climber.setSpeed(-Constants.CLIMBER_SPEED);
   }
 
   @Override

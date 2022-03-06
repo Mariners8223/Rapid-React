@@ -22,7 +22,8 @@ public class Climber extends SubsystemBase {
   }
 
   public void setSpeed(double s) {
-    climber.set(ControlMode.PercentOutput, s);
+    if (climber.getSelectedSensorVelocity() < 1 && climber.getMotorOutputPercent() > 0.3) climber.set(ControlMode.PercentOutput, s);
+    else climber.set(ControlMode.PercentOutput, s);
   }
 
   public static Climber getInstance() {
