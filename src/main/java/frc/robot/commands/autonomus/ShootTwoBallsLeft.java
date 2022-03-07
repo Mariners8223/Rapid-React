@@ -12,6 +12,6 @@ import frc.robot.commands.mechanisems.TransportBalls;
 
 public class ShootTwoBallsLeft extends SequentialCommandGroup {
   public ShootTwoBallsLeft() {
-    addCommands(new PathFollower(Constants.BALL_BEHIND_LEFT_HUB_PATH), new TransportBalls(false, 0.5), new ShootCycle(3), new PathFollower(Constants.ONE_BALL_PATH));
+    addCommands(new Rotate(45), new PathFollower(Constants.BALL_BEHIND_LEFT_HUB_PATH), new TransportBalls(false, 0.5), new ShootCycle(3, 0.39), new PathFollower(Constants.ONE_BALL_PATH));
   }
 }

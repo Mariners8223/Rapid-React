@@ -9,6 +9,6 @@ import frc.robot.commands.mechanisems.TransportBalls;
 
 public class ThreeBallsAuto extends SequentialCommandGroup {
   public ThreeBallsAuto() {
-    addCommands(new OneBallAuto(), new CollectTwoBallsRight(), new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME), new TransportBalls(false, 0.5), new ShootCycle(2.0, 0.3), new PathFollower(Constants.ONE_BALL_PATH1));
+    addCommands(new OneBallAuto(), new CollectTwoBallsRight(), new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME), new TransportBalls(false, 0.5), new ShootCycle(2.0, 0.39), new PathFollower(Constants.ONE_BALL_PATH1));
   }
 }

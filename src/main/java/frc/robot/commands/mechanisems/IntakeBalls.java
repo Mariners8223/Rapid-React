@@ -118,6 +118,9 @@ public class IntakeBalls extends CommandBase {
     }
     
     else if(button == Constants.LOWER_PULLIES_ENUM){
+      intake.setLeft(Constants.INTAKE_LEFT_SPEED);
+      intake.setRight(Constants.INTAKE_RIGHT_SPEED);
+
       if(intake.isLeftAtSetpoint() && !stop_left) {
         stop_left = true;
       }

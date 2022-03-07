@@ -47,9 +47,9 @@ public class Intake extends SubsystemBase {
     left_eye.setSelectedSensorPosition(0);
     right_eye.setSelectedSensorPosition(0);
 
-    left_eye_pid = new PIDController(Constants.INTAKE_KP, Constants.INTAKE_KI, Constants.INTAKE_KD);
+    left_eye_pid = new PIDController(1.3, Constants.INTAKE_KI, Constants.INTAKE_KD);
     left_eye_pid.setTolerance(Constants.INTAKE_TOLERANCE);
-    right_eye_pid = new PIDController(Constants.INTAKE_KP, Constants.INTAKE_KI, Constants.INTAKE_KD);
+    right_eye_pid = new PIDController(1.5, Constants.INTAKE_KI, Constants.INTAKE_KD);
     right_eye_pid.setTolerance(Constants.INTAKE_TOLERANCE);
   }
 
@@ -62,8 +62,8 @@ public class Intake extends SubsystemBase {
   }
 
   public void lowerPullies() {
-    left_eye_pid.setSetpoint(-1.7);
-    right_eye_pid.setSetpoint(-1.7);
+    left_eye_pid.setSetpoint(-2.8);
+    right_eye_pid.setSetpoint(-2.8);
   }
 
   public void raisePullies() {
@@ -79,7 +79,7 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean isRightAtSetpoint(){
-    SmartDashboard.putNumber("ri", right_eye.getMotorOutputPercent());
+    SmartDashboard.putNumber("ri", right_eye.getSelectedSensorPosition());
     if(right_eye_pid.getSetpoint() == Constants.EYE_UP) {
       if(Math.abs(right_eye.getSelectedSensorVelocity()) < 10) return true;
     }

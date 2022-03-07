@@ -22,7 +22,7 @@ public class ShootCycle extends CommandBase {
     addRequirements(shooter, transport);
 
     this.time = time;
-    this.speed = 0.4;
+    this.speed = 0.36;
   }
 
   public ShootCycle(double time, double speed) {

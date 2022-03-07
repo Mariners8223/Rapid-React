@@ -7,11 +7,15 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.autonomus.OneBallAuto;
 import frc.robot.commands.autonomus.ThreeBallsAuto;
 import frc.robot.commands.autonomus.TwoBallLeftAuto;
 import frc.robot.commands.drive.ResetAngle;
 import frc.robot.commands.mechanisems.Climb;
+import frc.robot.commands.mechanisems.ClimbWithIntake;
+import frc.robot.commands.mechanisems.CollectBalls;
 import frc.robot.commands.mechanisems.IntakeBalls;
+import frc.robot.commands.mechanisems.ShootClose;
 import frc.robot.commands.mechanisems.ShootCycle;
 
 public class RobotContainer {
@@ -26,6 +30,7 @@ public class RobotContainer {
   private static JoystickButton reset_angle = new JoystickButton(chasis_controller, 1);
   private static JoystickButton climb_up = new JoystickButton(limb_controller, Constants.CLIMB_UP_BUTTON);
   private static POVButton climb_down = new POVButton(limb_controller, Constants.CLIMB_DOWN_BUTTON);
+  private static JoystickButton shoot_close = new JoystickButton(limb_controller, 1);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -34,16 +39,19 @@ public class RobotContainer {
   private void configureButtonBindings() {
     pullies_raise_button.whenPressed(new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME));
     pullies_lower_button.whenPressed(new IntakeBalls(Constants.LOWER_PULLIES_ENUM, Constants.NO_TIME));
-    intake_left_button.whileHeld(new IntakeBalls(Constants.INTAKE_LEFT_ENUM, true, Constants.NO_TIME));
-    intake_right_button.whileHeld(new IntakeBalls(Constants.INTAKE_RIGHT_ENUM, false, Constants.NO_TIME));
+    intake_left_button.whileHeld(new CollectBalls());
+    intake_left_button.whenReleased(new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME));
+    intake_right_button.whileHeld(new CollectBalls());
+    intake_right_button.whenReleased(new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME));
     shoot_start.toggleWhenPressed(new ShootCycle(Constants.NO_TIME));
     reset_angle.whenPressed(new ResetAngle());
-    climb_up.whileHeld(new Climb(true));
-    climb_down.whileHeld(new Climb(false));
+    climb_up.whileHeld(new ClimbWithIntake(true));
+    climb_down.whileHeld(new ClimbWithIntake(false));
+    shoot_close.whenPressed(new ShootClose());
   }
 
   public Command getAutonomousCommand(){
-    return new TwoBallLeftAuto();
+    return new OneBallAuto();
   }
 
   public static boolean getChasisButton(int button) {return chasis_controller.getRawButton(button);}
