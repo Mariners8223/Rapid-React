@@ -32,7 +32,7 @@ public final class Constants {
     public static final boolean RIGHT_PULLIE_INVERTED = true;
     public static final boolean TOP_TRANSPORT_INVERTED = false;
     public static final boolean BOTTOM_TRANSPORT_INVERTED = true;    
-    public static final boolean CLIMBER_INVERTED = false;    
+    public static final boolean CLIMBER_INVERTED = true;    
 
 
     // Motors encoders                              0.00001072997
@@ -81,8 +81,8 @@ public final class Constants {
     public static final double ANGLE_TOLERANCE = 5.0;
 
     public static final double CLIMBER_KF = 0;
-    public static final double INTAKE_KP = 0.6;
-    public static final double INTAKE_KI = 0.1;
+    public static final double INTAKE_KP = 1.0;
+    public static final double INTAKE_KI = 0.3;
     public static final double INTAKE_KD = 0;
     public static final double INTAKE_TOLERANCE = 0.2;
 
@@ -97,7 +97,7 @@ public final class Constants {
     public static final double INTAKE_LEFT_SPEED = 0.7;
     public static final double INTAKE_RIGHT_SPEED = 0.7;
     public static final double TRANSPORT_SPEED = 0.6;
-    public static final double SHOOTER_SPEED = 0.3;
+    public static final double SHOOTER_SPEED = 0.4;
 
     // Buttons
     public static final int RAISE_PULLIES_ENUM = 3;
@@ -127,10 +127,10 @@ public final class Constants {
     private static final double[][] ball_behind_right_hub_path_arr = {{0,0}, {-4.5, 0}, {-4.5, 0.4}};
     public static final SimpleMatrix[] BALL_BEHIND_RIGHT_HUB_PATH = RobotContainer.arrayToPath(ball_behind_right_hub_path_arr);
 
-    private static final double[][] ball_behind_left_path_arr = {{0,0}, {-0.25, -0.5}, {-0.5, -0.5}, {-2.7, -0.5}};
+    private static final double[][] ball_behind_left_path_arr = {{0,0}, {-0.25, -1.0}, {-0.5, -1.0}, {-2.7, -1.0}};
     public static final SimpleMatrix[] BALL_BEHIND_LEFT_PATH = RobotContainer.arrayToPath(ball_behind_left_path_arr);
 
-    private static final double[][] ball_behind_left_hub_path_arr = {{0,0}, {3.5, 0}, {3.5, 0.6}};
+    private static final double[][] ball_behind_left_hub_path_arr = {{0,0}, {3.5, 0}, {3.5, 0.9}};
     public static final SimpleMatrix[] BALL_BEHIND_LEFT_HUB_PATH = RobotContainer.arrayToPath(ball_behind_left_hub_path_arr);
 
     private static final double[][] two_balls_first_path = {{0,0}, {0.5, 0.8}};
@@ -150,7 +150,7 @@ public final class Constants {
     public static final double ROTATION_SPEED = 0.4;
     public static final double ROTATION_DEAD_BAND = 0.1;
     public static final double NO_TIME = -1.0;
-    public static final double CLIMBER_SPEED = 0.7;
+    public static final double CLIMBER_SPEED = 1.0;
     public static final double EYE_SPEED = 0.5;
     public static final double EYE_UP = 5.0;
     public static final double EYE_DOWN = -1.2;

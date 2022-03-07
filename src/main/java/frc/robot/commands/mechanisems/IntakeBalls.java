@@ -79,7 +79,7 @@ public class IntakeBalls extends CommandBase {
   
   @Override
   public void execute() {
-    if(button == Constants.RAISE_PULLIES_ENUM || button == Constants.LOWER_PULLIES_ENUM) {
+    if(button == Constants.RAISE_PULLIES_ENUM) {
       if(intake.isLeftAtSetpoint() && !stop_left) {
         if(left_start_time == Constants.NO_TIME) {
           left_start_time = Timer.getFPGATimestamp();
@@ -109,6 +109,26 @@ public class IntakeBalls extends CommandBase {
           intake.setEyeRight(0);
           intake.resetRightEye();
         }
+      }
+      else if(stop_right) intake.setEyeRight(0);
+      else {
+        intake.rightPID();
+        right_start_time = Constants.NO_TIME;
+      }
+    }
+    
+    else if(button == Constants.LOWER_PULLIES_ENUM){
+      if(intake.isLeftAtSetpoint() && !stop_left) {
+        stop_left = true;
+      }
+      else if(stop_left) intake.setEyeLeft(0);
+      else {
+        intake.leftPID();
+        left_start_time = Constants.NO_TIME;
+      }
+
+      if(intake.isRightAtSetpoint() && !stop_right) {
+        stop_right = true;
       }
       else if(stop_right) intake.setEyeRight(0);
       else {
