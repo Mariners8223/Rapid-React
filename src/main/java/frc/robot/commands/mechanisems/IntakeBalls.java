@@ -80,6 +80,7 @@ public class IntakeBalls extends CommandBase {
   @Override
   public void execute() {
     if(button == Constants.RAISE_PULLIES_ENUM) {
+      transport.transportInwards(Constants.TRANSPORT_SPEED);
       if(intake.isLeftAtSetpoint() && !stop_left) {
         if(left_start_time == Constants.NO_TIME) {
           left_start_time = Timer.getFPGATimestamp();
