@@ -1,7 +1,6 @@
 package frc.robot.commands.mechanisems;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.subsystems.Transport;
@@ -12,8 +11,7 @@ public class IntakeBalls extends CommandBase {
   private Transport transport;
   private Intake intake;
 
-  private boolean left;
-  private int button;
+  private int state;
   private double time;
   private double start_time;
 
@@ -22,28 +20,12 @@ public class IntakeBalls extends CommandBase {
   private boolean stop_left;
   private boolean stop_right;
 
-  public IntakeBalls(int button, boolean left, double time) {
-    transport = Transport.getInstance();
-    intake = Intake.getInstance();
-    addRequirements(transport, intake);
-
-    this.button = button;
-    this.left = left;
-    this.time = time;
-
-    left_start_time = Constants.NO_TIME;
-    right_start_time = Constants.NO_TIME;
-    this.stop_left = false;
-    this.stop_right = false;
-  }
-
   public IntakeBalls(int button, double time) {
     transport = Transport.getInstance();
     intake = Intake.getInstance();
     addRequirements(transport, intake);
 
-    this.button = button;
-    this.left = false;
+    this.state = button;
     this.time = time;
 
     left_start_time = Constants.NO_TIME;
@@ -56,14 +38,14 @@ public class IntakeBalls extends CommandBase {
   public void initialize() {
     start_time = Timer.getFPGATimestamp();
 
-    if (button == Constants.RAISE_PULLIES_ENUM) intake.raisePullies();
-    else if (button == Constants.LOWER_PULLIES_ENUM) intake.lowerPullies();
-    else if (button == Constants.INTAKE_BOUTH_ENUM){
+    if (state == Constants.RAISE_PULLIES_ENUM) intake.raisePullies();
+    else if (state == Constants.LOWER_PULLIES_ENUM) intake.lowerPullies();
+    else if (state == Constants.INTAKE_BOUTH_ENUM){
       intake.setLeft(Constants.INTAKE_LEFT_SPEED);
       intake.setRight(Constants.INTAKE_RIGHT_SPEED);
       transport.transportInwards(Constants.TRANSPORT_SPEED);
     }
-    else if (left) {
+    else if (state == Constants.INTAKE_LEFT_ENUM) {
       intake.setLeft(Constants.INTAKE_LEFT_SPEED);
       transport.transportInwards(Constants.TRANSPORT_SPEED);
     } else {
@@ -79,7 +61,7 @@ public class IntakeBalls extends CommandBase {
   
   @Override
   public void execute() {
-    if(button == Constants.RAISE_PULLIES_ENUM) {
+    if(state == Constants.RAISE_PULLIES_ENUM) {
       transport.transportInwards(Constants.TRANSPORT_SPEED);
       if(intake.isLeftAtSetpoint() && !stop_left) {
         if(left_start_time == Constants.NO_TIME) {
@@ -118,7 +100,7 @@ public class IntakeBalls extends CommandBase {
       }
     }
     
-    else if(button == Constants.LOWER_PULLIES_ENUM){
+    else if(state == Constants.LOWER_PULLIES_ENUM){
       intake.setLeft(Constants.INTAKE_LEFT_SPEED);
       intake.setRight(Constants.INTAKE_RIGHT_SPEED);
 
@@ -140,8 +122,6 @@ public class IntakeBalls extends CommandBase {
         right_start_time = Constants.NO_TIME;
       }
     }
-    SmartDashboard.putBoolean("l", stop_left);
-    SmartDashboard.putBoolean("r", stop_right);
   }
 
   
@@ -156,7 +136,7 @@ public class IntakeBalls extends CommandBase {
   
   @Override
   public boolean isFinished() {
-    if(button == Constants.RAISE_PULLIES_ENUM || button == Constants.LOWER_PULLIES_ENUM) return (stop_left && stop_right);
+    if(state == Constants.RAISE_PULLIES_ENUM || state == Constants.LOWER_PULLIES_ENUM) return (stop_left && stop_right);
     if(time == Constants.NO_TIME) return false;
     if(Timer.getFPGATimestamp() - start_time > time) return true;
     return false; 

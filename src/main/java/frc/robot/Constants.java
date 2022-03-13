@@ -80,7 +80,6 @@ public final class Constants {
     public static final double ANGLE_KD = 0.01;
     public static final double ANGLE_TOLERANCE = 5.0;
 
-    public static final double CLIMBER_KF = 0;
     public static final double INTAKE_KP = 1.0;
     public static final double INTAKE_KI = 0.3;
     public static final double INTAKE_KD = 0;
@@ -98,6 +97,8 @@ public final class Constants {
     public static final double INTAKE_RIGHT_SPEED = 0.7;
     public static final double TRANSPORT_SPEED = 0.6;
     public static final double SHOOTER_SPEED = 0.4;
+    public static final double CLIMBER_SPEED = 1.0;
+    public static final double EYE_SPEED = 0.5;
 
     // Buttons
     public static final int RAISE_PULLIES_ENUM = 3;
@@ -110,6 +111,8 @@ public final class Constants {
     public static final int TRANSPORT_OUTWARDS_BUTTON = 2;
     public static final int CLIMB_UP_BUTTON = 6;
     public static final int CLIMB_DOWN_BUTTON = 270;
+    public static final int RESET_ANGLE_BUTTON = 1;
+    public static final int SHOOT_CLOSE_BUTTON = 1;
 
     // Path Follower
     public static final int FIND_TARGET_ITERATIONS = 10;
@@ -150,8 +153,7 @@ public final class Constants {
     public static final double ROTATION_SPEED = 0.4;
     public static final double ROTATION_DEAD_BAND = 0.1;
     public static final double NO_TIME = -1.0;
-    public static final double CLIMBER_SPEED = 1.0;
-    public static final double EYE_SPEED = 0.5;
+
     public static final double EYE_UP = 20.0;
     public static final double EYE_DOWN = -1.2;
 }

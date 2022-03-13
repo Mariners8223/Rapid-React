@@ -7,6 +7,6 @@ import frc.robot.commands.mechanisems.IntakeBalls;
 
 public class CollectBehindRight extends ParallelCommandGroup {
   public CollectBehindRight() {
-    addCommands(new PathFollower(Constants.BALL_BEHIND_RIGHT_PATH), new IntakeBalls(Constants.INTAKE_RIGHT_ENUM, false, 5));
+    addCommands(new PathFollower(Constants.BALL_BEHIND_RIGHT_PATH), new IntakeBalls(Constants.INTAKE_RIGHT_ENUM, 5));
   }
 }

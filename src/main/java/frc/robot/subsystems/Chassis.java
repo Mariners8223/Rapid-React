@@ -11,7 +11,6 @@ import org.ejml.simple.SimpleMatrix;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -145,11 +144,6 @@ public class Chassis extends SubsystemBase {
     double lb = Constants.LEFT_BACK_DPP * Constants.CHASSIS_VELOCITY_TIME_TO_SECONDS * left_back.getSelectedSensorVelocity();
     double rb = Constants.RIGHT_BACK_DPP * Constants.CHASSIS_VELOCITY_TIME_TO_SECONDS * right_back.getSelectedSensorVelocity();
 
-    SmartDashboard.putNumber("lf", lf);
-    SmartDashboard.putNumber("rf", rf);
-    SmartDashboard.putNumber("lb", lb);
-    SmartDashboard.putNumber("rb", rb);
-
     double e1 = (rf + lb);
     double e2 = (lf + rb);
 
@@ -160,9 +154,6 @@ public class Chassis extends SubsystemBase {
 
   public SimpleMatrix getPosition() {
     SimpleMatrix field_oriented_velocity = rotationMatrix(Math.toRadians(getAngle())).mult(getVelocity());
-
-    SmartDashboard.putNumber("x vel", field_oriented_velocity.get(0, 0));
-    SmartDashboard.putNumber("y vel", field_oriented_velocity.get(1, 0));
 
     double time = Timer.getFPGATimestamp();
     position = position.plus(field_oriented_velocity.scale(time - last_time_position));
