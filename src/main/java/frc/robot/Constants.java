@@ -59,14 +59,14 @@ public final class Constants {
 
     // Matrices
     private static final double[][] base_drive_arr = {
-        {0.5, 0.5},
-        {-0.5, 0.5}
+        {-0.5, 0.5},
+        {0.5, 0.5}
     };
     public static final SimpleMatrix BASE_DRIVE = new SimpleMatrix(base_drive_arr);
 
     private static final double sqrt2inverted = 0.707106781;
     private static final double[][] velocity_arr = {
-        {sqrt2inverted, -sqrt2inverted},
+        {-sqrt2inverted, sqrt2inverted},
         {sqrt2inverted, sqrt2inverted}
     };
     public static final SimpleMatrix VELOCITY = new SimpleMatrix(velocity_arr);
@@ -77,7 +77,7 @@ public final class Constants {
     // PID values
     public static final double ANGLE_KP = 0.03;
     public static final double ANGLE_KI = 0;
-    public static final double ANGLE_KD = 0.01;
+    public static final double ANGLE_KD = 0.005;
     public static final double ANGLE_TOLERANCE = 5.0;
 
     public static final double INTAKE_KP = 1.0;
@@ -118,7 +118,7 @@ public final class Constants {
     public static final int FIND_TARGET_ITERATIONS = 10;
 
     // Autonomus
-    private static final double[][] one_ball_path_arr = {{0,0}, {1.0, -1.5}};
+    private static final double[][] one_ball_path_arr = {{0,0}, {1.0, 0}};
     public static final SimpleMatrix[] ONE_BALL_PATH = RobotContainer.arrayToPath(one_ball_path_arr);
 
     private static final double[][] one_ball_path_arr1 = {{0,0}, {1.6, -2}};
@@ -146,11 +146,11 @@ public final class Constants {
     public static final SimpleMatrix[] TWO_BALL_HUB_PATH = RobotContainer.arrayToPath(two_balls_hub_path);
 
     // Other constants
-    public static final double CHASSIS_DEAD_BAND = 0.2;
+    public static final double CHASSIS_DEAD_BAND = 0.1;
     public static final double CHASSIS_MULTIPLIE = 0.8;
     public static final double CHASSIS_CLAMP = 1.0;
     public static final double CHASSIS_VELOCITY_TIME_TO_SECONDS = 10.0;
-    public static final double ROTATION_SPEED = 0.4;
+    public static final double ROTATION_SPEED = 0.2;
     public static final double ROTATION_DEAD_BAND = 0.1;
     public static final double NO_TIME = -1.0;
 

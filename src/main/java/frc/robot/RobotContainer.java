@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.commands.autonomus.OneBallAuto;
+import frc.robot.commands.PathFollower;
 import frc.robot.commands.drive.ResetAngle;
 import frc.robot.commands.mechanisems.ClimbWithIntake;
 import frc.robot.commands.mechanisems.CollectBalls;
@@ -50,7 +50,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand(){
-    return new OneBallAuto();
+    return new PathFollower(Constants.ONE_BALL_PATH);
   }
 
   public static boolean getChasisButton(int button) {return chasis_controller.getRawButton(button);}
