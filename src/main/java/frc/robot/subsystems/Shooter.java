@@ -18,10 +18,18 @@ public class Shooter extends SubsystemBase {
   private Shooter() {
     shooter = new TalonFX(Constants.SHOOTER);
     shooter.setInverted(Constants.SHOOTER_INVERTED);
+    shooter.config_kF(0, Constants.SHOOTER_KF);
+    shooter.config_kP(0, Constants.SHOOTER_KP);
+    shooter.config_kI(0, Constants.SHOOTER_KI);
+    shooter.config_kD(0, Constants.SHOOTER_KD);
   }
 
-  public void setSpeed(double voltage) {
-    shooter.set(ControlMode.PercentOutput, voltage);
+  public void setSpeed(double rps) {
+    shooter.set(ControlMode.Velocity, rps / Constants.ENCODERS_SPEED_TO_RPS);
+  }
+
+  public double getSpeed() {
+    return shooter.getSelectedSensorVelocity() * Constants.ENCODERS_SPEED_TO_RPS;
   }
 
   public static Shooter getInstance() {

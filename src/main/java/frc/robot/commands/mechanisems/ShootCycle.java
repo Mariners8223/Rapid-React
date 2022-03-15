@@ -1,6 +1,7 @@
 package frc.robot.commands.mechanisems;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -44,6 +45,7 @@ public class ShootCycle extends CommandBase {
   @Override
   public void execute() {
     if(time != Constants.NO_TIME) {
+      SmartDashboard.putNumber("shooter speed", shooter.getSpeed());
       shooter.setSpeed(speed);
       transport.transportInwards(Constants.TRANSPORT_SPEED);
     }

@@ -41,10 +41,10 @@ public final class Constants {
     public static final double RIGHT_FRONT_DPP = 0.000010440706;
     public static final double RIGHT_BACK_DPP = 0.000010440706;
 
-    public static final double CLIMBER_DPP = 0.00000522035;
-
     public static final double LEFT_EYE_DPP = 1.0 / 10000.0;
     public static final double RIGHT_EYE_DPP = 1.0 / 10000.0;
+
+    public static final double ENCODERS_SPEED_TO_RPS = 10.0 / 2048.0;
 
 
     // Joysticks
@@ -79,6 +79,11 @@ public final class Constants {
     public static final double INTAKE_KI = 0.3;
     public static final double INTAKE_KD = 0;
     public static final double INTAKE_TOLERANCE = 0.5;
+
+    public static final double SHOOTER_KF = (0.5 * 1023.0) / 10210.0;
+    public static final double SHOOTER_KP = 0.0;
+    public static final double SHOOTER_KI = 0.0;
+    public static final double SHOOTER_KD = 0;
 
 
     // Raspberry pi
