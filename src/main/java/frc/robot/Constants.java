@@ -59,7 +59,7 @@ public final class Constants {
 
     // Matrices
     private static final double[][] base_drive_arr = {
-        {-0.57, 0.57},
+        {-1.5, 0.5},
         {0.5, 0.5}
     };
     public static final SimpleMatrix BASE_DRIVE = new SimpleMatrix(base_drive_arr);
@@ -81,9 +81,9 @@ public final class Constants {
     public static final double INTAKE_TOLERANCE = 0.5;
 
     public static final double SHOOTER_KF = (0.5 * 1023.0) / 10210.0;
-    public static final double SHOOTER_KP = 0.0;
-    public static final double SHOOTER_KI = 0.0;
-    public static final double SHOOTER_KD = 0;
+    public static final double SHOOTER_KP = 0.06;
+    public static final double SHOOTER_KI = 0.00007;
+    public static final double SHOOTER_KD = 0.01;
 
 
     // Raspberry pi
