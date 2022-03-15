@@ -41,8 +41,8 @@ public final class Constants {
     public static final double RIGHT_FRONT_DPP = 0.000010440706;
     public static final double RIGHT_BACK_DPP = 0.000010440706;
 
-    public static final double LEFT_EYE_DPP = 1.0 / 10000.0;
-    public static final double RIGHT_EYE_DPP = 1.0 / 10000.0;
+    public static final double LEFT_EYE_DPP = 1.0 / 30000.0;
+    public static final double RIGHT_EYE_DPP = 1.0 / 30000.0;
 
     public static final double ENCODERS_SPEED_TO_RPS = 10.0 / 2048.0;
 
