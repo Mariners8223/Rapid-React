@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transport;
 
@@ -15,16 +14,6 @@ public class ShootCycle extends CommandBase {
   private double time;
   private double start_time;
   private double speed;
-
-  public ShootCycle(double time) {
-    transport = Transport.getInstance();
-    shooter = Shooter.getInstance();
-
-    addRequirements(shooter, transport);
-
-    this.time = time;
-    this.speed = 0.36;
-  }
 
   public ShootCycle(double time, double speed) {
     transport = Transport.getInstance();
@@ -48,12 +37,6 @@ public class ShootCycle extends CommandBase {
       SmartDashboard.putNumber("shooter speed", shooter.getSpeed());
       shooter.setSpeed(speed);
       transport.transportInwards(Constants.TRANSPORT_SPEED);
-    }
-    else {
-      shooter.setSpeed(Math.abs(RobotContainer.getArmsAxis(Constants.SHOOT_TRIGGER)) * Constants.SHOOTER_SPEED);
-      if (RobotContainer.getArmsButton(Constants.TRANSPORT_INWARDS_BUTTON)) transport.transportInwards(Constants.TRANSPORT_SPEED);
-      else if (RobotContainer.getArmsButton(Constants.TRANSPORT_OUTWARDS_BUTTON)) transport.transportOutwards(Constants.TRANSPORT_SPEED);
-      else transport.stopAll();
     }
   }
 
