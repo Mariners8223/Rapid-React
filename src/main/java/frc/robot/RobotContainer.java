@@ -18,8 +18,6 @@ public class RobotContainer {
   private static Joystick chasis_controller = new Joystick(Constants.DRIVE_JOYSTICK);
   private static Joystick limb_controller = new Joystick(Constants.ARM_JOYSTICK);
 
-  private static JoystickButton pullies_raise_button = new JoystickButton(chasis_controller, Constants.RAISE_PULLIES_ENUM);
-  private static JoystickButton pullies_lower_button = new JoystickButton(chasis_controller, Constants.LOWER_PULLIES_ENUM);
   private static JoystickButton intake_left_button = new JoystickButton(chasis_controller, Constants.INTAKE_LEFT_ENUM);
   private static JoystickButton intake_right_button = new JoystickButton(chasis_controller, Constants.INTAKE_RIGHT_ENUM);
   private static JoystickButton reset_angle = new JoystickButton(chasis_controller, Constants.RESET_ANGLE_BUTTON);
@@ -32,9 +30,6 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    pullies_raise_button.whenPressed(new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME));
-    pullies_lower_button.whenPressed(new IntakeBalls(Constants.LOWER_PULLIES_ENUM, Constants.NO_TIME));
-
     intake_left_button.whileHeld(new CollectBalls());
     intake_left_button.whenReleased(new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME));
     intake_right_button.whileHeld(new CollectBalls());
