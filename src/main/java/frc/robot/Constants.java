@@ -85,7 +85,7 @@ public final class Constants {
 
     public static final double INTAKE_TOLERANCE = 0.1;
 
-    public static final double SHOOTER_KF = (0.5 * 1023.0) / 10210.0;
+    public static final double SHOOTER_KF = (0.5 * 1023.0) / 13000.0;
     public static final double SHOOTER_KP = 0.06;
     public static final double SHOOTER_KI = 0.00007;
     public static final double SHOOTER_KD = 0.01;

@@ -13,6 +13,7 @@ import frc.robot.commands.mechanisems.ClimbWithIntake;
 import frc.robot.commands.mechanisems.CollectAndTransport;
 import frc.robot.commands.mechanisems.RaiseIntake;
 import frc.robot.commands.mechanisems.ShootClose;
+import frc.robot.commands.mechanisems.TransportBalls;
 
 public class RobotContainer {
   private static Joystick chasis_controller = new Joystick(Constants.DRIVE_JOYSTICK);
@@ -24,6 +25,8 @@ public class RobotContainer {
   private static JoystickButton climb_up = new JoystickButton(limb_controller, Constants.CLIMB_UP_BUTTON);
   private static POVButton climb_down = new POVButton(limb_controller, Constants.CLIMB_DOWN_BUTTON);
   private static JoystickButton shoot_close = new JoystickButton(limb_controller, Constants.SHOOT_CLOSE_BUTTON);
+  private static JoystickButton transport_in = new JoystickButton(limb_controller, Constants.TRANSPORT_INWARDS_BUTTON);
+  private static JoystickButton transport_out = new JoystickButton(limb_controller, Constants.TRANSPORT_OUTWARDS_BUTTON);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -39,6 +42,8 @@ public class RobotContainer {
     climb_up.whileHeld(new ClimbWithIntake(true));
     climb_down.whileHeld(new ClimbWithIntake(false));
     shoot_close.whenPressed(new ShootClose());
+    transport_in.whileHeld(new TransportBalls(true));
+    transport_out.whileHeld(new TransportBalls(false));
   }
 
   public Command getAutonomousCommand(){

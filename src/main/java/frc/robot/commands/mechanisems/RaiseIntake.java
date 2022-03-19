@@ -1,7 +1,6 @@
 package frc.robot.commands.mechanisems;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
@@ -34,9 +33,7 @@ public class RaiseIntake extends CommandBase {
 
   
   @Override
-  public void execute() {
-    SmartDashboard.putBoolean("l", stop_left);
-    
+  public void execute() {    
     if(intake.isLeftAtSetpoint() && !stop_left) {
       if(left_start_time == Constants.NO_TIME) {
         left_start_time = Timer.getFPGATimestamp();

@@ -1,6 +1,5 @@
 package frc.robot.commands.mechanisems;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
@@ -35,13 +34,11 @@ public class LowerIntake extends CommandBase {
 
     if(intake.isLeftAtSetpoint() && !stop_left) {
       stop_left = true;
-      SmartDashboard.putBoolean("cum", true);
       intake.setEyeLeft(0);
     }
     else if(stop_left) intake.setEyeLeft(0);
     else {
       intake.leftPID();
-      SmartDashboard.putBoolean("cum", false);
     }
 
     if(intake.isRightAtSetpoint() && !stop_right) {
