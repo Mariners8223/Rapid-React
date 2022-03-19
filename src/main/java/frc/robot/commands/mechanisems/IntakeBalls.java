@@ -72,7 +72,6 @@ public class IntakeBalls extends CommandBase {
         {
           stop_left = true;
           intake.setEyeLeft(0);
-          intake.resetLeftEye();
         }
       }
       else if(stop_left) intake.setEyeLeft(0);
@@ -90,7 +89,6 @@ public class IntakeBalls extends CommandBase {
         {
           stop_right = true;
           intake.setEyeRight(0);
-          intake.resetRightEye();
         }
       }
       else if(stop_right) intake.setEyeRight(0);
@@ -129,8 +127,6 @@ public class IntakeBalls extends CommandBase {
   public void end(boolean interrupted) {
     intake.stopAll();
     transport.stopAll();
-    intake.resetLeftEye();
-    intake.resetRightEye();
   }
 
   

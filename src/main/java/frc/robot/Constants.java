@@ -78,7 +78,7 @@ public final class Constants {
     public static final double INTAKE_KP = 1.0;
     public static final double INTAKE_KI = 0.3;
     public static final double INTAKE_KD = 0;
-    public static final double INTAKE_TOLERANCE = 0.5;
+    public static final double INTAKE_TOLERANCE = 0.1;
 
     public static final double SHOOTER_KF = (0.5 * 1023.0) / 10210.0;
     public static final double SHOOTER_KP = 0.06;
@@ -154,6 +154,6 @@ public final class Constants {
     public static final double ROTATION_DEAD_BAND = 0.05;
     public static final double NO_TIME = -1.0;
 
-    public static final double EYE_UP = 20.0;
+    public static final double EYE_UP = 0;
     public static final double EYE_DOWN = -1.2;
 }

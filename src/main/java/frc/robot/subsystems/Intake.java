@@ -46,9 +46,9 @@ public class Intake extends SubsystemBase {
     left_eye.setSelectedSensorPosition(0);
     right_eye.setSelectedSensorPosition(0);
 
-    left_eye_pid = new PIDController(1.3, Constants.INTAKE_KI, Constants.INTAKE_KD);
+    left_eye_pid = new PIDController(2.0, Constants.INTAKE_KI, Constants.INTAKE_KD);
     left_eye_pid.setTolerance(Constants.INTAKE_TOLERANCE);
-    right_eye_pid = new PIDController(1.5, Constants.INTAKE_KI, Constants.INTAKE_KD);
+    right_eye_pid = new PIDController(2.0, Constants.INTAKE_KI, Constants.INTAKE_KD);
     right_eye_pid.setTolerance(Constants.INTAKE_TOLERANCE);
   }
 
@@ -61,8 +61,8 @@ public class Intake extends SubsystemBase {
   }
 
   public void lowerPullies() {
-    left_eye_pid.setSetpoint(-2.8);
-    right_eye_pid.setSetpoint(-2.8);
+    left_eye_pid.setSetpoint(-2);
+    right_eye_pid.setSetpoint(-2);
   }
 
   public void raisePullies() {
