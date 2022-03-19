@@ -58,27 +58,29 @@ public class Intake extends SubsystemBase {
   }
 
   public void lowerPullies() {
+    left_eye_pid.reset();
+    right_eye_pid.reset();
+
     left_eye_pid.setSetpoint(Constants.EYE_DOWN);
     right_eye_pid.setSetpoint(Constants.EYE_DOWN);
   }
 
   public void raisePullies() {
+    left_eye_pid.reset();
+    right_eye_pid.reset();
+
     left_eye_pid.setSetpoint(Constants.EYE_UP);
     right_eye_pid.setSetpoint(Constants.EYE_UP);
   }
 
   public boolean isLeftAtSetpoint(){
-    SmartDashboard.putNumber("lp", left_eye.getSelectedSensorPosition());
-    if(left_eye_pid.getSetpoint() == Constants.EYE_UP) {
-      if(Math.abs(left_eye.getSelectedSensorVelocity()) < 10) return true;
-    }
+    SmartDashboard.putNumber("error", left_eye_pid.getPositionError());
+    if(left_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(left_eye.getSelectedSensorVelocity()) < 10) return true;
     return left_eye_pid.atSetpoint();
   }
 
   public boolean isRightAtSetpoint(){
-    if(right_eye_pid.getSetpoint() == Constants.EYE_UP) {
-      if(Math.abs(right_eye.getSelectedSensorVelocity()) < 10) return true;
-    }
+    if(right_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(right_eye.getSelectedSensorVelocity()) < 10) return true;
     return right_eye_pid.atSetpoint();
   }
 
@@ -99,6 +101,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void leftPID() {
+    SmartDashboard.putNumber("v", left_eye_pid.calculate(Constants.LEFT_EYE_DPP * left_eye.getSelectedSensorPosition()));
     setEyeLeft(left_eye_pid.calculate(Constants.LEFT_EYE_DPP * left_eye.getSelectedSensorPosition()));
   }
 

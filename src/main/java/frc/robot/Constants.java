@@ -75,7 +75,7 @@ public final class Constants {
     public static final double ANGLE_KD = 0.005;
     public static final double ANGLE_TOLERANCE = 5.0;
 
-    public static final double INTAKE_LEFT_KP = 2.5;
+    public static final double INTAKE_LEFT_KP = 2.3;
     public static final double INTAKE_LEFT_KI = 0.3;
     public static final double INTAKE_LEFT_KD = 0;
 
@@ -103,7 +103,7 @@ public final class Constants {
     public static final double TRANSPORT_SPEED = 0.6;
     public static final double SHOOTER_SPEED = 0.4;
     public static final double CLIMBER_SPEED = 1.0;
-    public static final double EYE_SPEED = 0.5;
+    public static final double EYE_SPEED = 1.0;
 
     // Buttons
     public static final int RAISE_PULLIES_ENUM = 3;
