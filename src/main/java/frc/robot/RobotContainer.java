@@ -13,17 +13,13 @@ import frc.robot.commands.mechanisems.ClimbWithIntake;
 import frc.robot.commands.mechanisems.CollectBalls;
 import frc.robot.commands.mechanisems.IntakeBalls;
 import frc.robot.commands.mechanisems.ShootClose;
-import frc.robot.commands.mechanisems.ShootCycle;
 
 public class RobotContainer {
   private static Joystick chasis_controller = new Joystick(Constants.DRIVE_JOYSTICK);
   private static Joystick limb_controller = new Joystick(Constants.ARM_JOYSTICK);
 
-  private static JoystickButton pullies_raise_button = new JoystickButton(chasis_controller, Constants.RAISE_PULLIES_ENUM);
-  private static JoystickButton pullies_lower_button = new JoystickButton(chasis_controller, Constants.LOWER_PULLIES_ENUM);
   private static JoystickButton intake_left_button = new JoystickButton(chasis_controller, Constants.INTAKE_LEFT_ENUM);
   private static JoystickButton intake_right_button = new JoystickButton(chasis_controller, Constants.INTAKE_RIGHT_ENUM);
-  private static JoystickButton shoot_start = new JoystickButton(limb_controller, Constants.SHOOT_COMMAND_BUTTON);
   private static JoystickButton reset_angle = new JoystickButton(chasis_controller, Constants.RESET_ANGLE_BUTTON);
   private static JoystickButton climb_up = new JoystickButton(limb_controller, Constants.CLIMB_UP_BUTTON);
   private static POVButton climb_down = new POVButton(limb_controller, Constants.CLIMB_DOWN_BUTTON);
@@ -34,15 +30,11 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    pullies_raise_button.whenPressed(new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME));
-    pullies_lower_button.whenPressed(new IntakeBalls(Constants.LOWER_PULLIES_ENUM, Constants.NO_TIME));
-
     intake_left_button.whileHeld(new CollectBalls());
     intake_left_button.whenReleased(new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME));
     intake_right_button.whileHeld(new CollectBalls());
     intake_right_button.whenReleased(new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME));
     
-    shoot_start.toggleWhenPressed(new ShootCycle(Constants.NO_TIME));
     reset_angle.whenPressed(new ResetAngle());
     climb_up.whileHeld(new ClimbWithIntake(true));
     climb_down.whileHeld(new ClimbWithIntake(false));
