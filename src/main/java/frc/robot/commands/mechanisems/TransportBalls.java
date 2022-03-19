@@ -12,6 +12,14 @@ public class TransportBalls extends CommandBase {
   private double time;
   private double start_time;
   
+  public TransportBalls(boolean inwords) {
+    transport = Transport.getInstance();
+    addRequirements(transport);
+
+    this.inwords = inwords;
+    this.time = Constants.NO_TIME;
+  }
+
   public TransportBalls(boolean inwords, double time) {
     transport = Transport.getInstance();
     addRequirements(transport);
@@ -37,6 +45,7 @@ public class TransportBalls extends CommandBase {
 
   @Override
   public boolean isFinished() {
+    if(time == Constants.NO_TIME) return false;
     if(Timer.getFPGATimestamp() - start_time > time) return true;
     return false;
   }

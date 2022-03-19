@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.PathFollower;
 import frc.robot.commands.drive.ResetAngle;
 import frc.robot.commands.mechanisems.ClimbWithIntake;
-import frc.robot.commands.mechanisems.CollectBalls;
-import frc.robot.commands.mechanisems.IntakeBalls;
+import frc.robot.commands.mechanisems.CollectAndTransport;
+import frc.robot.commands.mechanisems.RaiseIntake;
 import frc.robot.commands.mechanisems.ShootClose;
 
 public class RobotContainer {
@@ -30,10 +30,10 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    intake_left_button.whileHeld(new CollectBalls());
-    intake_left_button.whenReleased(new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME));
-    intake_right_button.whileHeld(new CollectBalls());
-    intake_right_button.whenReleased(new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME));
+    intake_left_button.whileHeld(new CollectAndTransport());
+    intake_left_button.whenReleased(new RaiseIntake());
+    intake_right_button.whileHeld(new CollectAndTransport());
+    intake_right_button.whenReleased(new RaiseIntake());
     
     reset_angle.whenPressed(new ResetAngle());
     climb_up.whileHeld(new ClimbWithIntake(true));
