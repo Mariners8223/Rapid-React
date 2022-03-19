@@ -1,32 +1,33 @@
-package frc.robot.commands;
+package frc.robot.commands.drive;
 
 import org.ejml.simple.SimpleMatrix;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Chassis;
 
-public class BaseDrive extends CommandBase {
+public class FieldOrientedDrive extends CommandBase {
   private Chassis chassis;
-  
+
   private SimpleMatrix direction;
   private double r;
   private double angle;
   private double rotation;
 
-  public BaseDrive() {
+  public FieldOrientedDrive() {
     chassis = Chassis.getInstance();
     addRequirements(chassis);
   }
-
+  
   @Override
   public void initialize() {
     r = 0;
     double[][] zero = {{0}, {0}};
     direction = new SimpleMatrix(zero);
-    angle = 0;
-    chassis.resetAngle();
+    angle = chassis.getAngle();
+    //chassis.resetAngle();
+
+    chassis.resetPosition();
   }
 
   @Override
@@ -39,9 +40,11 @@ public class BaseDrive extends CommandBase {
     }
     else r = chassis.getRotationPID(angle);
 
-    chassis.setSpeed(direction, r, Constants.BASE_DRIVE);
-  }
+    SimpleMatrix fodMatrix = chassis.getFieldOrientedMatrix();
 
+    chassis.setSpeed(direction, r, fodMatrix);
+  }
+  
   @Override
   public void end(boolean interrupted) {
     chassis.setMotorsSpeed(0, 0, 0, 0);

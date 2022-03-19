@@ -29,12 +29,12 @@ public class Transport extends SubsystemBase {
 
   public void transportInwards(double voltage) {
     transport_top.set(ControlMode.PercentOutput, -voltage);
-    transport_bottom.set(ControlMode.Follower, transport_top.getDeviceID());
+    transport_bottom.set(ControlMode.PercentOutput, -voltage);
   }
 
   public void transportOutwards(double voltage) {
     transport_top.set(ControlMode.PercentOutput, voltage);
-    transport_bottom.set(ControlMode.Follower, transport_top.getDeviceID());
+    transport_bottom.set(ControlMode.PercentOutput, voltage);
   }
   
   public void stopAll() {

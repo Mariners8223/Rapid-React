@@ -3,20 +3,23 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.drive.FieldOrientedDrive;
 import frc.robot.subsystems.Chassis;
-import frc.robot.commands.FieldOrientedDrive;
+import frc.robot.subsystems.Intake;
 
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
-  private RobotContainer m_robotContainer;
+  private Command autonomousCommand;
+  private RobotContainer robotContainer;
 
   private final Chassis chassis = Chassis.getInstance();
   private final FieldOrientedDrive drive = new FieldOrientedDrive();
 
+  private final Intake intake = Intake.getInstance();
 
   @Override
   public void robotInit() {
-    m_robotContainer = new RobotContainer();
+    robotContainer = new RobotContainer();
+    chassis.resetAngle();
     CommandScheduler.getInstance().setDefaultCommand(chassis, drive);
   }
 
@@ -33,10 +36,13 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    chassis.resetAngle();
+    intake.resetLeftEye();
+    intake.resetRightEye();
+    autonomousCommand = robotContainer.getAutonomousCommand();
 
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
+    if (autonomousCommand != null) {
+      autonomousCommand.schedule();
     }
   }
 
@@ -45,8 +51,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    if (autonomousCommand != null) {
+      autonomousCommand.cancel();
     }
   }
 

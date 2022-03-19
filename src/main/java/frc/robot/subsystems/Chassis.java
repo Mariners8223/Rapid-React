@@ -11,18 +11,18 @@ import org.ejml.simple.SimpleMatrix;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Chassis extends SubsystemBase {
+  private static Chassis instance;
+  
   private TalonFX left_front;
   private TalonFX left_back;
   private TalonFX right_front;
   private TalonFX right_back;
 
   private AHRS navx;
-  private static Chassis instance;
 
   private PIDController anglePID;
 
@@ -45,6 +45,7 @@ public class Chassis extends SubsystemBase {
 
     anglePID = new PIDController(Constants.ANGLE_KP, Constants.ANGLE_KI, Constants.ANGLE_KD);
     anglePID.enableContinuousInput(0, 360);
+    anglePID.setTolerance(Constants.ANGLE_TOLERANCE);
 
     position = Constants.ZERO_VECTOR;
     last_time_position = 0;
@@ -69,6 +70,14 @@ public class Chassis extends SubsystemBase {
     right_front.set(ControlMode.PercentOutput, deadBandOutput(rf) * Constants.CHASSIS_MULTIPLIE);
     left_back.set(ControlMode.PercentOutput, deadBandOutput(lb) * Constants.CHASSIS_MULTIPLIE);
     right_back.set(ControlMode.PercentOutput, deadBandOutput(rb) * Constants.CHASSIS_MULTIPLIE);
+  }
+
+  public void disable() {
+    anglePID.setPID(0, 0, 0);
+  }
+
+  public void enable() {
+    anglePID.setPID(Constants.ANGLE_KP, Constants.ANGLE_KI, Constants.ANGLE_KD);
   }
 
   public double getAngle(){
@@ -110,6 +119,10 @@ public class Chassis extends SubsystemBase {
     return anglePID.calculate(getAngle(), target);
   }
 
+  public boolean isRotationPIDatSetpoint(){
+    return anglePID.atSetpoint();
+  }
+
   private double deadBandOutput(double s){
     if(Math.abs(s) < Constants.CHASSIS_DEAD_BAND) return 0;
     return s;
@@ -122,7 +135,7 @@ public class Chassis extends SubsystemBase {
 
   public void resetPosition() {
     position = Constants.ZERO_VECTOR;
-    last_time_position = 0;
+    last_time_position = Timer.getFPGATimestamp();
   }
 
   public SimpleMatrix getVelocity() {
@@ -130,11 +143,6 @@ public class Chassis extends SubsystemBase {
     double rf = Constants.RIGHT_FRONT_DPP * Constants.CHASSIS_VELOCITY_TIME_TO_SECONDS * right_front.getSelectedSensorVelocity();
     double lb = Constants.LEFT_BACK_DPP * Constants.CHASSIS_VELOCITY_TIME_TO_SECONDS * left_back.getSelectedSensorVelocity();
     double rb = Constants.RIGHT_BACK_DPP * Constants.CHASSIS_VELOCITY_TIME_TO_SECONDS * right_back.getSelectedSensorVelocity();
-
-    SmartDashboard.putNumber("lf", lf);
-    SmartDashboard.putNumber("rf", rf);
-    SmartDashboard.putNumber("lb", lb);
-    SmartDashboard.putNumber("rb", rb);
 
     double e1 = (rf + lb);
     double e2 = (lf + rb);
@@ -146,9 +154,6 @@ public class Chassis extends SubsystemBase {
 
   public SimpleMatrix getPosition() {
     SimpleMatrix field_oriented_velocity = rotationMatrix(Math.toRadians(getAngle())).mult(getVelocity());
-
-    SmartDashboard.putNumber("x vel", field_oriented_velocity.get(0, 0));
-    SmartDashboard.putNumber("y vel", field_oriented_velocity.get(1, 0));
 
     double time = Timer.getFPGATimestamp();
     position = position.plus(field_oriented_velocity.scale(time - last_time_position));
