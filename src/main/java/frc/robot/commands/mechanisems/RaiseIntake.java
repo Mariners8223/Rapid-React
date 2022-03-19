@@ -36,7 +36,7 @@ public class RaiseIntake extends CommandBase {
         left_start_time = Timer.getFPGATimestamp();
         intake.leftPID();
       }
-      else if(Timer.getFPGATimestamp() - left_start_time > 0.04) 
+      else if(Timer.getFPGATimestamp() - left_start_time > 0.07) 
       {
         stop_left = true;
         intake.setEyeLeft(0);
@@ -54,7 +54,7 @@ public class RaiseIntake extends CommandBase {
         right_start_time = Timer.getFPGATimestamp();
         intake.rightPID();
       }
-      else if(Timer.getFPGATimestamp() - right_start_time > 0.04) 
+      else if(Timer.getFPGATimestamp() - right_start_time > 0.07) 
       {
         stop_right = true;
         intake.setEyeRight(0);

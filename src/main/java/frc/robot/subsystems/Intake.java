@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -72,14 +73,16 @@ public class Intake extends SubsystemBase {
 
   public boolean isLeftAtSetpoint(){
     if(left_eye_pid.getSetpoint() == Constants.EYE_UP) {
-      if(Math.abs(left_eye.getSelectedSensorVelocity()) < 60) return true;
+      SmartDashboard.putNumber("lv", left_eye.getSelectedSensorVelocity());
+      SmartDashboard.putNumber("l", left_eye.getSelectedSensorPosition());
+      if(Math.abs(left_eye.getSelectedSensorVelocity()) < 30) return true;
     }
     return left_eye_pid.atSetpoint();
   }
 
   public boolean isRightAtSetpoint(){
     if(right_eye_pid.getSetpoint() == Constants.EYE_UP) {
-      if(Math.abs(right_eye.getSelectedSensorVelocity()) < 60) return true;
+      if(Math.abs(right_eye.getSelectedSensorVelocity()) < 30) return true;
     }
     return right_eye_pid.atSetpoint();
   }

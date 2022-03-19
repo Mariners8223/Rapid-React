@@ -15,6 +15,7 @@ public class IntakeBalls extends CommandBase {
   private double start_time;
 
   public IntakeBalls(boolean inwords) {
+    intake = Intake.getInstance();
     addRequirements(intake);
 
     this.inwords = inwords;
