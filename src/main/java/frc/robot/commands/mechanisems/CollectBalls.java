@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class CollectBalls extends SequentialCommandGroup {
   public CollectBalls() {
-    addCommands(new RaiseIntake(), new LowerIntake(), new IntakeBalls(true));
+    addCommands(new LowerIntake(), new IntakeBalls(true));
   }
 
   public CollectBalls(double time) {
-    addCommands(new RaiseIntake(), new LowerIntake(), new IntakeBalls(true, time));
+    addCommands(new LowerIntake(), new IntakeBalls(true, time));
   }
 }

@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -72,17 +68,16 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean isLeftAtSetpoint(){
+    SmartDashboard.putNumber("lp", left_eye.getSelectedSensorPosition());
     if(left_eye_pid.getSetpoint() == Constants.EYE_UP) {
-      SmartDashboard.putNumber("lv", left_eye.getSelectedSensorVelocity());
-      SmartDashboard.putNumber("l", left_eye.getSelectedSensorPosition());
-      if(Math.abs(left_eye.getSelectedSensorVelocity()) < 30) return true;
+      if(Math.abs(left_eye.getSelectedSensorVelocity()) < 10) return true;
     }
     return left_eye_pid.atSetpoint();
   }
 
   public boolean isRightAtSetpoint(){
     if(right_eye_pid.getSetpoint() == Constants.EYE_UP) {
-      if(Math.abs(right_eye.getSelectedSensorVelocity()) < 30) return true;
+      if(Math.abs(right_eye.getSelectedSensorVelocity()) < 10) return true;
     }
     return right_eye_pid.atSetpoint();
   }

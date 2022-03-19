@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.drive.FieldOrientedDrive;
 import frc.robot.subsystems.Chassis;
+import frc.robot.subsystems.Intake;
 
 public class Robot extends TimedRobot {
   private Command autonomousCommand;
@@ -13,11 +14,14 @@ public class Robot extends TimedRobot {
   private final Chassis chassis = Chassis.getInstance();
   private final FieldOrientedDrive drive = new FieldOrientedDrive();
 
+  private final Intake intake = Intake.getInstance();
 
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
     chassis.resetAngle();
+    intake.resetLeftEye();
+    intake.resetRightEye();
     CommandScheduler.getInstance().setDefaultCommand(chassis, drive);
   }
 
@@ -35,6 +39,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     chassis.resetAngle();
+    intake.resetLeftEye();
+    intake.resetRightEye();
     autonomousCommand = robotContainer.getAutonomousCommand();
 
     if (autonomousCommand != null) {

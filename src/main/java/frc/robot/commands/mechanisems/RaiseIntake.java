@@ -1,6 +1,7 @@
 package frc.robot.commands.mechanisems;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
@@ -16,31 +17,32 @@ public class RaiseIntake extends CommandBase {
   public RaiseIntake() {
     intake = Intake.getInstance();
     addRequirements(intake);
+  }
+  
+  @Override
+  public void initialize() {
+    intake.raisePullies();
 
     left_start_time = Constants.NO_TIME;
     right_start_time = Constants.NO_TIME;
     this.stop_left = false;
     this.stop_right = false;
   }
-  
-  @Override
-  public void initialize() {
-    intake.raisePullies();
-  }
 
   
   @Override
   public void execute() {
+    SmartDashboard.putBoolean("l", stop_left);
+    
     if(intake.isLeftAtSetpoint() && !stop_left) {
       if(left_start_time == Constants.NO_TIME) {
         left_start_time = Timer.getFPGATimestamp();
         intake.leftPID();
       }
-      else if(Timer.getFPGATimestamp() - left_start_time > 0.07) 
+      else if(Timer.getFPGATimestamp() - left_start_time > 0.1) 
       {
         stop_left = true;
         intake.setEyeLeft(0);
-        intake.resetLeftEye();
       }
     }
     else if(stop_left) intake.setEyeLeft(0);
@@ -54,11 +56,10 @@ public class RaiseIntake extends CommandBase {
         right_start_time = Timer.getFPGATimestamp();
         intake.rightPID();
       }
-      else if(Timer.getFPGATimestamp() - right_start_time > 0.07) 
+      else if(Timer.getFPGATimestamp() - right_start_time > 0.1) 
       {
         stop_right = true;
         intake.setEyeRight(0);
-        intake.resetRightEye();
       }
     }
     else if(stop_right) intake.setEyeRight(0);
@@ -72,8 +73,6 @@ public class RaiseIntake extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intake.stopAll();
-    intake.resetLeftEye();
-    intake.resetRightEye();
   }
 
   
