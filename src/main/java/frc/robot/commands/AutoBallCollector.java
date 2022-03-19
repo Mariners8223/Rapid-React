@@ -11,8 +11,8 @@ public class AutoBallCollector extends CommandBase {
   private Chassis chassis;
   private RaspberryPi rPi;
 
-  private double distance;
-  private double angle;
+  private double y;
+  private double x;
   private double[][] direction_arr;
   private SimpleMatrix direction;
 
@@ -31,8 +31,8 @@ public class AutoBallCollector extends CommandBase {
 
   @Override
   public void initialize() {
-    distance = 0;
-    angle = 0;
+    y = 0;
+    x = 0;
     direction_arr = new double[][] {{0}, {0}};
     direction = new SimpleMatrix(direction_arr);
 
@@ -41,12 +41,12 @@ public class AutoBallCollector extends CommandBase {
 
   @Override
   public void execute() {
-    distance = rPi.getDistance();
-    angle = rPi.getAngle();
-    direction_arr = new double[][] {{distance * Math.cos(angle)}, {distance * Math.sin(angle)}};
+    y = rPi.getY();
+    x = rPi.getX();
+    direction_arr = new double[][] {{x}, {y}};
     direction = new SimpleMatrix(direction_arr);
 
-    chassis.setSpeed(direction.scale(0.45 / direction.normF()), chassis.getRotationPID(0), right_matrix);
+    chassis.setSpeed(direction.scale(0.7 / direction.normF()), chassis.getRotationPID(0), right_matrix);
   }
 
   @Override

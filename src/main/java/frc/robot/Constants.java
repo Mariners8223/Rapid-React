@@ -88,8 +88,8 @@ public final class Constants {
 
     // Raspberry pi
     public static final String RASPBERRYPI_TABLE = "vision";
-    public static final String RASPBERRYPI_ANGLE_ENTERY = "angle";
-    public static final String RASPBERRYPI_DISTANCE_ENTERY = "distance";
+    public static final String RASPBERRYPI_X_ENTERY = "x";
+    public static final String RASPBERRYPI_Y_ENTERY = "y";
 
     // Speed Values
     public static final double PULLIES_SPEED = 0.6;

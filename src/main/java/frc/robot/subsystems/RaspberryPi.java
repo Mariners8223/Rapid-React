@@ -11,14 +11,14 @@ public class RaspberryPi extends SubsystemBase {
 
   private NetworkTable table;
 
-  private NetworkTableEntry angleEntry;
-  private NetworkTableEntry distanceEntry;
+  private NetworkTableEntry xEntry;
+  private NetworkTableEntry yEntry;
 
   private RaspberryPi() {
     table = NetworkTableInstance.getDefault().getTable(Constants.RASPBERRYPI_TABLE);
 
-    angleEntry = table.getEntry(Constants.RASPBERRYPI_ANGLE_ENTERY);
-    distanceEntry = table.getEntry(Constants.RASPBERRYPI_DISTANCE_ENTERY);
+    xEntry = table.getEntry(Constants.RASPBERRYPI_X_ENTERY);
+    yEntry = table.getEntry(Constants.RASPBERRYPI_Y_ENTERY);
   }
 
   public static RaspberryPi getInstance(){
@@ -26,11 +26,11 @@ public class RaspberryPi extends SubsystemBase {
     return instance;
   }
 
-  public double getAngle() {
-    return angleEntry.getDouble(0);
+  public double getX() {
+    return xEntry.getDouble(0);
   }
 
-  public double getDistance() {
-    return distanceEntry.getDouble(0);
+  public double getY() {
+    return yEntry.getDouble(0);
   }
 }
