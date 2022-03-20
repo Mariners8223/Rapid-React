@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import org.ejml.simple.SimpleMatrix;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -11,14 +13,20 @@ public class RaspberryPi extends SubsystemBase {
 
   private NetworkTable table;
 
-  private NetworkTableEntry xEntry;
-  private NetworkTableEntry yEntry;
+  private NetworkTableEntry leftX;
+  private NetworkTableEntry leftY;
+
+  private NetworkTableEntry rightX;
+  private NetworkTableEntry rightY;
 
   private RaspberryPi() {
     table = NetworkTableInstance.getDefault().getTable(Constants.RASPBERRYPI_TABLE);
 
-    xEntry = table.getEntry(Constants.RASPBERRYPI_X_ENTERY);
-    yEntry = table.getEntry(Constants.RASPBERRYPI_Y_ENTERY);
+    leftX = table.getEntry("left-x");
+    leftY = table.getEntry("left-y");
+
+    rightX = table.getEntry("right-x");
+    rightY = table.getEntry("right-x");
   }
 
   public static RaspberryPi getInstance(){
@@ -26,11 +34,13 @@ public class RaspberryPi extends SubsystemBase {
     return instance;
   }
 
-  public double getX() {
-    return xEntry.getDouble(0);
+  public SimpleMatrix getLeft(){
+    double[][] left_arr = {{leftX.getDouble(0)}, {leftY.getDouble(0)}};
+    return new SimpleMatrix(left_arr);
   }
 
-  public double getY() {
-    return yEntry.getDouble(0);
+  public SimpleMatrix getRight(){
+    double[][] right_arr = {{rightX.getDouble(0)}, {rightY.getDouble(0)}};
+    return new SimpleMatrix(right_arr);
   }
 }

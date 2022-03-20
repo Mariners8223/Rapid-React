@@ -11,46 +11,64 @@ public class AutoBallCollector extends CommandBase {
   private Chassis chassis;
   private RaspberryPi rPi;
 
-  private double y;
-  private double x;
-  private double[][] direction_arr;
-  private SimpleMatrix direction;
+  private double angle;
 
-  private SimpleMatrix right_matrix;
+  private boolean left;
+
+  private SimpleMatrix left_direction;
+  private SimpleMatrix right_direction;
+  private SimpleMatrix last_direction;
+
+  private double right_distance;
+  private double left_distance;
 
   public AutoBallCollector() {
     chassis = Chassis.getInstance();
     rPi = RaspberryPi.getInstance();
-    addRequirements(chassis);
-    addRequirements(rPi);
-
-    double[][] arr = {{0, -1},
-                      {1, 0}};
-    right_matrix = new SimpleMatrix(arr).mult(Constants.BASE_DRIVE);
+    addRequirements(chassis, rPi);
   }
 
   @Override
   public void initialize() {
-    y = 0;
-    x = 0;
-    direction_arr = new double[][] {{0}, {0}};
-    direction = new SimpleMatrix(direction_arr);
-
-    chassis.resetAngle();
+    angle = chassis.getAngle();
+    left = true;
+    left_direction = Constants.ZERO_VECTOR;
+    right_direction = Constants.ZERO_VECTOR;
+    last_direction = Constants.ZERO_VECTOR;
   }
 
   @Override
   public void execute() {
-    y = rPi.getY();
-    x = rPi.getX();
-    direction_arr = new double[][] {{x}, {y}};
-    direction = new SimpleMatrix(direction_arr);
+    left_direction = rPi.getLeft();
+    right_direction = rPi.getRight();
 
-    chassis.setSpeed(direction.scale(0.7 / direction.normF()), chassis.getRotationPID(0), right_matrix);
+    left_distance = left_direction.normF();
+    right_distance = right_direction.normF();
+
+    if(left_distance == 0 && right_distance == 0) {
+      if(left) chassis.setSpeed(last_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_LEFT);
+      else chassis.setSpeed(last_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_RIGHT);
+    }
+    else{
+      left = (left_distance > right_distance); 
+
+      if(left) {
+        left_direction = left_direction.scale(1.0 / left_distance);
+        chassis.setSpeed(left_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_LEFT);
+        last_direction = left_direction.copy();
+      }
+      else {
+        right_direction = right_direction.scale(1.0 / right_distance);
+        chassis.setSpeed(right_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_RIGHT);
+        last_direction = right_direction.copy();
+      }
+    }
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    chassis.setMotorsSpeed(0, 0, 0, 0);
+  }
 
   @Override
   public boolean isFinished() {

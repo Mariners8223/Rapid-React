@@ -64,6 +64,18 @@ public final class Constants {
     };
     public static final SimpleMatrix BASE_DRIVE = new SimpleMatrix(base_drive_arr);
 
+    private static final double[][] left_arr = {
+        {0, 1},
+        {1, 0}
+    };
+    public static final SimpleMatrix BASE_DRIVE_LEFT = new SimpleMatrix(left_arr).mult(BASE_DRIVE);
+
+    private static final double[][] right_arr = {
+        {0, -1},
+        {1, 0}
+    };
+    public static final SimpleMatrix BASE_DRIVE_RIGHT = new SimpleMatrix(right_arr).mult(BASE_DRIVE);
+
     public static final SimpleMatrix VELOCITY = BASE_DRIVE.invert();
 
     private static final double[][] zero_arr = {{0}, {0}};
@@ -94,8 +106,6 @@ public final class Constants {
 
     // Raspberry pi
     public static final String RASPBERRYPI_TABLE = "vision";
-    public static final String RASPBERRYPI_X_ENTERY = "x";
-    public static final String RASPBERRYPI_Y_ENTERY = "y";
 
     // Speed Values
     public static final double PULLIES_SPEED = 0.6;
