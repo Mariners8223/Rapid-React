@@ -53,6 +53,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    intake.resetLeftEye(); // need to remove
+    intake.resetRightEye(); // need to remove
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }

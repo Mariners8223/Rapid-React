@@ -91,7 +91,7 @@ public final class Constants {
     public static final double INTAKE_LEFT_KI = 0.3;
     public static final double INTAKE_LEFT_KD = 0;
 
-    public static final double INTAKE_RIGHT_KP = 2.0;
+    public static final double INTAKE_RIGHT_KP = 2.3;
     public static final double INTAKE_RIGHT_KI = 0.3;
     public static final double INTAKE_RIGHT_KD = 0;
 
@@ -171,5 +171,5 @@ public final class Constants {
     public static final double NO_TIME = -1.0;
 
     public static final double EYE_UP = 0.0;
-    public static final double EYE_DOWN = -2.0;
+    public static final double EYE_DOWN = -2.4;
 }

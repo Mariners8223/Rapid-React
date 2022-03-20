@@ -73,7 +73,7 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean isLeftAtSetpoint(){
-    if(left_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(left_eye.getSelectedSensorVelocity()) < 10) return true;
+    //if(left_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(left_eye.getSelectedSensorVelocity()) < 10) return true;
     return left_eye_pid.atSetpoint();
   }
 
