@@ -6,8 +6,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -18,9 +16,6 @@ public class Intake extends SubsystemBase {
   private static VictorSPX left_intake;
   private static VictorSPX right_intake;
   private static Intake instance;
-
-  private PIDController left_eye_pid;
-  private PIDController right_eye_pid;
 
   private Intake() {
     left_intake = new VictorSPX(Constants.INTAKE_LEFT);
@@ -42,10 +37,13 @@ public class Intake extends SubsystemBase {
     left_eye.setSelectedSensorPosition(0);
     right_eye.setSelectedSensorPosition(0);
 
-    left_eye_pid = new PIDController(Constants.INTAKE_LEFT_KP, Constants.INTAKE_LEFT_KI, Constants.INTAKE_LEFT_KD);
-    left_eye_pid.setTolerance(Constants.INTAKE_TOLERANCE);
-    right_eye_pid = new PIDController(Constants.INTAKE_RIGHT_KP, Constants.INTAKE_RIGHT_KI, Constants.INTAKE_RIGHT_KD);
-    right_eye_pid.setTolerance(Constants.INTAKE_TOLERANCE);
+    left_eye.config_kP(0, Constants.INTAKE_LEFT_KP);
+    left_eye.config_kI(0, Constants.INTAKE_LEFT_KI);
+    left_eye.config_kD(0, Constants.INTAKE_LEFT_KD);
+
+    right_eye.config_kP(0, Constants.INTAKE_LEFT_KP);
+    right_eye.config_kI(0, Constants.INTAKE_LEFT_KI);
+    right_eye.config_kD(0, Constants.INTAKE_LEFT_KD);
   }
 
   public void setRight(double voltage) {
@@ -57,37 +55,21 @@ public class Intake extends SubsystemBase {
   }
 
   public void lowerPullies() {
-    left_eye_pid.reset();
-    right_eye_pid.reset();
-
-    left_eye_pid.setSetpoint(Constants.EYE_DOWN);
-    right_eye_pid.setSetpoint(Constants.EYE_DOWN);
+    left_eye.set(ControlMode.Position, Constants.EYE_DOWN / Constants.LEFT_EYE_DPP);
+    right_eye.set(ControlMode.Position, Constants.EYE_DOWN / Constants.LEFT_EYE_DPP);
   }
 
   public void raisePullies() {
-    left_eye_pid.reset();
-    right_eye_pid.reset();
-
-    left_eye_pid.setSetpoint(Constants.EYE_UP);
-    right_eye_pid.setSetpoint(Constants.EYE_UP);
+    left_eye.set(ControlMode.Position, Constants.EYE_UP / Constants.LEFT_EYE_DPP);
+    right_eye.set(ControlMode.Position, Constants.EYE_UP / Constants.LEFT_EYE_DPP);
   }
 
-  public boolean isLeftAtSetpoint(){
-    //if(left_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(left_eye.getSelectedSensorVelocity()) < 10) return true;
-    return left_eye_pid.atSetpoint();
+  public boolean leftAtSetpoint() {
+    return Math.abs((left_eye.getSelectedSensorPosition() - left_eye.getClosedLoopTarget()) * Constants.LEFT_EYE_DPP) < Constants.LEFT_EYE_DPP;
   }
 
-  public boolean isRightAtSetpoint(){
-    if(right_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(right_eye.getSelectedSensorVelocity()) < 10) return true;
-    return right_eye_pid.atSetpoint();
-  }
-
-  public void setEyeLeft(double s) {
-    left_eye.set(ControlMode.PercentOutput, MathUtil.clamp(s, -Constants.EYE_SPEED, Constants.EYE_SPEED));
-  }
-
-  public void setEyeRight(double s) {
-    right_eye.set(ControlMode.PercentOutput, MathUtil.clamp(s, -Constants.EYE_SPEED, Constants.EYE_SPEED));
+  public boolean rightAtSetpoint() {
+    return Math.abs((right_eye.getSelectedSensorPosition() - right_eye.getClosedLoopTarget()) * Constants.RIGHT_EYE_DPP) < Constants.RIGHT_EYE_DPP;
   }
 
   public void resetLeftEye(){
@@ -98,17 +80,7 @@ public class Intake extends SubsystemBase {
     right_eye.setSelectedSensorPosition(0);
   }
 
-  public void leftPID() {
-    setEyeLeft(left_eye_pid.calculate(Constants.LEFT_EYE_DPP * left_eye.getSelectedSensorPosition()));
-  }
-
-  public void rightPID() {
-    setEyeRight(right_eye_pid.calculate(Constants.RIGHT_EYE_DPP * right_eye.getSelectedSensorPosition()));
-  }
-
-  public void stopAll() {
-    left_eye.set(ControlMode.PercentOutput, 0);
-    right_eye.set(ControlMode.PercentOutput, 0);
+  public void stopCollectors() {
     left_intake.set(ControlMode.PercentOutput, 0);
     right_intake.set(ControlMode.PercentOutput, 0);
   }
