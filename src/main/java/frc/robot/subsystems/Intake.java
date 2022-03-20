@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -46,9 +42,9 @@ public class Intake extends SubsystemBase {
     left_eye.setSelectedSensorPosition(0);
     right_eye.setSelectedSensorPosition(0);
 
-    left_eye_pid = new PIDController(2.0, Constants.INTAKE_KI, Constants.INTAKE_KD);
+    left_eye_pid = new PIDController(Constants.INTAKE_LEFT_KP, Constants.INTAKE_LEFT_KI, Constants.INTAKE_LEFT_KD);
     left_eye_pid.setTolerance(Constants.INTAKE_TOLERANCE);
-    right_eye_pid = new PIDController(2.0, Constants.INTAKE_KI, Constants.INTAKE_KD);
+    right_eye_pid = new PIDController(Constants.INTAKE_RIGHT_KP, Constants.INTAKE_RIGHT_KI, Constants.INTAKE_RIGHT_KD);
     right_eye_pid.setTolerance(Constants.INTAKE_TOLERANCE);
   }
 
@@ -61,26 +57,28 @@ public class Intake extends SubsystemBase {
   }
 
   public void lowerPullies() {
-    left_eye_pid.setSetpoint(-2);
-    right_eye_pid.setSetpoint(-2);
+    left_eye_pid.reset();
+    right_eye_pid.reset();
+
+    left_eye_pid.setSetpoint(Constants.EYE_DOWN);
+    right_eye_pid.setSetpoint(Constants.EYE_DOWN);
   }
 
   public void raisePullies() {
+    left_eye_pid.reset();
+    right_eye_pid.reset();
+
     left_eye_pid.setSetpoint(Constants.EYE_UP);
     right_eye_pid.setSetpoint(Constants.EYE_UP);
   }
 
   public boolean isLeftAtSetpoint(){
-    if(left_eye_pid.getSetpoint() == Constants.EYE_UP) {
-      if(Math.abs(left_eye.getSelectedSensorVelocity()) < 60) return true;
-    }
+    if(left_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(left_eye.getSelectedSensorVelocity()) < 10) return true;
     return left_eye_pid.atSetpoint();
   }
 
   public boolean isRightAtSetpoint(){
-    if(right_eye_pid.getSetpoint() == Constants.EYE_UP) {
-      if(Math.abs(right_eye.getSelectedSensorVelocity()) < 60) return true;
-    }
+    if(right_eye_pid.getSetpoint() == Constants.EYE_UP && Math.abs(right_eye.getSelectedSensorVelocity()) < 10) return true;
     return right_eye_pid.atSetpoint();
   }
 

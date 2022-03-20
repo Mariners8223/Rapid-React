@@ -32,6 +32,10 @@ public class Shooter extends SubsystemBase {
     return shooter.getSelectedSensorVelocity() * Constants.ENCODERS_SPEED_TO_RPS;
   }
 
+  public boolean atSetpoint(){
+    return Math.abs((shooter.getSelectedSensorVelocity() - shooter.getClosedLoopTarget()) * Constants.ENCODERS_SPEED_TO_RPS) < Constants.SHOOTER_TOLERANCE;
+  }
+
   public static Shooter getInstance() {
     if (instance == null)
       instance = new Shooter();
