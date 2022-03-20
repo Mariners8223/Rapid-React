@@ -41,8 +41,8 @@ public final class Constants {
     public static final double RIGHT_FRONT_DPP = 0.000010440706;
     public static final double RIGHT_BACK_DPP = 0.000010440706;
 
-    public static final double LEFT_EYE_DPP = 1.0 / 30000.0;
-    public static final double RIGHT_EYE_DPP = 1.0 / 30000.0;
+    public static final double LEFT_EYE_DPP = 1.0 / 10000.0;
+    public static final double RIGHT_EYE_DPP = 1.0 / 10000.0;
 
     public static final double ENCODERS_SPEED_TO_RPS = 10.0 / 2048.0;
 
@@ -75,15 +75,21 @@ public final class Constants {
     public static final double ANGLE_KD = 0.005;
     public static final double ANGLE_TOLERANCE = 5.0;
 
-    public static final double INTAKE_KP = 1.0;
-    public static final double INTAKE_KI = 0.3;
-    public static final double INTAKE_KD = 0;
+    public static final double INTAKE_LEFT_KP = 2.3;
+    public static final double INTAKE_LEFT_KI = 0.3;
+    public static final double INTAKE_LEFT_KD = 0;
+
+    public static final double INTAKE_RIGHT_KP = 2.0;
+    public static final double INTAKE_RIGHT_KI = 0.3;
+    public static final double INTAKE_RIGHT_KD = 0;
+
     public static final double INTAKE_TOLERANCE = 0.1;
 
-    public static final double SHOOTER_KF = (0.5 * 1023.0) / 10210.0;
-    public static final double SHOOTER_KP = 0.06;
+    public static final double SHOOTER_KF = (0.5 * 1023.0) / 13500.0;
+    public static final double SHOOTER_KP = 0.3;
     public static final double SHOOTER_KI = 0.00007;
     public static final double SHOOTER_KD = 0.01;
+    public static final double SHOOTER_TOLERANCE = 10;
 
 
     // Raspberry pi
@@ -95,10 +101,10 @@ public final class Constants {
     public static final double PULLIES_SPEED = 0.6;
     public static final double INTAKE_LEFT_SPEED = 0.6;
     public static final double INTAKE_RIGHT_SPEED = 0.7;
-    public static final double TRANSPORT_SPEED = 0.6;
+    public static final double TRANSPORT_SPEED = 0.8;
     public static final double SHOOTER_SPEED = 0.4;
     public static final double CLIMBER_SPEED = 1.0;
-    public static final double EYE_SPEED = 0.5;
+    public static final double EYE_SPEED = 1.0;
 
     // Buttons
     public static final int RAISE_PULLIES_ENUM = 3;
@@ -154,6 +160,6 @@ public final class Constants {
     public static final double ROTATION_DEAD_BAND = 0.05;
     public static final double NO_TIME = -1.0;
 
-    public static final double EYE_UP = 0;
-    public static final double EYE_DOWN = -1.2;
+    public static final double EYE_UP = 0.0;
+    public static final double EYE_DOWN = -2.0;
 }

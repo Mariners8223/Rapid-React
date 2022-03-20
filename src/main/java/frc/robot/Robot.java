@@ -20,6 +20,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     robotContainer = new RobotContainer();
     chassis.resetAngle();
+    intake.resetLeftEye();
+    intake.resetRightEye();
     CommandScheduler.getInstance().setDefaultCommand(chassis, drive);
   }
 

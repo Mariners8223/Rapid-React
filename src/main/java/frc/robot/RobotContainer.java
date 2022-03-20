@@ -15,9 +15,10 @@ import frc.robot.commands.autonomus.TwoBallLeftAuto;
 import frc.robot.commands.autonomus.TwoBallRightAuto;
 import frc.robot.commands.drive.ResetAngle;
 import frc.robot.commands.mechanisems.ClimbWithIntake;
-import frc.robot.commands.mechanisems.CollectBalls;
-import frc.robot.commands.mechanisems.IntakeBalls;
+import frc.robot.commands.mechanisems.CollectAndTransport;
+import frc.robot.commands.mechanisems.RaiseIntake;
 import frc.robot.commands.mechanisems.ShootClose;
+import frc.robot.commands.mechanisems.TransportBalls;
 
 public class RobotContainer {
   private static Joystick chasis_controller = new Joystick(Constants.DRIVE_JOYSTICK);
@@ -29,6 +30,8 @@ public class RobotContainer {
   private static JoystickButton climb_up = new JoystickButton(limb_controller, Constants.CLIMB_UP_BUTTON);
   private static POVButton climb_down = new POVButton(limb_controller, Constants.CLIMB_DOWN_BUTTON);
   private static JoystickButton shoot_close = new JoystickButton(limb_controller, Constants.SHOOT_CLOSE_BUTTON);
+  private static JoystickButton transport_in = new JoystickButton(limb_controller, Constants.TRANSPORT_INWARDS_BUTTON);
+  private static JoystickButton transport_out = new JoystickButton(limb_controller, Constants.TRANSPORT_OUTWARDS_BUTTON);
 
   private static SendableChooser<Command> autonomous_chooser = new SendableChooser<>();
 
@@ -43,15 +46,17 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    intake_left_button.whileHeld(new CollectBalls());
-    intake_left_button.whenReleased(new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME));
-    intake_right_button.whileHeld(new CollectBalls());
-    intake_right_button.whenReleased(new IntakeBalls(Constants.RAISE_PULLIES_ENUM, Constants.NO_TIME));
+    intake_left_button.whileHeld(new CollectAndTransport());
+    intake_left_button.whenReleased(new RaiseIntake());
+    intake_right_button.whileHeld(new CollectAndTransport());
+    intake_right_button.whenReleased(new RaiseIntake());
     
     reset_angle.whenPressed(new ResetAngle());
     climb_up.whileHeld(new ClimbWithIntake(true));
     climb_down.whileHeld(new ClimbWithIntake(false));
     shoot_close.whenPressed(new ShootClose());
+    transport_in.whileHeld(new TransportBalls(true));
+    transport_out.whileHeld(new TransportBalls(false));
   }
 
   public Command getAutonomousCommand(){

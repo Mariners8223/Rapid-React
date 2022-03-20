@@ -33,11 +33,12 @@ public class ShootCycle extends CommandBase {
   
   @Override
   public void execute() {
-    if(time != Constants.NO_TIME) {
-      SmartDashboard.putNumber("shooter speed", shooter.getSpeed());
-      shooter.setSpeed(speed);
-      transport.transportInwards(Constants.TRANSPORT_SPEED);
-    }
+    SmartDashboard.putNumber("shooter speed", shooter.getSpeed());
+    shooter.setSpeed(speed);
+    //SmartDashboard.putBoolean("shooting", shooter.atSetpoint());
+    transport.transportInwards(Constants.TRANSPORT_SPEED);
+    //if(shooter.atSetpoint()) transport.transportInwards(Constants.TRANSPORT_SPEED);
+    //else transport.stopAll();
   }
 
   
