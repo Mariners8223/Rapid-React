@@ -45,19 +45,19 @@ public class AutoBallCollector extends CommandBase {
     left_distance = left_direction.normF();
     right_distance = right_direction.normF();
 
-    if(left_distance == 0 && right_distance == 0) {
-      if(left) chassis.setSpeed(last_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_LEFT);
-      else chassis.setSpeed(last_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_RIGHT);
-    }
-    else{
-      left = (left_distance > right_distance); 
+    if (left_distance == 0 && right_distance == 0) {
+      if (left)
+        chassis.setSpeed(last_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_LEFT);
+      else
+        chassis.setSpeed(last_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_RIGHT);
+    } else {
+      left = (left_distance > right_distance);
 
-      if(left) {
+      if (left) {
         left_direction = left_direction.scale(1.0 / left_distance);
         chassis.setSpeed(left_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_LEFT);
         last_direction = left_direction.copy();
-      }
-      else {
+      } else {
         right_direction = right_direction.scale(1.0 / right_distance);
         chassis.setSpeed(right_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_RIGHT);
         last_direction = right_direction.copy();
