@@ -4,10 +4,15 @@ import org.ejml.simple.SimpleMatrix;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.commands.PathFollower;
+import frc.robot.commands.autonomus.OneBallAuto;
+import frc.robot.commands.autonomus.ThreeBallsAuto;
+import frc.robot.commands.autonomus.TwoBallLeftAuto;
+import frc.robot.commands.autonomus.TwoBallRightAuto;
 import frc.robot.commands.drive.ResetAngle;
 import frc.robot.commands.mechanisems.ClimbWithIntake;
 import frc.robot.commands.mechanisems.CollectBalls;
@@ -25,8 +30,16 @@ public class RobotContainer {
   private static POVButton climb_down = new POVButton(limb_controller, Constants.CLIMB_DOWN_BUTTON);
   private static JoystickButton shoot_close = new JoystickButton(limb_controller, Constants.SHOOT_CLOSE_BUTTON);
 
+  private static SendableChooser<Command> autonomous_chooser = new SendableChooser<>();
+
   public RobotContainer() {
     configureButtonBindings();
+
+    autonomous_chooser.setDefaultOption("One ball", new OneBallAuto());
+    autonomous_chooser.addOption("Two balls left", new TwoBallLeftAuto());
+    autonomous_chooser.addOption("Two balls Right", new TwoBallRightAuto());
+    autonomous_chooser.addOption("Three balls", new ThreeBallsAuto());
+    SmartDashboard.putData(autonomous_chooser);
   }
 
   private void configureButtonBindings() {
@@ -42,7 +55,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand(){
-    return new PathFollower(Constants.ONE_BALL_PATH);
+    return autonomous_chooser.getSelected();
   }
 
   public static boolean getChasisButton(int button) {return chasis_controller.getRawButton(button);}

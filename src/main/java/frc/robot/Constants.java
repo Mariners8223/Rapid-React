@@ -118,7 +118,7 @@ public final class Constants {
     public static final int FIND_TARGET_ITERATIONS = 10;
 
     // Autonomus
-    private static final double[][] one_ball_path_arr = {{0,0}, {1.5, 0}};
+    private static final double[][] one_ball_path_arr = {{0,0}, {0, -1.5}};
     public static final SimpleMatrix[] ONE_BALL_PATH = RobotContainer.arrayToPath(one_ball_path_arr);
 
     private static final double[][] one_ball_path_arr1 = {{0,0}, {1.6, -2}};
