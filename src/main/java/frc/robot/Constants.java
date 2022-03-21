@@ -12,7 +12,7 @@ public final class Constants {
     public static final int EYE_LEFT = 8;
     public static final int EYE_RIGHT = 6;
     public static final int INTAKE_LEFT = 5; 
-    public static final int INTAKE_RIGHT = 9;
+    public static final int INTAKE_RIGHT = 10;
     public static final int TRANSPORT_BOTTOM = 11;
     public static final int TRANSPORT_TOP = 7;
     public static final int SHOOTER = 12;
@@ -109,7 +109,7 @@ public final class Constants {
 
     // Speed Values
     public static final double PULLIES_SPEED = 0.6;
-    public static final double INTAKE_LEFT_SPEED = 0.6;
+    public static final double INTAKE_LEFT_SPEED = 0.7;
     public static final double INTAKE_RIGHT_SPEED = 0.7;
     public static final double TRANSPORT_SPEED = 0.8;
     public static final double SHOOTER_SPEED = 0.4;
