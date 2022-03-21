@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.AutoBallCollector;
 import frc.robot.commands.autonomus.OneBallAuto;
+import frc.robot.commands.autonomus.Rotate;
 import frc.robot.commands.autonomus.ThreeBallsAuto;
 import frc.robot.commands.autonomus.TwoBallLeftAuto;
 import frc.robot.commands.autonomus.TwoBallRightAuto;
@@ -27,11 +27,14 @@ public class RobotContainer {
   private static Joystick chasis_controller = new Joystick(Constants.DRIVE_JOYSTICK);
   private static Joystick limb_controller = new Joystick(Constants.ARM_JOYSTICK);
 
-  private static JoystickButton intake_left_button = new JoystickButton(chasis_controller, Constants.INTAKE_LEFT_ENUM);
-  private static JoystickButton intake_right_button = new JoystickButton(chasis_controller, Constants.INTAKE_RIGHT_ENUM);
+  private static JoystickButton intake_left_button = new JoystickButton(chasis_controller, Constants.INTAKE_LEFT_BUTTON);
+  private static JoystickButton intake_right_button = new JoystickButton(chasis_controller, Constants.INTAKE_RIGHT_BUTTON);
   private static JoystickButton reset_angle = new JoystickButton(chasis_controller, Constants.RESET_ANGLE_BUTTON);
+  private static JoystickButton rotate_to_origin = new JoystickButton(chasis_controller, Constants.ROTATE_TO_ORIGIN_BUTTON);
+  private static JoystickButton collect_auto = new JoystickButton(chasis_controller, Constants.COLLECT_AUTO_BUTTON);
+
   private static JoystickButton climb_up = new JoystickButton(limb_controller, Constants.CLIMB_UP_BUTTON);
-  private static POVButton climb_down = new POVButton(limb_controller, Constants.CLIMB_DOWN_BUTTON);
+  private static JoystickButton climb_down = new JoystickButton(limb_controller, Constants.CLIMB_DOWN_BUTTON);
   private static JoystickButton shoot_close = new JoystickButton(limb_controller, Constants.SHOOT_CLOSE_BUTTON);
   private static JoystickButton transport_in = new JoystickButton(limb_controller, Constants.TRANSPORT_INWARDS_BUTTON);
   private static JoystickButton transport_out = new JoystickButton(limb_controller, Constants.TRANSPORT_OUTWARDS_BUTTON);
@@ -59,6 +62,9 @@ public class RobotContainer {
     intake_right_button.whenReleased(new RaiseIntake());
     
     reset_angle.whenPressed(new ResetAngle());
+    rotate_to_origin.whileHeld(new Rotate(0));
+    collect_auto.whileHeld(new AutoBallCollector());
+
     climb_up.whileHeld(new ClimbWithIntake(true));
     climb_down.whileHeld(new ClimbWithIntake(false));
     shoot_close.whenPressed(new ShootClose());

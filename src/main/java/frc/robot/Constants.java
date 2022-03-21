@@ -117,18 +117,17 @@ public final class Constants {
     public static final double EYE_SPEED = 1.0;
 
     // Buttons
-    public static final int RAISE_PULLIES_ENUM = 3;
-    public static final int LOWER_PULLIES_ENUM = 2;
-    public static final int INTAKE_LEFT_ENUM = 5; 
-    public static final int INTAKE_RIGHT_ENUM = 6;
-    public static final int INTAKE_BOUTH_ENUM = 7;
+    public static final int INTAKE_LEFT_BUTTON = 5; 
+    public static final int INTAKE_RIGHT_BUTTON = 6;
     public static final int SHOOT_COMMAND_BUTTON = 5;
     public static final int TRANSPORT_INWARDS_BUTTON = 3;
     public static final int TRANSPORT_OUTWARDS_BUTTON = 2;
     public static final int CLIMB_UP_BUTTON = 6;
-    public static final int CLIMB_DOWN_BUTTON = 270;
+    public static final int CLIMB_DOWN_BUTTON = 5;
     public static final int RESET_ANGLE_BUTTON = 1;
     public static final int SHOOT_CLOSE_BUTTON = 1;
+    public static final int COLLECT_AUTO_BUTTON = 2;
+    public static final int ROTATE_TO_ORIGIN_BUTTON = 4;
 
     // Path Follower
     public static final int FIND_TARGET_ITERATIONS = 10;
