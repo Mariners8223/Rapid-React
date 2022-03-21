@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -29,7 +30,9 @@ public class Intake extends SubsystemBase {
     left_intake.setInverted(Constants.LEFT_INTAKE_INVERTED);
 
     left_eye.setNeutralMode(NeutralMode.Brake);
+    left_eye.configPeakOutputForward(Constants.EYE_SPEED, 0);
     right_eye.setNeutralMode(NeutralMode.Brake);
+    right_eye.configPeakOutputForward(Constants.EYE_SPEED, 0);
 
     left_eye.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
     right_eye.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
@@ -41,9 +44,9 @@ public class Intake extends SubsystemBase {
     left_eye.config_kI(0, Constants.INTAKE_LEFT_KI);
     left_eye.config_kD(0, Constants.INTAKE_LEFT_KD);
 
-    right_eye.config_kP(0, Constants.INTAKE_LEFT_KP);
-    right_eye.config_kI(0, Constants.INTAKE_LEFT_KI);
-    right_eye.config_kD(0, Constants.INTAKE_LEFT_KD);
+    right_eye.config_kP(0, Constants.INTAKE_RIGHT_KP);
+    right_eye.config_kI(0, Constants.INTAKE_RIGHT_KI);
+    right_eye.config_kD(0, Constants.INTAKE_RIGHT_KD);
   }
 
   public void setRight(double voltage) {
@@ -65,11 +68,13 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean leftAtSetpoint() {
-    return Math.abs((left_eye.getSelectedSensorPosition() - left_eye.getClosedLoopTarget()) * Constants.LEFT_EYE_DPP) < Constants.LEFT_EYE_DPP;
+    SmartDashboard.putNumber("l", left_eye.getSelectedSensorPosition() * Constants.LEFT_EYE_DPP);
+    return Math.abs((left_eye.getSelectedSensorPosition() - left_eye.getClosedLoopTarget()) * Constants.LEFT_EYE_DPP) < Constants.INTAKE_TOLERANCE;
   }
 
   public boolean rightAtSetpoint() {
-    return Math.abs((right_eye.getSelectedSensorPosition() - right_eye.getClosedLoopTarget()) * Constants.RIGHT_EYE_DPP) < Constants.RIGHT_EYE_DPP;
+    SmartDashboard.putNumber("r", right_eye.getSelectedSensorPosition() * Constants.RIGHT_EYE_DPP);
+    return Math.abs((right_eye.getSelectedSensorPosition() - right_eye.getClosedLoopTarget()) * Constants.RIGHT_EYE_DPP) < Constants.INTAKE_TOLERANCE;
   }
 
   public void resetLeftEye(){

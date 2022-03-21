@@ -17,6 +17,8 @@ import frc.robot.commands.autonomus.TwoBallRightAuto;
 import frc.robot.commands.drive.ResetAngle;
 import frc.robot.commands.mechanisems.ClimbWithIntake;
 import frc.robot.commands.mechanisems.CollectAndTransport;
+import frc.robot.commands.mechanisems.CollectBalls;
+import frc.robot.commands.mechanisems.LowerIntake;
 import frc.robot.commands.mechanisems.RaiseIntake;
 import frc.robot.commands.mechanisems.ShootClose;
 import frc.robot.commands.mechanisems.TransportBalls;
@@ -40,6 +42,9 @@ public class RobotContainer {
     configureButtonBindings();
 
     autonomous_chooser.setDefaultOption("One ball", new OneBallAuto());
+    autonomous_chooser.addOption("raise", new RaiseIntake());
+    autonomous_chooser.addOption("lower", new LowerIntake());
+    autonomous_chooser.addOption("collect", new CollectBalls(1));
     autonomous_chooser.addOption("auto collect", new AutoBallCollector());
     autonomous_chooser.addOption("Two balls left", new TwoBallLeftAuto());
     autonomous_chooser.addOption("Two balls Right", new TwoBallRightAuto());

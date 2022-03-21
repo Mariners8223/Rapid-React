@@ -8,6 +8,6 @@ public class CollectBalls extends SequentialCommandGroup {
   }
 
   public CollectBalls(double time) {
-    addCommands(new LowerIntake(), new IntakeBalls(true, time));
+    addCommands(new LowerIntake(), new IntakeBalls(true, time), new RaiseIntake());
   }
 }

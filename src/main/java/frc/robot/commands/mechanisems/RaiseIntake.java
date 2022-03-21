@@ -18,7 +18,7 @@ public class RaiseIntake extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    intake.stopAll();
+    intake.stopCollectors();
   }
 
   
