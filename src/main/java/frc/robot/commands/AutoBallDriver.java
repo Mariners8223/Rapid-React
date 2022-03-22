@@ -2,12 +2,13 @@ package frc.robot.commands;
 
 import org.ejml.simple.SimpleMatrix;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Chassis;
 import frc.robot.subsystems.RaspberryPi;
 
-public class AutoBallCollector extends CommandBase {
+public class AutoBallDriver extends CommandBase {
   private Chassis chassis;
   private RaspberryPi rPi;
 
@@ -22,7 +23,7 @@ public class AutoBallCollector extends CommandBase {
   private double right_distance;
   private double left_distance;
 
-  public AutoBallCollector() {
+  public AutoBallDriver() {
     chassis = Chassis.getInstance();
     rPi = RaspberryPi.getInstance();
     addRequirements(chassis, rPi);
@@ -45,11 +46,16 @@ public class AutoBallCollector extends CommandBase {
     left_distance = left_direction.normF();
     right_distance = right_direction.normF();
 
+    SmartDashboard.putNumber("cx", last_direction.get(0,0));
+    SmartDashboard.putNumber("cy", last_direction.get(1,0));
+
     if (left_distance == 0 && right_distance == 0) {
-      if (left)
-        chassis.setSpeed(last_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_LEFT);
-      else
-        chassis.setSpeed(last_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_RIGHT);
+      if (left) {
+        //chassis.setSpeed(last_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_LEFT);
+      }
+      else {
+        //chassis.setSpeed(last_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_RIGHT);
+      }
     } else {
       left = (left_distance > right_distance);
 

@@ -37,8 +37,8 @@ public class ShootCycle extends CommandBase {
     shooter.setSpeed(speed);
     //SmartDashboard.putBoolean("shooting", shooter.atSetpoint());
     transport.transportInwards(Constants.TRANSPORT_SPEED);
-    //if(shooter.atSetpoint()) transport.transportInwards(Constants.TRANSPORT_SPEED);
-    //else transport.stopAll();
+    if(shooter.atSetpoint()) transport.transportInwards(Constants.TRANSPORT_SPEED);
+    else transport.stopAll();
   }
 
   

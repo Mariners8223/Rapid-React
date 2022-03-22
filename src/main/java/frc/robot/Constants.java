@@ -59,24 +59,28 @@ public final class Constants {
 
     // Matrices
     private static final double[][] base_drive_arr = {
-        {-1.5, 0.5},
+        {-0.5, 0.5},
         {0.5, 0.5}
     };
     public static final SimpleMatrix BASE_DRIVE = new SimpleMatrix(base_drive_arr);
 
     private static final double[][] left_arr = {
-        {0, 1},
-        {1, 0}
-    };
-    public static final SimpleMatrix BASE_DRIVE_LEFT = new SimpleMatrix(left_arr).mult(BASE_DRIVE);
-
-    private static final double[][] right_arr = {
         {0, -1},
         {1, 0}
     };
-    public static final SimpleMatrix BASE_DRIVE_RIGHT = new SimpleMatrix(right_arr).mult(BASE_DRIVE);
+    public static final SimpleMatrix BASE_DRIVE_LEFT = BASE_DRIVE.mult(new SimpleMatrix(left_arr));
 
-    public static final SimpleMatrix VELOCITY = BASE_DRIVE.invert();
+    private static final double[][] right_arr = {
+        {0.5, 0.5},
+        {0.5, -0.5}
+    };
+    public static final SimpleMatrix BASE_DRIVE_RIGHT = new SimpleMatrix(right_arr);
+
+    private static final double[][] velocity_arr = {
+        {-0.66666666666, 0.66666666666},
+        {0.75074183976, 0.75074183976}
+    };
+    public static final SimpleMatrix VELOCITY = new SimpleMatrix(velocity_arr);
 
     private static final double[][] zero_arr = {{0}, {0}};
     public static final SimpleMatrix ZERO_VECTOR = new SimpleMatrix(zero_arr);
@@ -84,7 +88,7 @@ public final class Constants {
     // PID values
     public static final double ANGLE_KP = 0.03;
     public static final double ANGLE_KI = 0;
-    public static final double ANGLE_KD = 0.005;
+    public static final double ANGLE_KD = 0.002;
     public static final double ANGLE_TOLERANCE = 5.0;
 
     public static final double INTAKE_LEFT_KP = 1.0;
@@ -101,7 +105,7 @@ public final class Constants {
     public static final double SHOOTER_KP = 0.3;
     public static final double SHOOTER_KI = 0.00007;
     public static final double SHOOTER_KD = 0.01;
-    public static final double SHOOTER_TOLERANCE = 10;
+    public static final double SHOOTER_TOLERANCE = 3;
 
 
     // Raspberry pi
@@ -109,8 +113,8 @@ public final class Constants {
 
     // Speed Values
     public static final double PULLIES_SPEED = 0.6;
-    public static final double INTAKE_LEFT_SPEED = 0.7;
-    public static final double INTAKE_RIGHT_SPEED = 0.7;
+    public static final double INTAKE_LEFT_SPEED = 0.6;
+    public static final double INTAKE_RIGHT_SPEED = 0.6;
     public static final double TRANSPORT_SPEED = 0.8;
     public static final double SHOOTER_SPEED = 0.4;
     public static final double CLIMBER_SPEED = 1.0;
@@ -128,12 +132,13 @@ public final class Constants {
     public static final int SHOOT_CLOSE_BUTTON = 1;
     public static final int COLLECT_AUTO_BUTTON = 2;
     public static final int ROTATE_TO_ORIGIN_BUTTON = 4;
+    public static final int DISABLE_ANGLE_FIX = 3;
 
     // Path Follower
     public static final int FIND_TARGET_ITERATIONS = 10;
 
     // Autonomus
-    private static final double[][] one_ball_path_arr = {{0,0}, {0, -1.5}};
+    private static final double[][] one_ball_path_arr = {{0,0}, {0, -3}};
     public static final SimpleMatrix[] ONE_BALL_PATH = RobotContainer.arrayToPath(one_ball_path_arr);
 
     private static final double[][] one_ball_path_arr1 = {{0,0}, {1.6, -2}};
@@ -145,24 +150,27 @@ public final class Constants {
     private static final double[][] ball_behind_right_hub_path_arr = {{0,0}, {-4.5, 0}, {-4.5, 0.4}};
     public static final SimpleMatrix[] BALL_BEHIND_RIGHT_HUB_PATH = RobotContainer.arrayToPath(ball_behind_right_hub_path_arr);
 
-    private static final double[][] ball_behind_left_path_arr = {{0,0}, {-0.25, -1.0}, {-0.5, -1.0}, {-2.7, -1.2}};
+    private static final double[][] ball_behind_left_path_arr = {{0,0}, {-1.5, -0.5}};
     public static final SimpleMatrix[] BALL_BEHIND_LEFT_PATH = RobotContainer.arrayToPath(ball_behind_left_path_arr);
 
-    private static final double[][] ball_behind_left_hub_path_arr = {{0,0}, {2.5, 0}, {2.5, 1.5}};
+    private static final double[][] ball_behind_left_hub_path_arr = {{0,0}, {1.5, 0}, {1.5, 1.9}};
     public static final SimpleMatrix[] BALL_BEHIND_LEFT_HUB_PATH = RobotContainer.arrayToPath(ball_behind_left_hub_path_arr);
 
-    private static final double[][] two_balls_first_path = {{0,0}, {0.5, 0.8}};
+    private static final double[][] two_balls_first_path = {{0,0}, {3.5, -0.7}};
     public static final SimpleMatrix[] TWO_BALL_RIGHT_FIRST_PATH = RobotContainer.arrayToPath(two_balls_first_path);
 
-    private static final double[][] two_balls_secound_path = {{0,0}, {-2, -2.5}};
+    private static final double[][] two_balls_secound_path = {{0,0}, {-5.7, -1.6}};
     public static final SimpleMatrix[] TWO_BALL_RIGHT_SECOUND_PATH = RobotContainer.arrayToPath(two_balls_secound_path);
 
-    private static final double[][] two_balls_hub_path = {{0,0}, {-0.6, 4}};
+    private static final double[][] two_balls_hub_path = {{0,0}, {1.5, 1}, {1, 2.5}};
     public static final SimpleMatrix[] TWO_BALL_HUB_PATH = RobotContainer.arrayToPath(two_balls_hub_path);
 
+    private static final double[][] three_ball_init_to_hub_arr = {{0,0}, {-4, 0.4}};
+    public static final SimpleMatrix[] THREE_BALL_INIT_TO_HUB_PUTH = RobotContainer.arrayToPath(three_ball_init_to_hub_arr);
+
     // Other constants
-    public static final double CHASSIS_DEAD_BAND = 0.15;
-    public static final double CHASSIS_MULTIPLIE = 0.8;
+    public static final double CHASSIS_DEAD_BAND = 0.05;
+    public static final double CHASSIS_MULTIPLIE = 1.1;
     public static final double CHASSIS_CLAMP = 1.0;
     public static final double CHASSIS_VELOCITY_TIME_TO_SECONDS = 10.0;
     public static final double ROTATION_SPEED = 0.3;
@@ -170,5 +178,6 @@ public final class Constants {
     public static final double NO_TIME = -1.0;
 
     public static final double EYE_UP = 0.0;
-    public static final double EYE_DOWN = -2.52;
+    public static final double EYE_LEFT_DOWN = -2.52;
+    public static final double EYE_RIGHT_DOWN = -2.8;
 }

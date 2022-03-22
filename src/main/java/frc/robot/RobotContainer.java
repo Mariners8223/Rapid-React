@@ -8,17 +8,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AutoBallCollector;
-import frc.robot.commands.autonomus.OneBallAuto;
+import frc.robot.commands.AutoBallDriver;
+import frc.robot.commands.autonomus.OneBallLeft;
+import frc.robot.commands.autonomus.OneBallRight;
 import frc.robot.commands.autonomus.Rotate;
 import frc.robot.commands.autonomus.ThreeBallsAuto;
 import frc.robot.commands.autonomus.TwoBallLeftAuto;
-import frc.robot.commands.autonomus.TwoBallRightAuto;
 import frc.robot.commands.drive.ResetAngle;
 import frc.robot.commands.mechanisems.ClimbWithIntake;
 import frc.robot.commands.mechanisems.CollectAndTransport;
-import frc.robot.commands.mechanisems.CollectBalls;
-import frc.robot.commands.mechanisems.LowerIntake;
 import frc.robot.commands.mechanisems.RaiseIntake;
 import frc.robot.commands.mechanisems.ShootClose;
 import frc.robot.commands.mechanisems.TransportBalls;
@@ -44,13 +42,10 @@ public class RobotContainer {
   public RobotContainer() {
     configureButtonBindings();
 
-    autonomous_chooser.setDefaultOption("One ball", new OneBallAuto());
-    autonomous_chooser.addOption("raise", new RaiseIntake());
-    autonomous_chooser.addOption("lower", new LowerIntake());
-    autonomous_chooser.addOption("collect", new CollectBalls(1));
-    autonomous_chooser.addOption("auto collect", new AutoBallCollector());
+    autonomous_chooser.setDefaultOption("one ball left", new OneBallLeft());
+    autonomous_chooser.addOption("one ball right", new OneBallRight());
+    autonomous_chooser.addOption("auto collect", new AutoBallDriver());
     autonomous_chooser.addOption("Two balls left", new TwoBallLeftAuto());
-    autonomous_chooser.addOption("Two balls Right", new TwoBallRightAuto());
     autonomous_chooser.addOption("Three balls", new ThreeBallsAuto());
     SmartDashboard.putData(autonomous_chooser);
   }
@@ -63,11 +58,11 @@ public class RobotContainer {
     
     reset_angle.whenPressed(new ResetAngle());
     rotate_to_origin.whileHeld(new Rotate(0));
-    collect_auto.whileHeld(new AutoBallCollector());
+    collect_auto.whileHeld(new AutoBallDriver());
 
     climb_up.whileHeld(new ClimbWithIntake(true));
     climb_down.whileHeld(new ClimbWithIntake(false));
-    shoot_close.whenPressed(new ShootClose());
+    shoot_close.whenPressed(new ShootClose(15));
     transport_in.whileHeld(new TransportBalls(true));
     transport_out.whileHeld(new TransportBalls(false));
   }

@@ -58,8 +58,8 @@ public class Intake extends SubsystemBase {
   }
 
   public void lowerPullies() {
-    left_eye.set(ControlMode.Position, Constants.EYE_DOWN / Constants.LEFT_EYE_DPP);
-    right_eye.set(ControlMode.Position, Constants.EYE_DOWN / Constants.LEFT_EYE_DPP);
+    left_eye.set(ControlMode.Position, Constants.EYE_LEFT_DOWN / Constants.LEFT_EYE_DPP);
+    right_eye.set(ControlMode.Position, Constants.EYE_RIGHT_DOWN / Constants.LEFT_EYE_DPP);
   }
 
   public void raisePullies() {

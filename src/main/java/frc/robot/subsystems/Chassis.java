@@ -11,6 +11,7 @@ import org.ejml.simple.SimpleMatrix;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -129,7 +130,7 @@ public class Chassis extends SubsystemBase {
   }
 
   public void setSmoothRotation(boolean smooth) {
-    if (smooth) anglePID.setD(0);
+    if (smooth) anglePID.setD(0.005);
     else anglePID.setD(Constants.ANGLE_KD);
   }
 
@@ -159,6 +160,8 @@ public class Chassis extends SubsystemBase {
     position = position.plus(field_oriented_velocity.scale(time - last_time_position));
     last_time_position = time;
     
+    SmartDashboard.putNumber("position x", position.get(0,0));
+    SmartDashboard.putNumber("position y", position.get(1,0));
     return position;
   }
 }
