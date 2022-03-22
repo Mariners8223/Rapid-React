@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AutoBallDriver;
+import frc.robot.commands.auto_ball_collector.AutoBallCollector;
 import frc.robot.commands.autonomus.OneBallLeft;
 import frc.robot.commands.autonomus.OneBallRight;
 import frc.robot.commands.autonomus.Rotate;
@@ -44,7 +44,6 @@ public class RobotContainer {
 
     autonomous_chooser.setDefaultOption("one ball left", new OneBallLeft());
     autonomous_chooser.addOption("one ball right", new OneBallRight());
-    autonomous_chooser.addOption("auto collect", new AutoBallDriver());
     autonomous_chooser.addOption("Two balls left", new TwoBallLeftAuto());
     autonomous_chooser.addOption("Three balls", new ThreeBallsAuto());
     SmartDashboard.putData(autonomous_chooser);
@@ -58,11 +57,14 @@ public class RobotContainer {
     
     reset_angle.whenPressed(new ResetAngle());
     rotate_to_origin.whileHeld(new Rotate(0));
-    collect_auto.whileHeld(new AutoBallDriver());
+    
+    collect_auto.whileHeld(new AutoBallCollector());
+    collect_auto.whenReleased(new RaiseIntake());
+
 
     climb_up.whileHeld(new ClimbWithIntake(true));
     climb_down.whileHeld(new ClimbWithIntake(false));
-    shoot_close.whenPressed(new ShootClose(15));
+    shoot_close.whenPressed(new ShootClose(7));
     transport_in.whileHeld(new TransportBalls(true));
     transport_out.whileHeld(new TransportBalls(false));
   }

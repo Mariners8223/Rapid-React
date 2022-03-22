@@ -42,7 +42,10 @@ public class FieldOrientedDrive extends CommandBase {
       angle = chassis.getAngle();
     }
     else {
-      if(RobotContainer.getChasisButton(Constants.DISABLE_ANGLE_FIX)) r = 0;
+      if(RobotContainer.getChasisButton(Constants.DISABLE_ANGLE_FIX)) {
+        r = 0;
+        angle = chassis.getAngle();
+      }
       else r = chassis.getRotationPID(angle);
     }
 

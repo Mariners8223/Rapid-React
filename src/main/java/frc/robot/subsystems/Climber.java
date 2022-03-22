@@ -24,6 +24,10 @@ public class Climber extends SubsystemBase {
     climber.set(ControlMode.PercentOutput, s);
   }
 
+  public double getSpeed(){
+    return climber.getSelectedSensorVelocity();
+  }
+
   public static Climber getInstance() {
     if (instance == null)
       instance = new Climber();

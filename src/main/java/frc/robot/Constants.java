@@ -64,18 +64,6 @@ public final class Constants {
     };
     public static final SimpleMatrix BASE_DRIVE = new SimpleMatrix(base_drive_arr);
 
-    private static final double[][] left_arr = {
-        {0, -1},
-        {1, 0}
-    };
-    public static final SimpleMatrix BASE_DRIVE_LEFT = BASE_DRIVE.mult(new SimpleMatrix(left_arr));
-
-    private static final double[][] right_arr = {
-        {0.5, 0.5},
-        {0.5, -0.5}
-    };
-    public static final SimpleMatrix BASE_DRIVE_RIGHT = new SimpleMatrix(right_arr);
-
     private static final double[][] velocity_arr = {
         {-0.66666666666, 0.66666666666},
         {0.75074183976, 0.75074183976}
@@ -177,7 +165,7 @@ public final class Constants {
     public static final double ROTATION_DEAD_BAND = 0.05;
     public static final double NO_TIME = -1.0;
 
-    public static final double EYE_UP = 0.0;
-    public static final double EYE_LEFT_DOWN = -2.52;
+    public static final double EYE_UP = -0.3;
+    public static final double EYE_LEFT_DOWN = -2.55;
     public static final double EYE_RIGHT_DOWN = -2.8;
 }

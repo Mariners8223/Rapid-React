@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.auto_ball_collector;
 
 import org.ejml.simple.SimpleMatrix;
 
@@ -50,22 +50,21 @@ public class AutoBallDriver extends CommandBase {
     SmartDashboard.putNumber("cy", last_direction.get(1,0));
 
     if (left_distance == 0 && right_distance == 0) {
-      if (left) {
-        //chassis.setSpeed(last_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_LEFT);
-      }
-      else {
-        //chassis.setSpeed(last_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_RIGHT);
-      }
+      //chassis.setSpeed(last_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE);
     } else {
       left = (left_distance > right_distance);
 
       if (left) {
-        left_direction = left_direction.scale(1.0 / left_distance);
-        chassis.setSpeed(left_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_LEFT);
+        left_direction = left_direction.scale(0.4 / left_distance);
+        SmartDashboard.putNumber("left direction x", left_direction.get(0,0));
+        SmartDashboard.putNumber("left direction y", left_direction.get(1,0));
+        chassis.setSpeed(left_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE);
         last_direction = left_direction.copy();
       } else {
-        right_direction = right_direction.scale(1.0 / right_distance);
-        chassis.setSpeed(right_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE_RIGHT);
+        right_direction = right_direction.scale(0.4 / right_distance);
+        SmartDashboard.putNumber("right direction x", right_direction.get(0,0));
+        SmartDashboard.putNumber("right direction y", right_direction.get(1,0));
+        chassis.setSpeed(right_direction, chassis.getRotationPID(angle), Constants.BASE_DRIVE);
         last_direction = right_direction.copy();
       }
     }
