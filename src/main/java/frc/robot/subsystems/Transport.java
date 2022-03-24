@@ -32,6 +32,10 @@ public class Transport extends SubsystemBase {
     transport_top.set(ControlMode.PercentOutput, voltage);
     transport_bottom.set(ControlMode.PercentOutput, voltage);
   }
+
+  public void setUpper(double speed) {
+    transport_top.set(ControlMode.PercentOutput, -speed);
+  }
   
   public void stopAll() {
     transport_top.set(ControlMode.PercentOutput, 0);

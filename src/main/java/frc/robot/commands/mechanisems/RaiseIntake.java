@@ -1,6 +1,7 @@
 package frc.robot.commands.mechanisems;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 
 public class RaiseIntake extends CommandBase {
@@ -14,6 +15,8 @@ public class RaiseIntake extends CommandBase {
   @Override
   public void initialize() {
     intake.raisePullies();
+    intake.setLeft(Constants.INTAKE_LEFT_SPEED);
+    intake.setRight(Constants.INTAKE_RIGHT_SPEED);
   }
 
   @Override

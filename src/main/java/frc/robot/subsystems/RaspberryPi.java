@@ -35,12 +35,12 @@ public class RaspberryPi extends SubsystemBase {
   }
 
   public SimpleMatrix getLeft(){
-    double[][] left_arr = {{-leftY.getDouble(0)}, {leftX.getDouble(0)}};
+    double[][] left_arr = {{leftX.getDouble(0)}, {leftY.getDouble(0)}};
     return new SimpleMatrix(left_arr);
   }
 
   public SimpleMatrix getRight(){
-    double[][] right_arr = {{rightY.getDouble(0)}, {-rightX.getDouble(0)}};
+    double[][] right_arr = {{rightX.getDouble(0)}, {rightY.getDouble(0)}};
     return new SimpleMatrix(right_arr);
   }
 }

@@ -64,6 +64,18 @@ public final class Constants {
     };
     public static final SimpleMatrix BASE_DRIVE = new SimpleMatrix(base_drive_arr);
 
+    private static final double[][] left_base_drive_arr = {
+        {0.5, 0.5},
+        {0.5, -0.5}
+    };
+    public static final SimpleMatrix LEFT_BASE_DRIVE = new SimpleMatrix(left_base_drive_arr);
+
+    private static final double[][] right_base_drive_arr = {
+        {-0.5, -0.5},
+        {-0.5, 0.5}
+    };
+    public static final SimpleMatrix RIGHT_BASE_DRIVE = new SimpleMatrix(right_base_drive_arr);
+
     private static final double[][] velocity_arr = {
         {-0.66666666666, 0.66666666666},
         {0.75074183976, 0.75074183976}
@@ -93,7 +105,7 @@ public final class Constants {
     public static final double SHOOTER_KP = 0.3;
     public static final double SHOOTER_KI = 0.00007;
     public static final double SHOOTER_KD = 0.01;
-    public static final double SHOOTER_TOLERANCE = 3;
+    public static final double SHOOTER_TOLERANCE = 2;
 
 
     // Raspberry pi
@@ -103,7 +115,7 @@ public final class Constants {
     public static final double PULLIES_SPEED = 0.6;
     public static final double INTAKE_LEFT_SPEED = 0.6;
     public static final double INTAKE_RIGHT_SPEED = 0.6;
-    public static final double TRANSPORT_SPEED = 0.8;
+    public static final double TRANSPORT_SPEED = 0.6;
     public static final double SHOOTER_SPEED = 0.4;
     public static final double CLIMBER_SPEED = 1.0;
     public static final double EYE_SPEED = 1.0;
@@ -126,7 +138,7 @@ public final class Constants {
     public static final int FIND_TARGET_ITERATIONS = 10;
 
     // Autonomus
-    private static final double[][] one_ball_path_arr = {{0,0}, {0, -3}};
+    private static final double[][] one_ball_path_arr = {{0,0}, {0, -5.5}};
     public static final SimpleMatrix[] ONE_BALL_PATH = RobotContainer.arrayToPath(one_ball_path_arr);
 
     private static final double[][] one_ball_path_arr1 = {{0,0}, {1.6, -2}};
@@ -158,14 +170,14 @@ public final class Constants {
 
     // Other constants
     public static final double CHASSIS_DEAD_BAND = 0.05;
-    public static final double CHASSIS_MULTIPLIE = 1.1;
+    public static final double CHASSIS_MULTIPLIE = 1.2;
     public static final double CHASSIS_CLAMP = 1.0;
     public static final double CHASSIS_VELOCITY_TIME_TO_SECONDS = 10.0;
     public static final double ROTATION_SPEED = 0.3;
     public static final double ROTATION_DEAD_BAND = 0.05;
     public static final double NO_TIME = -1.0;
 
-    public static final double EYE_UP = -0.3;
-    public static final double EYE_LEFT_DOWN = -2.55;
-    public static final double EYE_RIGHT_DOWN = -2.8;
+    public static final double EYE_UP = -0.2;
+    public static final double EYE_LEFT_DOWN = -2.8;
+    public static final double EYE_RIGHT_DOWN = -3.2;
 }

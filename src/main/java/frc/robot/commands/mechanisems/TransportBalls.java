@@ -13,8 +13,9 @@ public class TransportBalls extends CommandBase {
   private boolean inwords;
   private double time;
   private double start_time;
+  private double speed;
   
-  public TransportBalls(boolean inwords) {
+  public TransportBalls(boolean inwords, double speed) {
     transport = Transport.getInstance();
     addRequirements(transport);
 
@@ -25,9 +26,10 @@ public class TransportBalls extends CommandBase {
 
     this.inwords = inwords;
     this.time = Constants.NO_TIME;
+    this.speed = speed;
   }
 
-  public TransportBalls(boolean inwords, double time) {
+  public TransportBalls(boolean inwords, double time, double speed) {
     transport = Transport.getInstance();
     addRequirements(transport);
 
@@ -38,14 +40,15 @@ public class TransportBalls extends CommandBase {
 
     this.inwords = inwords;
     this.time = time;
+    this.speed = speed;
   }
 
   @Override
   public void initialize() {
     start_time = Timer.getFPGATimestamp();
-    if(inwords) transport.transportInwards(Constants.TRANSPORT_SPEED);
+    if(inwords) transport.transportInwards(speed);
     else {
-      transport.transportOutwards(Constants.TRANSPORT_SPEED);
+      transport.transportOutwards(speed);
       shooter.setSpeed(-10);
     }
   }
