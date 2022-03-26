@@ -133,6 +133,7 @@ public final class Constants {
     public static final int COLLECT_AUTO_BUTTON = 2;
     public static final int ROTATE_TO_ORIGIN_BUTTON = 4;
     public static final int DISABLE_ANGLE_FIX = 3;
+    public static final int CHANGE_CHASSIS_SPEED_BUTTON = 4;
 
     // Path Follower
     public static final int FIND_TARGET_ITERATIONS = 10;
@@ -170,7 +171,6 @@ public final class Constants {
 
     // Other constants
     public static final double CHASSIS_DEAD_BAND = 0.05;
-    public static final double CHASSIS_MULTIPLIE = 1.2;
     public static final double CHASSIS_CLAMP = 1.0;
     public static final double CHASSIS_VELOCITY_TIME_TO_SECONDS = 10.0;
     public static final double ROTATION_SPEED = 0.3;

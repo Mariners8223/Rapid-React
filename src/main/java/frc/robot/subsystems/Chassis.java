@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class Chassis extends SubsystemBase {
   private static Chassis instance;
@@ -67,10 +68,10 @@ public class Chassis extends SubsystemBase {
 
   public void setMotorsSpeed(double lf, double rf, double lb, double rb)
   {
-    left_front.set(ControlMode.PercentOutput, deadBandOutput(lf) * Constants.CHASSIS_MULTIPLIE);
-    right_front.set(ControlMode.PercentOutput, deadBandOutput(rf) * Constants.CHASSIS_MULTIPLIE);
-    left_back.set(ControlMode.PercentOutput, deadBandOutput(lb) * Constants.CHASSIS_MULTIPLIE);
-    right_back.set(ControlMode.PercentOutput, deadBandOutput(rb) * Constants.CHASSIS_MULTIPLIE);
+    left_front.set(ControlMode.PercentOutput, deadBandOutput(lf) * RobotContainer.CHASSIS_MULTIPLIE);
+    right_front.set(ControlMode.PercentOutput, deadBandOutput(rf) * RobotContainer.CHASSIS_MULTIPLIE);
+    left_back.set(ControlMode.PercentOutput, deadBandOutput(lb) * RobotContainer.CHASSIS_MULTIPLIE);
+    right_back.set(ControlMode.PercentOutput, deadBandOutput(rb) * RobotContainer.CHASSIS_MULTIPLIE);
   }
 
   public void disable() {

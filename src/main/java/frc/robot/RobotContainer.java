@@ -14,6 +14,7 @@ import frc.robot.commands.autonomus.OneBallMid;
 import frc.robot.commands.autonomus.OneBallRight;
 import frc.robot.commands.autonomus.Rotate;
 import frc.robot.commands.autonomus.TwoBallLeftAuto;
+import frc.robot.commands.drive.ChangeChassisMaxSpeed;
 import frc.robot.commands.drive.ResetAngle;
 import frc.robot.commands.mechanisems.ClimbWithIntake;
 import frc.robot.commands.mechanisems.CollectAndTransport;
@@ -36,8 +37,11 @@ public class RobotContainer {
   private static JoystickButton shoot_close = new JoystickButton(limb_controller, Constants.SHOOT_CLOSE_BUTTON);
   private static JoystickButton transport_in = new JoystickButton(limb_controller, Constants.TRANSPORT_INWARDS_BUTTON);
   private static JoystickButton transport_out = new JoystickButton(limb_controller, Constants.TRANSPORT_OUTWARDS_BUTTON);
+  private static JoystickButton change_chassis_speed = new JoystickButton(limb_controller, Constants.CHANGE_CHASSIS_SPEED_BUTTON);
 
   private static SendableChooser<Command> autonomous_chooser = new SendableChooser<>();
+
+  public static double CHASSIS_MULTIPLIE = 1.2;
 
   public RobotContainer() {
     configureButtonBindings();
@@ -67,6 +71,8 @@ public class RobotContainer {
     shoot_close.whenPressed(new ShootClose(7));
     transport_in.whileHeld(new TransportBalls(true, 1.0));
     transport_out.whileHeld(new TransportBalls(false, 1.0));
+
+    change_chassis_speed.whileHeld(new ChangeChassisMaxSpeed());
   }
 
   public Command getAutonomousCommand(){
@@ -117,5 +123,9 @@ public class RobotContainer {
 
   public static boolean isBlue(){
     return DriverStation.getAlliance() == DriverStation.Alliance.Blue;
+  }
+
+  public static void setChassisSpeed(double speed) {
+    CHASSIS_MULTIPLIE = speed;
   }
 }
