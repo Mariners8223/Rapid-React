@@ -14,6 +14,7 @@ public class ShootCycle extends CommandBase {
   private double time;
   private double start_time;
   private double speed;
+  private boolean first_sp;
 
   public ShootCycle(double time, double speed) {
     transport = Transport.getInstance();
@@ -28,6 +29,8 @@ public class ShootCycle extends CommandBase {
   @Override
   public void initialize() {
     start_time = Timer.getFPGATimestamp();
+    first_sp = false;
+    shooter.enableIntegral(false);
   }
 
   
@@ -35,8 +38,11 @@ public class ShootCycle extends CommandBase {
   public void execute() {
     SmartDashboard.putNumber("shooter speed", shooter.getSpeed());
     shooter.setSpeed(speed);
-    //SmartDashboard.putBoolean("shooting", shooter.atSetpoint());
-    //transport.transportInwards(Constants.TRANSPORT_SPEED);
+    if(!first_sp && shooter.atSetpoint()){
+      first_sp = true;
+      shooter.resetIntegral();
+      shooter.enableIntegral(true);
+    }
     if(shooter.atSetpoint()) transport.transportInwards(Constants.TRANSPORT_SPEED);
     else transport.stopAll();
   }
@@ -45,7 +51,7 @@ public class ShootCycle extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     transport.transportInwards(0);
-    shooter.setSpeed(0);
+    shooter.stop();
   }
 
   

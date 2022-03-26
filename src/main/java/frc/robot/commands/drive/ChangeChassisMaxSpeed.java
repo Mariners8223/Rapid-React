@@ -1,6 +1,7 @@
 package frc.robot.commands.drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class ChangeChassisMaxSpeed extends CommandBase {
@@ -17,7 +18,7 @@ public class ChangeChassisMaxSpeed extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.setChassisSpeed(1.2);
+    RobotContainer.setChassisSpeed(Constants.CHASSIS_MULTIPLIE);
   }
 
   @Override

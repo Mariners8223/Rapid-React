@@ -101,11 +101,11 @@ public final class Constants {
 
     public static final double INTAKE_TOLERANCE = 0.05;
 
-    public static final double SHOOTER_KF = (0.5 * 1023.0) / 13500.0;
-    public static final double SHOOTER_KP = 0.3;
-    public static final double SHOOTER_KI = 0.00007;
-    public static final double SHOOTER_KD = 0.01;
-    public static final double SHOOTER_TOLERANCE = 2;
+    public static final double SHOOTER_KF = (0.5 * 1023.0) / 11200.0;
+    public static final double SHOOTER_KP = 0.35;
+    public static final double SHOOTER_KI = 0.0005;
+    public static final double SHOOTER_KD = 0.005;
+    public static final double SHOOTER_TOLERANCE = 0.3;
 
 
     // Raspberry pi
@@ -172,6 +172,7 @@ public final class Constants {
     // Other constants
     public static final double CHASSIS_DEAD_BAND = 0.05;
     public static final double CHASSIS_CLAMP = 1.0;
+    public static final double CHASSIS_MULTIPLIE = 1.2;
     public static final double CHASSIS_VELOCITY_TIME_TO_SECONDS = 10.0;
     public static final double ROTATION_SPEED = 0.3;
     public static final double ROTATION_DEAD_BAND = 0.05;

@@ -5,6 +5,6 @@ import frc.robot.Constants;
 
 public class ShootClose extends SequentialCommandGroup {
   public ShootClose(double time) {
-    addCommands(new TransportBalls(false, 0.25, Constants.TRANSPORT_SPEED), new ShootCycle(time, 54));
+    addCommands(new TransportBalls(false, 0.3, Constants.TRANSPORT_SPEED), new ShootCycle(time, 54));
   }
 }

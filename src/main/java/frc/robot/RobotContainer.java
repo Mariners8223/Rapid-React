@@ -41,7 +41,7 @@ public class RobotContainer {
 
   private static SendableChooser<Command> autonomous_chooser = new SendableChooser<>();
 
-  public static double CHASSIS_MULTIPLIE = 1.2;
+  public static double CHASSIS_MULTIPLIE = Constants.CHASSIS_MULTIPLIE;
 
   public RobotContainer() {
     configureButtonBindings();
@@ -68,7 +68,7 @@ public class RobotContainer {
 
     climb_up.whileHeld(new ClimbWithIntake(true));
     climb_down.whileHeld(new ClimbWithIntake(false));
-    shoot_close.whenPressed(new ShootClose(7));
+    shoot_close.whileHeld(new ShootClose(Constants.NO_TIME));
     transport_in.whileHeld(new TransportBalls(true, 1.0));
     transport_out.whileHeld(new TransportBalls(false, 1.0));
 
