@@ -89,7 +89,7 @@ public final class Constants {
     public static final double ANGLE_KP = 0.03;
     public static final double ANGLE_KI = 0;
     public static final double ANGLE_KD = 0.002;
-    public static final double ANGLE_TOLERANCE = 5.0;
+    public static final double ANGLE_TOLERANCE = 3.0;
 
     public static final double INTAKE_LEFT_KP = 1.0;
     public static final double INTAKE_LEFT_KI = 0;
@@ -115,8 +115,7 @@ public final class Constants {
     public static final double PULLIES_SPEED = 0.6;
     public static final double INTAKE_LEFT_SPEED = 0.6;
     public static final double INTAKE_RIGHT_SPEED = 0.6;
-    public static final double TRANSPORT_SPEED = 0.6;
-    public static final double SHOOTER_SPEED = 0.4;
+    public static final double TRANSPORT_SPEED = 0.7;
     public static final double CLIMBER_SPEED = 1.0;
     public static final double EYE_SPEED = 1.0;
 

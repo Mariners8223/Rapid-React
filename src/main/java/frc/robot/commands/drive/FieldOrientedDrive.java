@@ -51,8 +51,6 @@ public class FieldOrientedDrive extends CommandBase {
 
     SimpleMatrix fodMatrix = chassis.getFieldOrientedMatrix();
 
-    chassis.getPosition();
-
     chassis.setSpeed(direction, r, fodMatrix);
   }
   

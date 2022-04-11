@@ -10,7 +10,7 @@ public class ChangeChassisMaxSpeed extends CommandBase {
 
   @Override
   public void initialize() {
-    RobotContainer.setChassisSpeed(2.0);
+    RobotContainer.setChassisSpeed(1.6);
   }
 
   @Override

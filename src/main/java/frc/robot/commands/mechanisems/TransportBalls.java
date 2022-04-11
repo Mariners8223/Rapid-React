@@ -59,7 +59,7 @@ public class TransportBalls extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     transport.stopAll();
-    if(!inwords) shooter.setSpeed(0);
+    if(!inwords) shooter.stop();
   }
 
   @Override

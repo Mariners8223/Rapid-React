@@ -11,6 +11,6 @@ import frc.robot.commands.mechanisems.ShootClose;
 
 public class ShootTwoBallsLeft extends SequentialCommandGroup {
   public ShootTwoBallsLeft() {
-    addCommands(new PathFollower(Constants.BALL_BEHIND_LEFT_HUB_PATH), new ShootClose(5), new PathFollower(Constants.ONE_BALL_PATH));
+    addCommands(new PathFollower(Constants.BALL_BEHIND_LEFT_HUB_PATH), new ShootClose(7), new PathFollower(Constants.ONE_BALL_PATH));
   }
 }
