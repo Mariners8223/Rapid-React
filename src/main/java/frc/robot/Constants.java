@@ -13,8 +13,8 @@ public final class Constants {
     public static final int EYE_RIGHT = 6;
     public static final int INTAKE_LEFT = 5; 
     public static final int INTAKE_RIGHT = 10;
-    public static final int TRANSPORT_BOTTOM = 11;
-    public static final int TRANSPORT_TOP = 7;
+    public static final int TRANSPORT_BOTTOM = 7;
+    public static final int TRANSPORT_TOP = 9;
     public static final int SHOOTER = 12;
     public static final int CLIMBER = 13;
 
@@ -170,7 +170,7 @@ public final class Constants {
 
     // Other constants
     public static final double CHASSIS_DEAD_BAND = 0.05;
-    public static final double CHASSIS_CLAMP = 1.0;
+    public static final double CHASSIS_CLAMP = 0.3;
     public static final double CHASSIS_MULTIPLIE = 1.2;
     public static final double CHASSIS_VELOCITY_TIME_TO_SECONDS = 10.0;
     public static final double ROTATION_SPEED = 0.3;
