@@ -86,10 +86,10 @@ public final class Constants {
     public static final SimpleMatrix ZERO_VECTOR = new SimpleMatrix(zero_arr);
 
     // PID values
-    public static final double ANGLE_KP = 0.03;
+    public static final double ANGLE_KP = 0.0225;
     public static final double ANGLE_KI = 0;
-    public static final double ANGLE_KD = 0.002;
-    public static final double ANGLE_TOLERANCE = 3.0;
+    public static final double ANGLE_KD = 0.0032;
+    public static final double ANGLE_TOLERANCE = 3.125;
 
     public static final double INTAKE_LEFT_KP = 1.0;
     public static final double INTAKE_LEFT_KI = 0;
@@ -170,7 +170,7 @@ public final class Constants {
 
     // Other constants
     public static final double CHASSIS_DEAD_BAND = 0.05;
-    public static final double CHASSIS_CLAMP = 0.3;
+    public static final double CHASSIS_CLAMP = 0.5;
     public static final double CHASSIS_MULTIPLIE = 1.2;
     public static final double CHASSIS_VELOCITY_TIME_TO_SECONDS = 10.0;
     public static final double ROTATION_SPEED = 0.3;
